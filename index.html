@@ -4,130 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krisztián Kovács - IT Infrastructure Engineer</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/shared-themes.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-color: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            opacity: 0.05;
-        }
-
-        .background-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-            animation: moveGradient 20s ease infinite;
-        }
-
-        @keyframes moveGradient {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(-20px, -20px); }
-            50% { transform: translate(20px, -20px); }
-            75% { transform: translate(20px, 20px); }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
+        /* Page specific styles */
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            padding: 100px 20px 50px;
             position: relative;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--text-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
         }
 
         /* Hero Section */
@@ -158,9 +42,23 @@
         }
 
         .hero h1 {
+            font-family: var(--font-title);
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
             margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        body[data-fun="on"] .hero h1 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 
+                3px 3px 0 rgba(0,0,0,0.5),
+                -1px -1px 0 rgba(255,255,255,0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        body[data-fun="off"] .hero h1 {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -173,10 +71,19 @@
             50% { background-position: 100% 50%; }
         }
 
-        .hero .subtitle {
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .subtitle {
             font-size: 1.5rem;
-            color: var(--text-secondary);
+            color: var(--secondary-color);
             margin-bottom: 2rem;
+        }
+
+        body[data-fun="off"] .subtitle {
+            color: var(--text-secondary);
         }
 
         .hero-description {
@@ -186,6 +93,7 @@
             line-height: 1.8;
         }
 
+        /* CTA Buttons */
         .cta-buttons {
             display: flex;
             gap: 1rem;
@@ -202,9 +110,23 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            font-family: var(--font-main);
+        }
+
+        body[data-fun="on"] .btn {
+            border: 3px solid var(--border-color);
+            text-transform: uppercase;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.3);
         }
 
         .btn-primary {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        body[data-fun="off"] .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
@@ -212,6 +134,9 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
+        }
+
+        body[data-fun="off"] .btn-primary:hover {
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
@@ -242,12 +167,25 @@
 
         .feature-card {
             background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
+            border: 2px solid var(--border-color);
             padding: 2rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        body[data-fun="on"] .feature-card {
+            border: 3px solid var(--border-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.2);
+        }
+
+        body[data-fun="off"] .feature-card {
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .feature-card::before {
@@ -257,7 +195,12 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--primary-color) 20%, 
+                var(--primary-color) 80%, 
+                transparent
+            );
             transform: translateX(-100%);
             transition: transform 0.3s ease;
         }
@@ -268,6 +211,9 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
+        }
+
+        body[data-fun="off"] .feature-card:hover {
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
@@ -277,9 +223,14 @@
         }
 
         .feature-card h3 {
+            font-family: var(--font-title);
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--text-color);
+            color: var(--primary-color);
+        }
+
+        body[data-fun="off"] .feature-card h3 {
+            font-weight: 600;
         }
 
         .feature-card p {
@@ -308,38 +259,8 @@
             fill: var(--text-secondary);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--surface-color);
-                flex-direction: column;
-                padding: 2rem;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .nav-links.active {
-                transform: translateX(0);
-            }
-
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -355,24 +276,42 @@
                 width: 100%;
                 justify-content: center;
             }
+
+            .container {
+                padding-top: 120px;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="background-animation"></div>
-
+<body data-theme="dark" data-fun="on">
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="logo">KK</div>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="cv.html">CV</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
+            <div class="nav-content" id="navLinks">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">
+                        <span class="lang-en">Home</span>
+                        <span class="lang-fr hidden">Accueil</span>
+                    </a></li>
+                    <li><a href="about.html">
+                        <span class="lang-en">About</span>
+                        <span class="lang-fr hidden">À propos</span>
+                    </a></li>
+                    <li><a href="cv.html">CV</a></li>
+                    <li><a href="projects.html">
+                        <span class="lang-en">Projects</span>
+                        <span class="lang-fr hidden">Projets</span>
+                    </a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+                <div class="control-panel">
+                    <button class="control-btn" id="langToggle" onclick="toggleLanguage()">EN</button>
+                    <button class="control-btn" id="themeToggle" onclick="toggleTheme()">☀️</button>
+                    <button class="control-btn" id="funToggle" onclick="toggleFun()">PRO</button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -380,19 +319,27 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Krisztián Kovács</h1>
-            <p class="subtitle">IT Infrastructure Engineer & Project Manager</p>
-            <p class="hero-description">
+            <p class="subtitle lang-en">IT Infrastructure Engineer & Project Manager</p>
+            <p class="subtitle lang-fr hidden">Ingénieur Infrastructure IT & Chef de Projet</p>
+            <p class="hero-description lang-en">
                 Crafting robust cloud solutions and leading cross-functional teams to deliver 
                 enterprise-grade infrastructure. Specializing in cloud security, Kubernetes orchestration, 
                 and regulatory compliance.
             </p>
+            <p class="hero-description lang-fr hidden">
+                Conception de solutions cloud robustes et direction d'équipes interfonctionnelles pour 
+                livrer des infrastructures d'entreprise. Spécialisé en sécurité cloud, orchestration 
+                Kubernetes et conformité réglementaire.
+            </p>
             <div class="cta-buttons">
                 <a href="projects.html" class="btn btn-primary">
-                    <span>View Projects</span>
+                    <span class="lang-en">View Projects</span>
+                    <span class="lang-fr hidden">Voir Projets</span>
                     <span>→</span>
                 </a>
                 <a href="cv.html" class="btn btn-secondary">
-                    <span>Download CV</span>
+                    <span class="lang-en">Download CV</span>
+                    <span class="lang-fr hidden">Télécharger CV</span>
                     <span>↓</span>
                 </a>
             </div>
@@ -409,36 +356,28 @@
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">🚀</div>
-                <h3>Cloud Architecture</h3>
-                <p>Designing and implementing scalable cloud solutions on Azure, AWS, and GCP with focus on performance and cost optimization.</p>
+                <h3 class="lang-en">Cloud Architecture</h3>
+                <h3 class="lang-fr hidden">Architecture Cloud</h3>
+                <p class="lang-en">Designing and implementing scalable cloud solutions on Azure, AWS, and GCP with focus on performance and cost optimization.</p>
+                <p class="lang-fr hidden">Conception et implémentation de solutions cloud évolutives sur Azure, AWS et GCP avec focus sur la performance et l'optimisation des coûts.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🔒</div>
-                <h3>Security & Compliance</h3>
-                <p>Ensuring GDPR compliance, implementing ISO 27001 standards, and maintaining robust security postures across infrastructures.</p>
+                <h3 class="lang-en">Security & Compliance</h3>
+                <h3 class="lang-fr hidden">Sécurité & Conformité</h3>
+                <p class="lang-en">Ensuring GDPR compliance, implementing ISO 27001 standards, and maintaining robust security postures across infrastructures.</p>
+                <p class="lang-fr hidden">Assurer la conformité RGPD, implémenter les normes ISO 27001 et maintenir des postures de sécurité robustes sur les infrastructures.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🤖</div>
-                <h3>AI & Automation</h3>
-                <p>Leveraging ML/AI for infrastructure optimization and implementing automation with Ansible, Terraform, and PowerShell.</p>
+                <h3 class="lang-en">AI & Automation</h3>
+                <h3 class="lang-fr hidden">IA & Automatisation</h3>
+                <p class="lang-en">Leveraging ML/AI for infrastructure optimization and implementing automation with Ansible, Terraform, and PowerShell.</p>
+                <p class="lang-fr hidden">Exploitation du ML/IA pour l'optimisation des infrastructures et implémentation de l'automatisation avec Ansible, Terraform et PowerShell.</p>
             </div>
         </div>
     </section>
 
-    <script>
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const nav = document.querySelector('nav');
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-                document.getElementById('navLinks').classList.remove('active');
-            }
-        });
-    </script>
+    <script src="js/shared.js"></script>
 </body>
 </html>

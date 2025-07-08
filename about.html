@@ -4,110 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Krisztián Kovács</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/shared-themes.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-color: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Background */
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            opacity: 0.05;
-        }
-
-        /* Navigation (same as index) */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--text-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
+        /* Page-specific styles only */
 
         /* Main Content */
         .main-content {
@@ -315,38 +214,44 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
+        /* Fun mode styles */
+        body[data-fun="on"] .about-section {
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(99, 102, 241, 0.03) 10px,
+                    rgba(99, 102, 241, 0.03) 20px
+                );
         }
 
+        body[data-fun="on"] .skill-card {
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+        }
+
+        body[data-fun="on"] .timeline::before {
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--primary-color),
+                var(--primary-color) 5px,
+                transparent 5px,
+                transparent 10px
+            );
+        }
+
+        body[data-fun="on"] .timeline-item::before {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--surface-color);
-                flex-direction: column;
-                padding: 2rem;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .nav-links.active {
-                transform: translateX(0);
-            }
-
             .page-header h1 {
                 font-size: 2rem;
             }
@@ -373,46 +278,67 @@
         <div class="nav-container">
             <div class="logo">KK</div>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-                <li><a href="cv.html">CV</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
+            <div class="nav-content" id="navLinks">
+                <ul class="nav-links">
+                    <li><a href="index.html"><span class="lang-en">Home</span><span class="lang-fr" style="display:none;">Accueil</span></a></li>
+                    <li><a href="about.html" class="active"><span class="lang-en">About</span><span class="lang-fr" style="display:none;">À Propos</span></a></li>
+                    <li><a href="cv.html"><span class="lang-en">CV</span><span class="lang-fr" style="display:none;">CV</span></a></li>
+                    <li><a href="projects.html"><span class="lang-en">Projects</span><span class="lang-fr" style="display:none;">Projets</span></a></li>
+                    <li><a href="blog.html"><span class="lang-en">Blog</span><span class="lang-fr" style="display:none;">Blog</span></a></li>
+                </ul>
+                <div class="control-panel">
+                    <button class="control-btn" id="langToggle" onclick="toggleLanguage()">EN</button>
+                    <button class="control-btn" id="themeToggle" onclick="toggleTheme()">☀️</button>
+                    <button class="control-btn" id="funToggle" onclick="toggleFun()">PRO</button>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
         <div class="page-header">
-            <h1>About Me</h1>
-            <p>IT Engineer, Problem Solver, Innovation Enthusiast</p>
+            <h1><span class="lang-en">About Me</span><span class="lang-fr" style="display:none;">À Propos de Moi</span></h1>
+            <p><span class="lang-en">IT Engineer, Problem Solver, Innovation Enthusiast</span><span class="lang-fr" style="display:none;">Ingénieur IT, Résolveur de Problèmes, Passionné d'Innovation</span></p>
         </div>
 
         <!-- Introduction -->
         <section class="about-section">
-            <h2>Hello, I'm Krisztián</h2>
-            <p>
+            <h2><span class="lang-en">Hello, I'm Krisztián</span><span class="lang-fr" style="display:none;">Bonjour, je suis Krisztián</span></h2>
+            <p class="lang-en">
                 I'm an IT Infrastructure Engineer with a passion for building robust, scalable systems that drive business value. 
                 Currently working as an IT Expert at Nomadia in Nantes, France, I specialize in cloud architecture, 
                 regulatory compliance, and cross-departmental project management.
             </p>
-            <p>
+            <p class="lang-fr" style="display:none;">
+                Je suis un Ingénieur Infrastructure IT passionné par la construction de systèmes robustes et évolutifs qui génèrent de la valeur commerciale. 
+                Actuellement Expert IT chez Nomadia à Nantes, France, je me spécialise dans l'architecture cloud, 
+                la conformité réglementaire et la gestion de projets inter-départementaux.
+            </p>
+            <p class="lang-en">
                 With expertise spanning from Level 3 support to strategic IT implementations, I thrive on solving complex 
                 technical challenges and transforming infrastructure to meet modern demands. My approach combines technical 
                 excellence with a keen understanding of business needs, ensuring solutions that are both innovative and practical.
             </p>
-            <p>
+            <p class="lang-fr" style="display:none;">
+                Avec une expertise allant du support de niveau 3 aux implémentations IT stratégiques, je m'épanouis dans la résolution de défis 
+                techniques complexes et la transformation d'infrastructures pour répondre aux exigences modernes. Mon approche combine l'excellence 
+                technique avec une compréhension approfondie des besoins commerciaux, garantissant des solutions à la fois innovantes et pratiques.
+            </p>
+            <p class="lang-en">
                 Beyond the technical realm, I'm multilingual (speaking English, French, Hungarian, Romanian, and some German), 
                 which has proven invaluable in managing international projects and collaborating with diverse teams across Europe.
+            </p>
+            <p class="lang-fr" style="display:none;">
+                Au-delà du domaine technique, je suis multilingue (parlant anglais, français, hongrois, roumain et un peu d'allemand), 
+                ce qui s'est avéré inestimable pour gérer des projets internationaux et collaborer avec des équipes diverses à travers l'Europe.
             </p>
         </section>
 
         <!-- Skills & Interests -->
         <div class="skills-interests">
             <div class="skill-card">
-                <h3>Core Expertise</h3>
+                <h3><span class="lang-en">Core Expertise</span><span class="lang-fr" style="display:none;">Expertise Principale</span></h3>
                 <ul class="skill-list">
                     <li>Cloud Architecture (Azure, AWS, GCP)</li>
                     <li>Kubernetes & Container Orchestration</li>
@@ -423,7 +349,7 @@
                 </ul>
             </div>
             <div class="skill-card">
-                <h3>Current Interests</h3>
+                <h3><span class="lang-en">Current Interests</span><span class="lang-fr" style="display:none;">Intérêts Actuels</span></h3>
                 <ul class="skill-list">
                     <li>Machine Learning & AI in Infrastructure</li>
                     <li>Green IT & Sustainable Technology</li>
@@ -438,35 +364,35 @@
         <!-- Journey Timeline -->
         <section class="journey-section">
             <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color);">
-                My Journey
+                <span class="lang-en">My Journey</span><span class="lang-fr" style="display:none;">Mon Parcours</span>
             </h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-date">2023 - Present</div>
                     <div class="timeline-content">
                         <h4>IT Expert at Nomadia</h4>
-                        <p>Leading strategic IT projects, conducting infrastructure audits, and driving innovation through ML/AI integration.</p>
+                        <p><span class="lang-en">Leading strategic IT projects, conducting infrastructure audits, and driving innovation through ML/AI integration.</span><span class="lang-fr" style="display:none;">Direction de projets IT stratégiques, réalisation d'audits d'infrastructure et stimulation de l'innovation par l'intégration ML/IA.</span></p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2022 - 2023</div>
                     <div class="timeline-content">
                         <h4>IT Administrator at Dynamips</h4>
-                        <p>Managed cloud infrastructure, modernized legacy systems, and ensured GDPR compliance across platforms.</p>
+                        <p><span class="lang-en">Managed cloud infrastructure, modernized legacy systems, and ensured GDPR compliance across platforms.</span><span class="lang-fr" style="display:none;">Gestion de l'infrastructure cloud, modernisation des systèmes legacy et assurance de la conformité RGPD sur toutes les plateformes.</span></p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2020 - 2022</div>
                     <div class="timeline-content">
                         <h4>IT Technician at Entreprise CHARIER</h4>
-                        <p>Started my professional journey implementing Intune solutions and supporting enterprise mobility initiatives.</p>
+                        <p><span class="lang-en">Started my professional journey implementing Intune solutions and supporting enterprise mobility initiatives.</span><span class="lang-fr" style="display:none;">Début de mon parcours professionnel en implémentant des solutions Intune et en soutenant les initiatives de mobilité d'entreprise.</span></p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2020 - 2025</div>
                     <div class="timeline-content">
-                        <h4>Continuous Learning</h4>
-                        <p>Pursuing Master's degree at EPSI while gaining hands-on experience through work-study programs.</p>
+                        <h4><span class="lang-en">Continuous Learning</span><span class="lang-fr" style="display:none;">Apprentissage Continu</span></h4>
+                        <p><span class="lang-en">Pursuing Master's degree at EPSI while gaining hands-on experience through work-study programs.</span><span class="lang-fr" style="display:none;">Poursuite d'un Master à l'EPSI tout en acquérant une expérience pratique grâce aux programmes d'alternance.</span></p>
                     </div>
                 </div>
             </div>
@@ -474,29 +400,15 @@
 
         <!-- Contact CTA -->
         <section class="contact-cta">
-            <h2>Let's Connect</h2>
-            <p>I'm always interested in discussing new technologies, challenging projects, or potential collaborations.</p>
+            <h2><span class="lang-en">Let's Connect</span><span class="lang-fr" style="display:none;">Connectons-nous</span></h2>
+            <p><span class="lang-en">I'm always interested in discussing new technologies, challenging projects, or potential collaborations.</span><span class="lang-fr" style="display:none;">Je suis toujours intéressé pour discuter de nouvelles technologies, de projets stimulants ou de collaborations potentielles.</span></p>
             <a href="mailto:contact@example.com" class="btn">
-                <span>Get In Touch</span>
+                <span class="lang-en">Get In Touch</span><span class="lang-fr" style="display:none;">Contactez-moi</span>
                 <span>→</span>
             </a>
         </section>
     </main>
 
-    <script>
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const nav = document.querySelector('nav');
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-                document.getElementById('navLinks').classList.remove('active');
-            }
-        });
-    </script>
+    <script src="js/shared.js"></script>
 </body>
 </html>

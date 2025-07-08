@@ -4,111 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Krisztián Kovács</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/shared-themes.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Page-specific styles only */
         :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-color: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
             --success-color: #10b981;
             --warning-color: #f59e0b;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Background */
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            opacity: 0.05;
-        }
-
-        /* Navigation (same as other pages) */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--text-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
         }
 
         /* Main Content */
@@ -325,38 +226,49 @@
             gap: 1rem;
         }
 
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
+        /* Fun mode styles */
+        body[data-fun="on"] .project-card {
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(99, 102, 241, 0.03) 10px,
+                    rgba(99, 102, 241, 0.03) 20px
+                );
         }
 
+        body[data-fun="on"] .filter-tab {
+            font-family: 'VT323', monospace;
+            font-size: 1.1em;
+            text-transform: uppercase;
+        }
+
+        body[data-fun="on"] .filter-tab.active {
+            animation: blink 1s steps(2) infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        body[data-fun="on"] .featured-badge {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        body[data-fun="on"] .stat-value {
+            font-family: 'VT323', monospace;
+            font-size: 2em;
+        }
+
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--surface-color);
-                flex-direction: column;
-                padding: 2rem;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .nav-links.active {
-                transform: translateX(0);
-            }
-
             .page-header h1 {
                 font-size: 2rem;
             }
@@ -383,36 +295,43 @@
         <div class="nav-container">
             <div class="logo">KK</div>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="cv.html">CV</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
+            <div class="nav-content" id="navLinks">
+                <ul class="nav-links">
+                    <li><a href="index.html"><span class="lang-en">Home</span><span class="lang-fr" style="display:none;">Accueil</span></a></li>
+                    <li><a href="about.html"><span class="lang-en">About</span><span class="lang-fr" style="display:none;">À Propos</span></a></li>
+                    <li><a href="cv.html"><span class="lang-en">CV</span><span class="lang-fr" style="display:none;">CV</span></a></li>
+                    <li><a href="projects.html" class="active"><span class="lang-en">Projects</span><span class="lang-fr" style="display:none;">Projets</span></a></li>
+                    <li><a href="blog.html"><span class="lang-en">Blog</span><span class="lang-fr" style="display:none;">Blog</span></a></li>
+                </ul>
+                <div class="control-panel">
+                    <button class="control-btn" id="langToggle" onclick="toggleLanguage()">EN</button>
+                    <button class="control-btn" id="themeToggle" onclick="toggleTheme()">☀️</button>
+                    <button class="control-btn" id="funToggle" onclick="toggleFun()">PRO</button>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
         <div class="page-header">
-            <h1>Projects Portfolio</h1>
-            <p>A showcase of my technical projects and achievements</p>
+            <h1><span class="lang-en">Projects Portfolio</span><span class="lang-fr" style="display:none;">Portfolio de Projets</span></h1>
+            <p><span class="lang-en">A showcase of my technical projects and achievements</span><span class="lang-fr" style="display:none;">Une vitrine de mes projets techniques et réalisations</span></p>
         </div>
 
         <!-- Filter Tabs -->
         <div class="filter-tabs">
-            <div class="filter-tab active" onclick="filterProjects('all')">All Projects</div>
-            <div class="filter-tab" onclick="filterProjects('cloud')">Cloud & Infrastructure</div>
-            <div class="filter-tab" onclick="filterProjects('security')">Security & Compliance</div>
-            <div class="filter-tab" onclick="filterProjects('automation')">Automation & DevOps</div>
+            <div class="filter-tab active" onclick="filterProjects('all')"><span class="lang-en">All Projects</span><span class="lang-fr" style="display:none;">Tous les Projets</span></div>
+            <div class="filter-tab" onclick="filterProjects('cloud')"><span class="lang-en">Cloud & Infrastructure</span><span class="lang-fr" style="display:none;">Cloud & Infrastructure</span></div>
+            <div class="filter-tab" onclick="filterProjects('security')"><span class="lang-en">Security & Compliance</span><span class="lang-fr" style="display:none;">Sécurité & Conformité</span></div>
+            <div class="filter-tab" onclick="filterProjects('automation')"><span class="lang-en">Automation & DevOps</span><span class="lang-fr" style="display:none;">Automatisation & DevOps</span></div>
         </div>
 
         <!-- Projects Grid -->
         <div class="projects-grid" id="projectsGrid">
             <!-- Featured Project -->
             <article class="project-card featured-project" data-category="cloud">
-                <span class="featured-badge">Featured</span>
+                <span class="featured-badge"><span class="lang-en">Featured</span><span class="lang-fr" style="display:none;">En Vedette</span></span>
                 <div class="project-header">
                     <h3 class="project-title">Cloud-Native Kubernetes Infrastructure</h3>
                     <p class="project-date">April 2025 - July 2025</p>
@@ -425,26 +344,29 @@
                 </div>
                 <div class="project-body">
                     <p class="project-description">
-                        Delivered a production-ready Kubernetes infrastructure on Google Cloud Platform for an enterprise client. 
+                        <span class="lang-en">Delivered a production-ready Kubernetes infrastructure on Google Cloud Platform for an enterprise client. 
                         Led a multicultural team implementing Infrastructure as Code with Terraform, comprehensive monitoring 
-                        with Prometheus/Grafana, and automated CI/CD pipelines.
+                        with Prometheus/Grafana, and automated CI/CD pipelines.</span>
+                        <span class="lang-fr" style="display:none;">Livraison d'une infrastructure Kubernetes prête pour la production sur Google Cloud Platform pour un client d'entreprise. 
+                        Direction d'une équipe multiculturelle implémentant l'Infrastructure as Code avec Terraform, une surveillance complète 
+                        avec Prometheus/Grafana et des pipelines CI/CD automatisés.</span>
                     </p>
                     <div class="project-stats">
                         <div class="stat">
                             <div class="stat-value">99.95%</div>
-                            <div class="stat-label">Uptime Achieved</div>
+                            <div class="stat-label"><span class="lang-en">Uptime Achieved</span><span class="lang-fr" style="display:none;">Disponibilité Atteinte</span></div>
                         </div>
                         <div class="stat">
                             <div class="stat-value">28%</div>
-                            <div class="stat-label">Under Budget</div>
+                            <div class="stat-label"><span class="lang-en">Under Budget</span><span class="lang-fr" style="display:none;">Sous Budget</span></div>
                         </div>
                         <div class="stat">
                             <div class="stat-value">62%</div>
-                            <div class="stat-label">ROI Projection</div>
+                            <div class="stat-label"><span class="lang-en">ROI Projection</span><span class="lang-fr" style="display:none;">Projection ROI</span></div>
                         </div>
                         <div class="stat">
                             <div class="stat-value">4</div>
-                            <div class="stat-label">Team Members</div>
+                            <div class="stat-label"><span class="lang-en">Team Members</span><span class="lang-fr" style="display:none;">Membres d'Équipe</span></div>
                         </div>
                     </div>
                     <div class="project-tech">
@@ -466,18 +388,21 @@
                 </div>
                 <div class="project-body">
                     <p class="project-description">
-                        Architected and deployed a comprehensive Microsoft Intune solution, transforming endpoint security 
+                        <span class="lang-en">Architected and deployed a comprehensive Microsoft Intune solution, transforming endpoint security 
                         across 30+ workstations. Achieved 98% BitLocker encryption coverage and established Azure AD 
-                        integration with MFA and conditional access policies.
+                        integration with MFA and conditional access policies.</span>
+                        <span class="lang-fr" style="display:none;">Architecture et déploiement d'une solution Microsoft Intune complète, transformant la sécurité des endpoints 
+                        sur plus de 30 postes de travail. Réalisation d'une couverture de chiffrement BitLocker de 98% et établissement de l'intégration 
+                        Azure AD avec MFA et politiques d'accès conditionnel.</span>
                     </p>
                     <div class="project-stats">
                         <div class="stat">
                             <div class="stat-value">92%</div>
-                            <div class="stat-label">Incident Reduction</div>
+                            <div class="stat-label"><span class="lang-en">Incident Reduction</span><span class="lang-fr" style="display:none;">Réduction des Incidents</span></div>
                         </div>
                         <div class="stat">
                             <div class="stat-value">1 hour</div>
-                            <div class="stat-label">Deploy Time</div>
+                            <div class="stat-label"><span class="lang-en">Deploy Time</span><span class="lang-fr" style="display:none;">Temps de Déploiement</span></div>
                         </div>
                     </div>
                     <div class="project-tech">
@@ -620,12 +545,8 @@
         </div>
     </main>
 
+    <script src="js/shared.js"></script>
     <script>
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
         // Filter projects
         function filterProjects(category) {
             const projects = document.querySelectorAll('.project-card');
@@ -634,8 +555,9 @@
             // Update active tab
             tabs.forEach(tab => {
                 tab.classList.remove('active');
-                if (tab.textContent.toLowerCase().includes(category) || 
-                    (category === 'all' && tab.textContent === 'All Projects')) {
+                const tabText = tab.querySelector('.lang-en').textContent.toLowerCase();
+                if (tabText.includes(category) || 
+                    (category === 'all' && tabText === 'all projects')) {
                     tab.classList.add('active');
                 }
             });
@@ -654,15 +576,6 @@
                 }
             });
         }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const nav = document.querySelector('nav');
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-                document.getElementById('navLinks').classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
