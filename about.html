@@ -46,6 +46,102 @@
             color: var(--text-secondary);
         }
 
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        body[data-fun="on"] .profile-section {
+            border: 3px solid var(--border-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.2);
+        }
+
+        body[data-fun="off"] .profile-section {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .profile-image {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        body[data-fun="on"] .profile-image {
+            border-radius: 0;
+            image-rendering: pixelated;
+            border: 5px solid var(--border-color);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .profile-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .profile-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        body[data-fun="on"] .profile-links a {
+            border: 2px solid var(--border-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.3);
+        }
+
+        .profile-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
         /* About Content */
         .about-section {
             background: var(--surface-color);
@@ -302,6 +398,28 @@
             <p><span class="lang-en">IT Engineer, Problem Solver, Innovation Enthusiast</span><span class="lang-fr" class="hidden">Ingénieur IT, Résolveur de Problèmes, Passionné d'Innovation</span></p>
         </div>
 
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-image">
+                <img src="images/krisztian-headshot.jpg" alt="Krisztián Kovács">
+            </div>
+            <div class="profile-info">
+                <h2>Krisztián Kovács</h2>
+                <p class="lang-en">IT Infrastructure Engineer & Project Manager based in France</p>
+                <p class="lang-fr hidden">Ingénieur Infrastructure IT & Chef de Projet basé en France</p>
+                <div class="profile-links">
+                    <a href="https://www.linkedin.com/in/kriszti%C3%A1n-g%C3%A9za-kov%C3%A1cs-2b72251a2/" target="_blank" rel="noopener noreferrer">
+                        <span>💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="mailto:krisztian.kovacs.HQ@protonmail.com">
+                        <span>✉️</span>
+                        <span>Email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- Introduction -->
         <section class="about-section">
             <h2><span class="lang-en">Hello, I'm Krisztián</span><span class="lang-fr" class="hidden">Bonjour, je suis Krisztián</span></h2>
@@ -402,7 +520,7 @@
         <section class="contact-cta">
             <h2><span class="lang-en">Let's Connect</span><span class="lang-fr" class="hidden">Connectons-nous</span></h2>
             <p><span class="lang-en">I'm always interested in discussing new technologies, challenging projects, or potential collaborations.</span><span class="lang-fr" class="hidden">Je suis toujours intéressé pour discuter de nouvelles technologies, de projets stimulants ou de collaborations potentielles.</span></p>
-            <a href="mailto:contact@example.com" class="btn">
+            <a href="mailto:krisztian.kovacs.HQ@protonmail.com" class="btn">
                 <span class="lang-en">Get In Touch</span><span class="lang-fr" class="hidden">Contactez-moi</span>
                 <span>→</span>
             </a>
