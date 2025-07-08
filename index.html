@@ -104,6 +104,30 @@
             color: var(--text-secondary);
         }
 
+        /* Fun theme button-like styles for subtitle */
+        body[data-fun="on"] .subtitle {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 3px solid var(--border-color);
+            background: var(--surface-color);
+            text-transform: uppercase;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.3);
+            margin-bottom: 2rem;
+        }
+
+        body[data-fun="on"][data-theme="light"] .subtitle {
+            background: rgba(245,230,211,0.95);
+            color: var(--text-color);
+            border-color: var(--accent-color);
+        }
+
+        body[data-fun="on"][data-theme="dark"] .subtitle {
+            background: var(--surface-color);
+            color: var(--secondary-color);
+        }
+
         .hero-description {
             font-size: 1.1rem;
             color: var(--text-secondary);
@@ -114,6 +138,32 @@
             padding: 1rem;
             border-radius: 0.5rem;
             backdrop-filter: blur(5px);
+        }
+
+        /* Fun theme button-like styles for hero description */
+        body[data-fun="on"] .hero-description {
+            display: inline-block;
+            max-width: 600px;
+            padding: 1rem 2rem;
+            border: 3px solid var(--border-color);
+            background: var(--surface-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.3);
+            border-radius: 0;
+            backdrop-filter: none;
+        }
+
+        body[data-fun="on"][data-theme="light"] .hero-description {
+            background: rgba(245,230,211,0.95);
+            color: var(--text-color);
+            border-color: var(--accent-color);
+            text-shadow: none;
+        }
+
+        body[data-fun="on"][data-theme="dark"] .hero-description {
+            background: var(--surface-color);
+            color: var(--text-secondary);
         }
 
         /* CTA Buttons */
