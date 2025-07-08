@@ -4,110 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Krisztián Kovács</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/shared-themes.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #6366f1;
-            --secondary-color: #8b5cf6;
-            --accent-color: #ec4899;
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-color: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Background */
-        .background-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            opacity: 0.05;
-        }
-
-        /* Navigation (same as other pages) */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--text-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
+        /* Page-specific styles only */
 
         /* Main Content */
         .main-content {
@@ -264,38 +163,70 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
+        /* Fun mode styles */
+        body[data-fun="on"] .coming-soon {
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(99, 102, 241, 0.03) 10px,
+                    rgba(99, 102, 241, 0.03) 20px
+                );
         }
 
+        body[data-fun="on"] .coming-soon-icon {
+            font-size: 5rem;
+            filter: hue-rotate(0deg);
+            animation: pulse 2s ease-in-out infinite, hueRotate 5s linear infinite;
+        }
+
+        @keyframes hueRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        body[data-fun="on"] .topic-card {
+            font-family: 'VT323', monospace;
+        }
+
+        body[data-fun="on"] .topic-card:hover {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+
+        body[data-fun="on"] .subscribe-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        body[data-fun="on"] .subscribe-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                rgba(139, 92, 246, 0.03) 10deg,
+                transparent 20deg
+            );
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: var(--surface-color);
-                flex-direction: column;
-                padding: 2rem;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .nav-links.active {
-                transform: translateX(0);
-            }
-
             .page-header h1 {
                 font-size: 2rem;
             }
@@ -314,83 +245,79 @@
         <div class="nav-container">
             <div class="logo">KK</div>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="cv.html">CV</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="blog.html" class="active">Blog</a></li>
-            </ul>
+            <div class="nav-content" id="navLinks">
+                <ul class="nav-links">
+                    <li><a href="index.html"><span class="lang-en">Home</span><span class="lang-fr" style="display:none;">Accueil</span></a></li>
+                    <li><a href="about.html"><span class="lang-en">About</span><span class="lang-fr" style="display:none;">À Propos</span></a></li>
+                    <li><a href="cv.html"><span class="lang-en">CV</span><span class="lang-fr" style="display:none;">CV</span></a></li>
+                    <li><a href="projects.html"><span class="lang-en">Projects</span><span class="lang-fr" style="display:none;">Projets</span></a></li>
+                    <li><a href="blog.html" class="active"><span class="lang-en">Blog</span><span class="lang-fr" style="display:none;">Blog</span></a></li>
+                </ul>
+                <div class="control-panel">
+                    <button class="control-btn" id="langToggle" onclick="toggleLanguage()">EN</button>
+                    <button class="control-btn" id="themeToggle" onclick="toggleTheme()">☀️</button>
+                    <button class="control-btn" id="funToggle" onclick="toggleFun()">PRO</button>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
         <div class="page-header">
-            <h1>Technical Blog</h1>
-            <p>Insights, tutorials, and thoughts on modern IT infrastructure</p>
+            <h1><span class="lang-en">Technical Blog</span><span class="lang-fr" style="display:none;">Blog Technique</span></h1>
+            <p><span class="lang-en">Insights, tutorials, and thoughts on modern IT infrastructure</span><span class="lang-fr" style="display:none;">Perspectives, tutoriels et réflexions sur l'infrastructure IT moderne</span></p>
         </div>
 
         <!-- Coming Soon Section -->
         <section class="coming-soon">
             <div class="coming-soon-icon">📝</div>
-            <h2>Blog Coming Soon!</h2>
+            <h2><span class="lang-en">Blog Coming Soon!</span><span class="lang-fr" style="display:none;">Blog à Venir!</span></h2>
             <p>
-                I'm currently working on launching my technical blog where I'll share insights from my 
+                <span class="lang-en">I'm currently working on launching my technical blog where I'll share insights from my 
                 journey in IT infrastructure, cloud computing, and emerging technologies. Stay tuned for 
-                in-depth tutorials, project walkthroughs, and industry perspectives.
+                in-depth tutorials, project walkthroughs, and industry perspectives.</span>
+                <span class="lang-fr" style="display:none;">Je travaille actuellement sur le lancement de mon blog technique où je partagerai des perspectives de mon 
+                parcours en infrastructure IT, cloud computing et technologies émergentes. Restez à l'écoute pour 
+                des tutoriels approfondis, des présentations de projets et des perspectives de l'industrie.</span>
             </p>
 
             <!-- Topics Preview -->
             <div class="topics-preview">
                 <div class="topic-card">
                     <div class="topic-icon">☁️</div>
-                    <h3>Cloud Architecture</h3>
-                    <p>Deep dives into cloud design patterns, cost optimization, and multi-cloud strategies</p>
+                    <h3><span class="lang-en">Cloud Architecture</span><span class="lang-fr" style="display:none;">Architecture Cloud</span></h3>
+                    <p><span class="lang-en">Deep dives into cloud design patterns, cost optimization, and multi-cloud strategies</span><span class="lang-fr" style="display:none;">Analyses approfondies des modèles de conception cloud, optimisation des coûts et stratégies multi-cloud</span></p>
                 </div>
                 <div class="topic-card">
                     <div class="topic-icon">🔧</div>
-                    <h3>Technical Tutorials</h3>
-                    <p>Step-by-step guides for Kubernetes, Infrastructure as Code, and automation tools</p>
+                    <h3><span class="lang-en">Technical Tutorials</span><span class="lang-fr" style="display:none;">Tutoriels Techniques</span></h3>
+                    <p><span class="lang-en">Step-by-step guides for Kubernetes, Infrastructure as Code, and automation tools</span><span class="lang-fr" style="display:none;">Guides étape par étape pour Kubernetes, Infrastructure as Code et outils d'automatisation</span></p>
                 </div>
                 <div class="topic-card">
                     <div class="topic-icon">🚀</div>
-                    <h3>Project Stories</h3>
-                    <p>Behind-the-scenes looks at real-world implementations and lessons learned</p>
+                    <h3><span class="lang-en">Project Stories</span><span class="lang-fr" style="display:none;">Histoires de Projets</span></h3>
+                    <p><span class="lang-en">Behind-the-scenes looks at real-world implementations and lessons learned</span><span class="lang-fr" style="display:none;">Regards en coulisses sur les implémentations réelles et les leçons apprises</span></p>
                 </div>
                 <div class="topic-card">
                     <div class="topic-icon">🔍</div>
-                    <h3>Tech Reviews</h3>
-                    <p>Analysis of new tools, frameworks, and technologies in the infrastructure space</p>
+                    <h3><span class="lang-en">Tech Reviews</span><span class="lang-fr" style="display:none;">Revues Technologiques</span></h3>
+                    <p><span class="lang-en">Analysis of new tools, frameworks, and technologies in the infrastructure space</span><span class="lang-fr" style="display:none;">Analyse de nouveaux outils, frameworks et technologies dans l'espace infrastructure</span></p>
                 </div>
             </div>
         </section>
 
         <!-- Subscribe Section -->
         <section class="subscribe-section">
-            <h3>Get Notified</h3>
-            <p>Be the first to know when the blog launches and never miss a post!</p>
+            <h3><span class="lang-en">Get Notified</span><span class="lang-fr" style="display:none;">Soyez Notifié</span></h3>
+            <p><span class="lang-en">Be the first to know when the blog launches and never miss a post!</span><span class="lang-fr" style="display:none;">Soyez le premier à savoir quand le blog sera lancé et ne manquez jamais un article!</span></p>
             <a href="https://linkedin.com/in/krisztian-kovacs" class="btn">
-                <span>Connect on LinkedIn</span>
+                <span class="lang-en">Connect on LinkedIn</span><span class="lang-fr" style="display:none;">Connectez-vous sur LinkedIn</span>
                 <span>→</span>
             </a>
         </section>
     </main>
 
-    <script>
-        function toggleMobileMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const nav = document.querySelector('nav');
-            const toggle = document.querySelector('.mobile-menu-toggle');
-            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-                document.getElementById('navLinks').classList.remove('active');
-            }
-        });
-    </script>
+    <script src="js/shared.js"></script>
 </body>
 </html>
