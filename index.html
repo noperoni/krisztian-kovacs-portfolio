@@ -22,6 +22,22 @@
             justify-content: center;
             padding: 0 2rem;
             position: relative;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/austria-mountains.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        body[data-fun="on"][data-theme="dark"] .hero {
+            background-image: linear-gradient(rgba(26,0,0,0.8), rgba(45,24,16,0.8)), url('images/austria-mountains.jpg');
+        }
+
+        body[data-fun="on"][data-theme="light"] .hero {
+            background-image: linear-gradient(rgba(232,212,160,0.85), rgba(245,230,211,0.85)), url('images/austria-mountains.jpg');
+        }
+
+        body[data-fun="off"] .hero {
+            background-image: linear-gradient(rgba(15,23,42,0.9), rgba(30,41,59,0.9)), url('images/austria-mountains.jpg');
         }
 
         .hero-content {
