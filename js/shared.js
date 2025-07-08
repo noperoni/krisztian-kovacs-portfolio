@@ -27,6 +27,9 @@ function updateControlButtons(theme, fun, lang) {
     }
     
     if (funToggle) {
+        // Show current state on button
+        funToggle.textContent = fun === 'on' ? 'FUN' : 'PRO';
+        
         if (fun === 'off') {
             funToggle.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
             funToggle.style.color = 'white';
@@ -69,6 +72,9 @@ function toggleFun() {
     
     const funToggle = document.getElementById('funToggle');
     if (funToggle) {
+        // Update button text to show current state
+        funToggle.textContent = newFun === 'on' ? 'FUN' : 'PRO';
+        
         if (newFun === 'off') {
             funToggle.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
             funToggle.style.color = 'white';
