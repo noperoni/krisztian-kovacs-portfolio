@@ -2,7 +2,7 @@
 
 Welcome to my personal portfolio website showcasing my work as an IT Infrastructure Engineer and Project Manager.
 
-🌐 **Live Site**: [https://[your-username].github.io/krisztian-kovacs-portfolio](https://[your-username].github.io/krisztian-kovacs-portfolio)
+🌐 **Live Site**: [https://noperoni.github.io/krisztian-kovacs-portfolio](https://noperoni.github.io/krisztian-kovacs-portfolio)
 
 ## 🎯 Overview
 
