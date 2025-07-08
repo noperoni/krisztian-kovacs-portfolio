@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krisztián Kovács - IT Infrastructure Engineer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        /* Dark Theme - Doom/StarCraft/Quake Style */
+        :root {
+            --primary-color: #ff6b1a;
+            --secondary-color: #ffd700;
+            --tertiary-color: #ff0000;
+            --bg-color: #1a0000;
+            --surface-color: #2d1810;
+            --text-color: #ffcc99;
+            --border-color: #8b4513;
+            --accent-color: #ff4500;
+            --health-red: #cc0000;
+            --armor-yellow: #ffcc00;
+            --ammo-orange: #ff8800;
+            --pixel-size: 3px;
+            --font-main: 'VT323', monospace;
+            --font-title: 'Press Start 2P', cursive;
+        }
+
+        /* Light Theme - Warcraft/Commander Keen/Wolfenstein Style */
+        [data-theme="light"] {
+            --primary-color: #0066cc;
+            --secondary-color: #00aa00;
+            --tertiary-color: #ffcc00;
+            --bg-color: #e8d4a0;
+            --surface-color: #f5e6d3;
+            --text-color: #2c1810;
+            --border-color: #8b6914;
+            --accent-color: #cc6600;
+            --health-red: #ff3333;
+            --armor-yellow: #ffdd00;
+            --ammo-orange: #ff9900;
+        }
+
+        /* Pro Theme - Ultra Modern Light */
+        [data-fun="off"][data-theme="light"] {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --tertiary-color: #ec4899;
+            --bg-color: #fafbfc;
+            --surface-color: rgba(255, 255, 255, 0.8);
+            --text-color: #1a202c;
+            --text-secondary: #64748b;
+            --border-color: rgba(226, 232, 240, 0.8);
+            --accent-color: #3b82f6;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-title: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Pro Theme - Ultra Modern Dark */
+        [data-fun="off"][data-theme="dark"] {
+            --primary-color: #818cf8;
+            --secondary-color: #a78bfa;
+            --tertiary-color: #f472b6;
+            --bg-color: #0f172a;
+            --surface-color: rgba(30, 41, 59, 0.8);
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(51, 65, 85, 0.8);
+            --accent-color: #60a5fa;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-title: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        body[data-fun="on"] {
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0,0,0,0.15),
+                    rgba(0,0,0,0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+        }
+
+        /* Doom-style texture overlay for dark theme */
+        body[data-fun="on"][data-theme="dark"]::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 107, 26, 0.03) 2px,
+                    rgba(255, 107, 26, 0.03) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Control Panel - Doom/Warcraft style HUD */
+        .control-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 5px;
+            padding: 0;
+            background: transparent;
+        }
+
+        body[data-fun="on"] .control-panel {
+            background: var(--surface-color);
+            border: 3px solid var(--border-color);
+            padding: 8px;
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.3);
+        }
+
+        .control-btn {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            color: var(--primary-color);
+            padding: 10px 15px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.1s ease;
+            position: relative;
+            font-size: 16px;
+            min-width: 50px;
+        }
+
+        body[data-fun="on"] .control-btn {
+            border: 3px solid var(--border-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+
+        body[data-fun="on"] .control-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        /* Pro theme control panel styling */
+        body[data-fun="off"] .control-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        body[data-fun="off"] .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body[data-fun="off"] .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .control-btn:active {
+            transform: translateY(2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 50px;
+            position: relative;
+        }
+
+        /* Professional Theme Overrides */
+        body[data-fun="off"] {
+            background: var(--bg-color);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background for Pro theme */
+        body[data-fun="off"]::before {
+            content: "";
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                var(--primary-color) 0%,
+                var(--secondary-color) 25%,
+                var(--tertiary-color) 50%,
+                var(--secondary-color) 75%,
+                var(--primary-color) 100%
+            );
+            opacity: 0.05;
+            animation: gradientShift 15s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
+            0% { transform: rotate(0deg) scale(2); }
+            50% { transform: rotate(180deg) scale(2.5); }
+            100% { transform: rotate(360deg) scale(2); }
+        }
+
+        /* Floating particles for Pro theme */
+        body[data-fun="off"]::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, var(--primary-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            opacity: 0.02;
+            animation: particleFloat 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50px); }
+        }
+
+        /* Hero Section - Game Title Screen Style */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px;
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Pro theme hero styling - Glassmorphism */
+        body[data-fun="off"] .hero {
+            background: var(--surface-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body[data-fun="off"] .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        body[data-fun="on"] .hero {
+            border: 5px solid var(--border-color);
+            box-shadow: 
+                inset -3px -3px 0 rgba(0,0,0,0.5),
+                inset 3px 3px 0 rgba(255,255,255,0.2),
+                0 0 20px rgba(0,0,0,0.3);
+        }
+
+        /* Doom-style corner decorations */
+        body[data-fun="on"][data-theme="dark"] .hero::before,
+        body[data-fun="on"][data-theme="dark"] .hero::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--health-red);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        body[data-fun="on"][data-theme="dark"] .hero::before {
+            top: -5px;
+            left: -5px;
+        }
+
+        body[data-fun="on"][data-theme="dark"] .hero::after {
+            bottom: -5px;
+            right: -5px;
+            transform: rotate(180deg);
+        }
+
+        /* Warcraft-style corner gems for light theme */
+        body[data-fun="on"][data-theme="light"] .hero::before,
+        body[data-fun="on"][data-theme="light"] .hero::after {
+            content: "";
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle at 30% 30%, var(--tertiary-color), var(--accent-color));
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
+        }
+
+        body[data-fun="on"][data-theme="light"] .hero::before {
+            top: -12px;
+            left: -12px;
+        }
+
+        body[data-fun="on"][data-theme="light"] .hero::after {
+            bottom: -12px;
+            right: -12px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        body[data-fun="off"] .hero h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            text-transform: none;
+            letter-spacing: -2px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            margin-bottom: 16px;
+            animation: gradientText 5s ease infinite;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        body[data-fun="on"] .hero h1 {
+            text-shadow: 
+                3px 3px 0 rgba(0,0,0,0.5),
+                -1px -1px 0 rgba(255,255,255,0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        body[data-fun="off"] .subtitle {
+            text-transform: none;
+            font-size: 1.25em;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        body[data-fun="off"] .contact-item {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body[data-fun="off"] .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        body[data-fun="on"] .contact-item:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 30px;
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            padding: 25px;
+            position: relative;
+        }
+
+        /* Pro theme section styling - Modern cards */
+        body[data-fun="off"] .section {
+            background: var(--surface-color);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body[data-fun="off"] .section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        body[data-fun="off"] .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body[data-fun="off"] .section:hover::before {
+            opacity: 1;
+        }
+
+        body[data-fun="on"] .section {
+            border: 4px solid var(--border-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.2);
+        }
+
+        /* Doom-style section headers for dark theme */
+        body[data-fun="on"][data-theme="dark"] .section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--health-red) 10%, 
+                var(--armor-yellow) 50%, 
+                var(--health-red) 90%, 
+                transparent
+            );
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 1.5em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body[data-fun="off"] .section-title {
+            font-size: 2em;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        body[data-fun="off"] .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-1);
+            border-radius: 2px;
+        }
+
+        body[data-fun="on"] .section-title::before {
+            content: "▶";
+            color: var(--secondary-color);
+            font-size: 0.8em;
+        }
+
+        body[data-fun="on"][data-theme="dark"] .section-title::before {
+            content: "◆";
+            color: var(--health-red);
+            animation: blink 1s steps(2) infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* Timeline - Quest Log Style */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        body[data-fun="off"] .timeline {
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--border-color);
+        }
+
+        body[data-fun="on"] .timeline::before {
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--primary-color),
+                var(--primary-color) 5px,
+                transparent 5px,
+                transparent 10px
+            );
+        }
+
+        body[data-fun="off"] .timeline::before {
+            width: 2px;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                var(--primary-color) 10%,
+                var(--primary-color) 90%,
+                transparent 100%
+            );
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 30px;
+        }
+
+        body[data-fun="off"] .timeline-item {
+            margin-bottom: 40px;
+            padding-left: 40px;
+            transition: all 0.3s ease;
+        }
+
+        body[data-fun="off"] .timeline-item:hover {
+            transform: translateX(5px);
+        }
+
+        .timeline-item::before {
+            content: "■";
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            color: var(--primary-color);
+            font-size: 20px;
+            background: var(--surface-color);
+        }
+
+        body[data-fun="on"][data-theme="dark"] .timeline-item::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background: #ffeb3b;
+            border-radius: 50%;
+            left: -30px;
+            top: 8px;
+            animation: yellowBlink 1s ease-in-out infinite;
+            box-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
+        }
+
+        @keyframes yellowBlink {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+                box-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
+            }
+            50% { 
+                opacity: 0.5; 
+                transform: scale(0.9);
+                box-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b;
+            }
+        }
+
+        body[data-fun="on"][data-theme="light"] .timeline-item::before {
+            content: "⚔️";
+            font-size: 16px;
+        }
+
+        body[data-fun="off"] .timeline-item::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border: 3px solid var(--bg-color);
+            border-radius: 50%;
+            left: -41px;
+            top: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        body[data-fun="off"] .timeline-item:hover::before {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2);
+        }
+
+        .job-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        body[data-fun="off"] .job-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .company {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        body[data-fun="off"] .company {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .date-location {
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        body[data-fun="off"] .date-location {
+            color: var(--text-secondary);
+            opacity: 1;
+            margin-bottom: 16px;
+        }
+
+        /* Skills Grid - Inventory Style */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        body[data-fun="off"] .skills-grid {
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-category {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            padding: 15px;
+            position: relative;
+        }
+
+        /* Pro theme skill categories - Neumorphic design */
+        body[data-fun="off"] .skill-category {
+            background: var(--surface-color);
+            border: none;
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body[data-fun="off"][data-theme="light"] .skill-category {
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.08),
+                -8px -8px 16px rgba(255, 255, 255, 0.8),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        body[data-fun="off"][data-theme="dark"] .skill-category {
+            box-shadow: 
+                8px 8px 16px rgba(0, 0, 0, 0.4),
+                -8px -8px 16px rgba(255, 255, 255, 0.05),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.05),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        body[data-fun="off"] .skill-category:hover {
+            transform: translateY(-2px);
+        }
+
+        body[data-fun="off"][data-theme="light"] .skill-category:hover {
+            box-shadow: 
+                12px 12px 20px rgba(0, 0, 0, 0.1),
+                -12px -12px 20px rgba(255, 255, 255, 0.9);
+        }
+
+        body[data-fun="off"][data-theme="dark"] .skill-category:hover {
+            box-shadow: 
+                12px 12px 20px rgba(0, 0, 0, 0.5),
+                -12px -12px 20px rgba(255, 255, 255, 0.08);
+        }
+
+        body[data-fun="on"] .skill-category {
+            border: 3px solid var(--border-color);
+            box-shadow: 
+                inset -1px -1px 0 rgba(0,0,0,0.5),
+                inset 1px 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .skill-category h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-family: var(--font-title);
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        body[data-fun="off"] .skill-category h4 {
+            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: none;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+        }
+
+        body[data-fun="on"] .skill-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        body[data-fun="off"] .skill-list li {
+            padding-left: 0;
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        body[data-fun="off"] .skill-list li:hover {
+            color: var(--text-color);
+            transform: translateX(5px);
+        }
+
+        /* Project Cards - Mission Briefing Style */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: var(--surface-color);
+            border: 2px solid var(--border-color);
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        body[data-fun="on"] .project-card {
+            border: 3px solid var(--border-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.2);
+        }
+
+        body[data-fun="on"] .project-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            box-shadow: 
+                inset -2px -2px 0 rgba(0,0,0,0.5),
+                inset 2px 2px 0 rgba(255,255,255,0.2),
+                0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .project-date {
+            color: var(--secondary-color);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .project-tech {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        /* Achievement Badges - Power-up Style */
+        .achievement {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--bg-color);
+            padding: 5px 10px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        body[data-fun="on"] .achievement {
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        body[data-fun="on"][data-theme="dark"] .achievement {
+            background: linear-gradient(135deg, var(--health-red), var(--armor-yellow));
+        }
+
+        body[data-fun="on"][data-theme="light"] .achievement {
+            background: linear-gradient(135deg, var(--tertiary-color), var(--secondary-color));
+            border: 1px solid var(--border-color);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        /* Language Items - Skill Points Style */
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+        }
+
+        body[data-fun="on"] .language-item {
+            border: 2px solid var(--border-color);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        body[data-fun="on"] .language-item::before {
+            content: "★";
+            position: absolute;
+            left: 10px;
+            color: var(--primary-color);
+        }
+
+        .language-level {
+            color: var(--secondary-color);
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            
+            .control-panel {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .control-btn {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .container {
+                padding-top: 80px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .control-panel {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                color: black;
+                font-family: Arial, sans-serif;
+            }
+            
+            .section {
+                border: 1px solid #000;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark" data-fun="on">
+    <!-- Navigation -->
+    <nav style="position: fixed; top: 0; width: 100%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); z-index: 1002; padding: 1rem 0;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: 700; font-size: 1.5rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">KK</div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" style="display: none; background: none; border: none; color: var(--text-color); font-size: 1.5rem; cursor: pointer;">☰</button>
+            <ul id="navLinks" style="display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+                <li><a href="index.html" style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">Home</a></li>
+                <li><a href="about.html" style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">About</a></li>
+                <li><a href="cv.html" style="color: #e2e8f0; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">CV</a></li>
+                <li><a href="projects.html" style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">Projects</a></li>
+                <li><a href="blog.html" style="color: #94a3b8; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <button class="control-btn" id="langToggle" onclick="toggleLanguage()">EN</button>
+        <button class="control-btn" id="themeToggle" onclick="toggleTheme()">☀️</button>
+        <button class="control-btn" id="funToggle" onclick="toggleFun()">PRO</button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Krisztián Kovács</h1>
+            <p class="subtitle lang-en">IT Infrastructure Engineer | Inter-Departmental IT Project Manager</p>
+            <p class="subtitle lang-fr hidden">Ingénieur Infrastructure IT | Chef de Projet IT Inter-Départemental</p>
+            <div class="contact-info">
+                <a href="#" class="contact-item">📧 [email]</a>
+                <a href="#" class="contact-item">📱 [phone]</a>
+                <span class="contact-item">📍 France</span>
+                <a href="#" class="contact-item">💼 LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Professional Summary -->
+        <section class="section">
+            <h2 class="section-title lang-en">Professional Summary</h2>
+            <h2 class="section-title lang-fr hidden">Résumé Professionnel</h2>
+            <p class="lang-en">
+                IT Engineer with expertise in enterprise system optimization, cloud security, and multi-service project management. 
+                Currently IT Expert at Nomadia, specializing in IT audit, regulatory compliance, and inter-departmental IT project management. 
+                Proven track record in Level 3 IT Support, complex incident management, and strategic IT implementation.
+            </p>
+            <p class="lang-fr hidden">
+                Ingénieur IT spécialisé dans l'optimisation des systèmes d'entreprise, la sécurité cloud et la gestion de projets multi-services. 
+                Actuellement Expert IT chez Nomadia, spécialisé dans l'audit IT, la conformité réglementaire et la gestion de projets IT inter-départementaux. 
+                Expertise confirmée en support IT Niveau 3, gestion d'incidents complexes et implémentation stratégique IT.
+            </p>
+        </section>
+
+        <!-- Technical Expertise -->
+        <section class="section">
+            <h2 class="section-title lang-en">Technical Expertise</h2>
+            <h2 class="section-title lang-fr hidden">Expertise Technique</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4 class="lang-en">Infrastructure & Virtualization</h4>
+                    <h4 class="lang-fr hidden">Infrastructure & Virtualisation</h4>
+                    <ul class="skill-list">
+                        <li>Hyper-V, ESXi, Proxmox</li>
+                        <li>Kubernetes, Docker</li>
+                        <li>Microsoft Azure, OVH, GCP</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4 class="lang-en">IT Support & Management</h4>
+                    <h4 class="lang-fr hidden">Support & Gestion IT</h4>
+                    <ul class="skill-list">
+                        <li class="lang-en">Level 1-3 Support</li>
+                        <li class="lang-fr hidden">Support Niveaux 1-3</li>
+                        <li class="lang-en">IT Audit & Compliance</li>
+                        <li class="lang-fr hidden">Audit IT & Conformité</li>
+                        <li>ITIL Framework</li>
+                        <li class="lang-en">Project Management</li>
+                        <li class="lang-fr hidden">Gestion de Projet</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4 class="lang-en">Technologies & Tools</h4>
+                    <h4 class="lang-fr hidden">Technologies & Outils</h4>
+                    <ul class="skill-list">
+                        <li>Microsoft 365, Azure AD</li>
+                        <li>VEEAM Backup & Replication</li>
+                        <li>Sophos XGS, BitLocker, MFA</li>
+                        <li>PowerShell, Terraform, Ansible</li>
+                        <li>Prometheus, Grafana, Zabbix</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience -->
+        <section class="section">
+            <h2 class="section-title lang-en">Professional Experience</h2>
+            <h2 class="section-title lang-fr hidden">Expérience Professionnelle</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3 class="job-title lang-en">IT Expert (Work-Study Program)</h3>
+                    <h3 class="job-title lang-fr hidden">Expert IT (Alternance)</h3>
+                    <div class="company">Nomadia</div>
+                    <div class="date-location lang-en">Oct 2023 - Present | Nantes, France</div>
+                    <div class="date-location lang-fr hidden">Oct 2023 - Présent | Nantes, France</div>
+                    <ul class="lang-en">
+                        <li>Strategic IT project management and implementation across multiple departments</li>
+                        <li>IT infrastructure audit and regulatory compliance (GDPR, ISO 27001)</li>
+                        <li>Level 3 IT Support and complex incident resolution</li>
+                        <li>Active participation in internal R&D on ML & AI integration</li>
+                    </ul>
+                    <ul class="lang-fr hidden">
+                        <li>Gestion et implémentation de projets IT stratégiques multi-départements</li>
+                        <li>Audit d'infrastructure IT et conformité réglementaire (RGPD, ISO 27001)</li>
+                        <li>Support IT Niveau 3 et résolution d'incidents complexes</li>
+                        <li>Participation active à la R&D interne sur l'intégration ML & IA</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="job-title lang-en">IT Administrator (Work-Study Program)</h3>
+                    <h3 class="job-title lang-fr hidden">Administrateur IT (Alternance)</h3>
+                    <div class="company">Dynamips</div>
+                    <div class="date-location lang-en">Sep 2022 - Sep 2023 | Saint-Herblain, France</div>
+                    <div class="date-location lang-fr hidden">Sep 2022 - Sep 2023 | Saint-Herblain, France</div>
+                    <ul class="lang-en">
+                        <li>M365, Network, AD, RDS, and Azure incident resolution</li>
+                        <li>VEEAM administration and optimization</li>
+                        <li>RDS migration project participation</li>
+                        <li>Legacy infrastructure modernization</li>
+                    </ul>
+                    <ul class="lang-fr hidden">
+                        <li>Résolution d'incidents M365, Réseau, AD, RDS et Azure</li>
+                        <li>Administration et optimisation VEEAM</li>
+                        <li>Participation au projet de migration RDS</li>
+                        <li>Modernisation d'infrastructure legacy</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="job-title lang-en">IT Technician (Work-Study Program)</h3>
+                    <h3 class="job-title lang-fr hidden">Technicien IT (Alternance)</h3>
+                    <div class="company">Entreprise CHARIER</div>
+                    <div class="date-location lang-en">Sep 2020 - Sep 2022 | Couëron, France</div>
+                    <div class="date-location lang-fr hidden">Sep 2020 - Sep 2022 | Couëron, France</div>
+                    <ul class="lang-en">
+                        <li>Workstation preparation and configuration</li>
+                        <li>End-user IT support</li>
+                        <li>Intune project management for mobility solutions</li>
+                        <li>IT park maintenance</li>
+                    </ul>
+                    <ul class="lang-fr hidden">
+                        <li>Préparation et configuration de postes de travail</li>
+                        <li>Support IT utilisateur final</li>
+                        <li>Gestion de projet Intune pour solutions de mobilité</li>
+                        <li>Maintenance du parc informatique</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Projects -->
+        <section class="section">
+            <h2 class="section-title lang-en">Key Projects</h2>
+            <h2 class="section-title lang-fr hidden">Projets Clés</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="lang-en">Cloud-Native Kubernetes Infrastructure</h3>
+                    <h3 class="lang-fr hidden">Infrastructure Kubernetes Cloud-Native</h3>
+                    <div class="project-date">Apr 2025 - Jul 2025</div>
+                    <p class="lang-en">Delivered production-ready Kubernetes infrastructure on GCP with 99.95% uptime and 28% under budget.</p>
+                    <p class="lang-fr hidden">Livraison d'infrastructure Kubernetes production sur GCP avec 99,95% de disponibilité et 28% sous budget.</p>
+                    <div class="project-tech">Kubernetes, Terraform, Ansible, Prometheus</div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="lang-en">IT Modernization & International Integration</h3>
+                    <h3 class="lang-fr hidden">Modernisation IT & Intégration Internationale</h3>
+                    <div class="project-date">Oct 2024 - Mar 2025</div>
+                    <p class="lang-en">Led IT transformation implementing ITIL and ISO 27001, reducing order processing by 25%.</p>
+                    <p class="lang-fr hidden">Direction de transformation IT avec ITIL et ISO 27001, réduction de 25% du temps de traitement.</p>
+                    <div class="project-tech">ITIL, ISO 27001, Lean IT, ERP</div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="lang-en">Enterprise Endpoint Management</h3>
+                    <h3 class="lang-fr hidden">Gestion des Endpoints d'Entreprise</h3>
+                    <div class="project-date">Mar 2024 - Oct 2024</div>
+                    <p class="lang-en">Architected Intune solution with 98% BitLocker coverage, reducing deployment time from days to hours.</p>
+                    <p class="lang-fr hidden">Architecture Intune avec 98% de chiffrement BitLocker, réduction du déploiement de jours à heures.</p>
+                    <div class="project-tech">Intune, Azure AD, BitLocker, PowerShell</div>
+                </div>
+                
+                <div class="project-card">
+                    <h3 class="lang-en">Multi-Cloud Infrastructure Transformation</h3>
+                    <h3 class="lang-fr hidden">Transformation Infrastructure Multi-Cloud</h3>
+                    <div class="project-date">Oct 2024</div>
+                    <p class="lang-en">Migrated OVH to Azure achieving 62% latency reduction and 2-4h provisioning time.</p>
+                    <p class="lang-fr hidden">Migration OVH vers Azure avec réduction latence de 62% et provisionnement en 2-4h.</p>
+                    <div class="project-tech">Azure, Infrastructure as Code, DevOps</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Certifications -->
+        <section class="section">
+            <h2 class="section-title lang-en">Education & Certifications</h2>
+            <h2 class="section-title lang-fr hidden">Formation & Certifications</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.1em;" class="lang-en">Education</h3>
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.1em;" class="lang-fr hidden">Formation</h3>
+                    <div style="margin-bottom: 15px;">
+                        <div style="font-weight: bold;" class="lang-en">Expert in IT and Information Systems</div>
+                        <div style="font-weight: bold;" class="lang-fr hidden">Expert en Informatique et SI</div>
+                        <div style="color: var(--secondary-color);">EPSI Nantes | 2023 - 2025</div>
+                        <div style="font-size: 0.9em; opacity: 0.8;" class="lang-en">Master's Level (RNCP Level 7)</div>
+                        <div style="font-size: 0.9em; opacity: 0.8;" class="lang-fr hidden">Niveau Master (RNCP Niveau 7)</div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="font-weight: bold;" class="lang-en">Secure Infrastructure Administrator</div>
+                        <div style="font-weight: bold;" class="lang-fr hidden">Administrateur d'Infrastructures Sécurisées</div>
+                        <div style="color: var(--secondary-color);">EPSI Nantes | 2022 - 2023</div>
+                        <div style="font-size: 0.9em; opacity: 0.8;" class="lang-en">Bachelor's Level (RNCP Level 6)</div>
+                        <div style="font-size: 0.9em; opacity: 0.8;" class="lang-fr hidden">Niveau Licence (RNCP Niveau 6)</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.1em;">Certifications</h3>
+                    <ul class="skill-list">
+                        <li>Sophos Engineer ET80</li>
+                        <li>Microsoft MS-900</li>
+                        <li>Microsoft AZ-900</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages -->
+        <section class="section">
+            <h2 class="section-title lang-en">Languages</h2>
+            <h2 class="section-title lang-fr hidden">Langues</h2>
+            <div class="language-item">
+                <span class="lang-en">English</span>
+                <span class="lang-fr hidden">Anglais</span>
+                <span class="language-level lang-en">Native or bilingual</span>
+                <span class="language-level lang-fr hidden">Natif ou bilingue</span>
+            </div>
+            <div class="language-item">
+                <span class="lang-en">French</span>
+                <span class="lang-fr hidden">Français</span>
+                <span class="language-level lang-en">Full professional</span>
+                <span class="language-level lang-fr hidden">Compétence professionnelle complète</span>
+            </div>
+            <div class="language-item">
+                <span class="lang-en">Hungarian</span>
+                <span class="lang-fr hidden">Hongrois</span>
+                <span class="language-level lang-en">Native or bilingual</span>
+                <span class="language-level lang-fr hidden">Natif ou bilingue</span>
+            </div>
+            <div class="language-item">
+                <span class="lang-en">Romanian</span>
+                <span class="lang-fr hidden">Roumain</span>
+                <span class="language-level lang-en">Native or bilingual</span>
+                <span class="language-level lang-fr hidden">Natif ou bilingue</span>
+            </div>
+            <div class="language-item">
+                <span class="lang-en">German</span>
+                <span class="lang-fr hidden">Allemand</span>
+                <span class="language-level lang-en">Limited working</span>
+                <span class="language-level lang-fr hidden">Compétence professionnelle limitée</span>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Language Toggle
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'fr' : 'en';
+            const langToggle = document.getElementById('langToggle');
+            langToggle.textContent = currentLang.toUpperCase();
+            
+            document.querySelectorAll('.lang-en').forEach(el => {
+                el.classList.toggle('hidden', currentLang !== 'en');
+            });
+            
+            document.querySelectorAll('.lang-fr').forEach(el => {
+                el.classList.toggle('hidden', currentLang !== 'fr');
+            });
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Fun Toggle
+        function toggleFun() {
+            const body = document.body;
+            const currentFun = body.getAttribute('data-fun');
+            const newFun = currentFun === 'on' ? 'off' : 'on';
+            body.setAttribute('data-fun', newFun);
+            
+            const funToggle = document.getElementById('funToggle');
+            if (newFun === 'off') {
+                // Pro mode active
+                funToggle.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                funToggle.style.color = 'white';
+                funToggle.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            } else {
+                // Fun mode active
+                funToggle.style.background = 'var(--primary-color)';
+                funToggle.style.color = 'var(--bg-color)';
+                funToggle.style.border = '';
+            }
+        }
+
+        // Add retro sound effects simulation (visual feedback)
+        document.querySelectorAll('.control-btn, .project-card, .skill-category').forEach(el => {
+            el.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
+
+        // Doom-style health counter easter egg
+        let clickCount = 0;
+        document.querySelector('.hero h1').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === 5) {
+                this.textContent += ' [100%]';
+                this.style.color = 'var(--health-red)';
+                setTimeout(() => {
+                    this.textContent = this.textContent.replace(' [100%]', '');
+                    this.style.color = '';
+                    clickCount = 0;
+                }, 2000);
+            }
+        });
+
+        // Initialize PRO button styling on load
+        window.addEventListener('DOMContentLoaded', function() {
+            const funToggle = document.getElementById('funToggle');
+            const currentFun = document.body.getAttribute('data-fun');
+            if (currentFun === 'off') {
+                funToggle.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                funToggle.style.color = 'white';
+                funToggle.style.border = '1px solid rgba(255, 255, 255, 0.2)';
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Add mobile menu styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (max-width: 768px) {
+                .mobile-menu-toggle {
+                    display: block !important;
+                }
+                
+                #navLinks {
+                    position: fixed !important;
+                    top: 70px !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    background: var(--surface-color) !important;
+                    flex-direction: column !important;
+                    padding: 2rem !important;
+                    transform: translateX(-100%) !important;
+                    transition: transform 0.3s ease !important;
+                    border-bottom: 1px solid var(--border-color) !important;
+                }
+                
+                #navLinks.active {
+                    transform: translateX(0) !important;
+                }
+                
+                .container {
+                    padding-top: 150px !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

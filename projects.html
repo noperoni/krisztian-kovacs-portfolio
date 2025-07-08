@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Krisztián Kovács</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-color: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0.05;
+        }
+
+        /* Navigation (same as other pages) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1.5rem;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .filter-tab:hover {
+            border-color: var(--primary-color);
+            color: var(--text-color);
+        }
+
+        .filter-tab.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease both;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .project-header {
+            padding: 2rem 2rem 1rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .project-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .project-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-color);
+            border-radius: 0.5rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .project-tech {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tech-stack {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Featured Project */
+        .featured-project {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--surface-color), rgba(99, 102, 241, 0.05));
+            border: 2px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Project Details Modal Placeholder */
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--surface-color);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-project {
+                grid-column: 1;
+            }
+
+            .project-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">KK</div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Projects Portfolio</h1>
+            <p>A showcase of my technical projects and achievements</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <div class="filter-tab active" onclick="filterProjects('all')">All Projects</div>
+            <div class="filter-tab" onclick="filterProjects('cloud')">Cloud & Infrastructure</div>
+            <div class="filter-tab" onclick="filterProjects('security')">Security & Compliance</div>
+            <div class="filter-tab" onclick="filterProjects('automation')">Automation & DevOps</div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Featured Project -->
+            <article class="project-card featured-project" data-category="cloud">
+                <span class="featured-badge">Featured</span>
+                <div class="project-header">
+                    <h3 class="project-title">Cloud-Native Kubernetes Infrastructure</h3>
+                    <p class="project-date">April 2025 - July 2025</p>
+                    <div class="project-tags">
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">GCP</span>
+                        <span class="tag">Terraform</span>
+                        <span class="tag">Production</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Delivered a production-ready Kubernetes infrastructure on Google Cloud Platform for an enterprise client. 
+                        Led a multicultural team implementing Infrastructure as Code with Terraform, comprehensive monitoring 
+                        with Prometheus/Grafana, and automated CI/CD pipelines.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">99.95%</div>
+                            <div class="stat-label">Uptime Achieved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">28%</div>
+                            <div class="stat-label">Under Budget</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">62%</div>
+                            <div class="stat-label">ROI Projection</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">4</div>
+                            <div class="stat-label">Team Members</div>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <p class="tech-stack">Tech: Kubernetes (GKE), Terraform, Ansible, Prometheus, Grafana, Docker, GitOps</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card" data-category="security">
+                <div class="project-header">
+                    <h3 class="project-title">Enterprise Endpoint Management Platform</h3>
+                    <p class="project-date">March 2024 - October 2024</p>
+                    <div class="project-tags">
+                        <span class="tag">Microsoft Intune</span>
+                        <span class="tag">Azure AD</span>
+                        <span class="tag">Security</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Architected and deployed a comprehensive Microsoft Intune solution, transforming endpoint security 
+                        across 30+ workstations. Achieved 98% BitLocker encryption coverage and established Azure AD 
+                        integration with MFA and conditional access policies.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">92%</div>
+                            <div class="stat-label">Incident Reduction</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">1 hour</div>
+                            <div class="stat-label">Deploy Time</div>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <p class="tech-stack">Tech: Microsoft Intune, Azure AD, BitLocker, PowerShell, Windows Autopilot</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card" data-category="cloud">
+                <div class="project-header">
+                    <h3 class="project-title">Multi-Cloud Infrastructure Transformation</h3>
+                    <p class="project-date">October 2024</p>
+                    <div class="project-tags">
+                        <span class="tag">Azure</span>
+                        <span class="tag">Migration</span>
+                        <span class="tag">IaC</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Spearheaded strategic cloud transformation migrating infrastructure from OVH to Microsoft Azure. 
+                        Designed scalable architecture supporting IaaS and PaaS services, reducing environment 
+                        provisioning time from 3-5 days to 2-4 hours.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">62%</div>
+                            <div class="stat-label">Latency Reduction</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">99.95%</div>
+                            <div class="stat-label">Availability</div>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <p class="tech-stack">Tech: Azure, Azure Functions, Prometheus, Grafana, PowerShell, DevOps</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card" data-category="automation">
+                <div class="project-header">
+                    <h3 class="project-title">IT Modernization & International Integration</h3>
+                    <p class="project-date">October 2024 - March 2025</p>
+                    <div class="project-tags">
+                        <span class="tag">ITIL</span>
+                        <span class="tag">ISO 27001</span>
+                        <span class="tag">Lean IT</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Led comprehensive IT transformation for electronics manufacturer integrating French and Spanish 
+                        operations. Implemented ITIL framework and ISO 27001-compliant security policies, achieving 
+                        25% reduction in order processing time.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">25%</div>
+                            <div class="stat-label">Time Reduction</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">20%</div>
+                            <div class="stat-label">Energy Savings</div>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <p class="tech-stack">Tech: ITIL, ISO 27001, ERP Integration, Green IT, Lean Methodologies</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 5 -->
+            <article class="project-card" data-category="automation">
+                <div class="project-header">
+                    <h3 class="project-title">Enterprise IT Asset Inventory System</h3>
+                    <p class="project-date">October 2023 - February 2024</p>
+                    <div class="project-tags">
+                        <span class="tag">PowerShell</span>
+                        <span class="tag">Automation</span>
+                        <span class="tag">ITSM</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Developed automated PowerShell scripts for comprehensive IT asset discovery across distributed 
+                        endpoints. Established centralized knowledge base reducing information retrieval time from 
+                        48 hours to 30 minutes.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Asset Coverage</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">96%</div>
+                            <div class="stat-label">Time Saved</div>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <p class="tech-stack">Tech: PowerShell, Jira Service Management, Excel, Data Analytics</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 6 -->
+            <article class="project-card" data-category="security">
+                <div class="project-header">
+                    <h3 class="project-title">Enterprise Security & Backup Implementation</h3>
+                    <p class="project-date">April 2023 - August 2023</p>
+                    <div class="project-tags">
+                        <span class="tag">Sophos</span>
+                        <span class="tag">VEEAM</span>
+                        <span class="tag">Security</span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <p class="project-description">
+                        Deployed enterprise-grade security with SOPHOS XGS firewall and established robust backup 
+                        infrastructure using VEEAM. Transformed access management implementing AGDLP methodology 
+                        for enhanced security posture.
+                    </p>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <div class="stat-value">5 days</div>
+                            <div class="stat-label">Implementation</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">Backup Coverage</div>
+                        </div>
+                    </div>
+                    <div class="project-tech">
+                        <p class="tech-stack">Tech: SOPHOS XGS, VEEAM, Active Directory, ReFS, SSL VPN, PowerShell</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Filter projects
+        function filterProjects(category) {
+            const projects = document.querySelectorAll('.project-card');
+            const tabs = document.querySelectorAll('.filter-tab');
+            
+            // Update active tab
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent.toLowerCase().includes(category) || 
+                    (category === 'all' && tab.textContent === 'All Projects')) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Filter projects
+            projects.forEach((project, index) => {
+                if (category === 'all' || project.dataset.category === category) {
+                    project.style.display = 'flex';
+                    // Re-animate
+                    project.style.animation = 'none';
+                    setTimeout(() => {
+                        project.style.animation = `fadeInUp 0.8s ease ${index * 0.1}s both`;
+                    }, 10);
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                document.getElementById('navLinks').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
