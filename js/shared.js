@@ -44,6 +44,16 @@ function updateControlButtons(theme, fun, lang) {
     if (langToggle) {
         langToggle.textContent = lang.toUpperCase();
     }
+    
+    // Update profile image on about page based on fun mode
+    const profileImg = document.querySelector('.profile-image img');
+    if (profileImg) {
+        if (fun === 'on') {
+            profileImg.src = 'images/krisztian-headshot-pixel.jpg';
+        } else {
+            profileImg.src = 'images/krisztian-headshot.jpg';
+        }
+    }
 }
 
 // Theme toggle function
@@ -83,6 +93,16 @@ function toggleFun() {
             funToggle.style.background = '';
             funToggle.style.color = '';
             funToggle.style.border = '';
+        }
+    }
+    
+    // Update profile image on about page based on fun mode
+    const profileImg = document.querySelector('.profile-image img');
+    if (profileImg) {
+        if (newFun === 'on') {
+            profileImg.src = 'images/krisztian-headshot-pixel.jpg';
+        } else {
+            profileImg.src = 'images/krisztian-headshot.jpg';
         }
     }
 }
