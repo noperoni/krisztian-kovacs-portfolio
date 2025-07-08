@@ -73,9 +73,6 @@
             background: var(--surface-color);
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 
-                3px 3px 0 rgba(0,0,0,0.5),
-                -1px -1px 0 rgba(255,255,255,0.3);
             animation: pulse-glow 2s ease-in-out infinite;
             box-shadow: 
                 inset -2px -2px 0 rgba(0,0,0,0.5),
@@ -86,11 +83,13 @@
             background: rgba(245,230,211,0.95);
             color: var(--primary-color);
             border-color: var(--accent-color);
+            text-shadow: none;
         }
 
         body[data-fun="on"][data-theme="dark"] .hero h1 {
             background: var(--surface-color);
             color: var(--primary-color);
+            text-shadow: none;
         }
 
         body[data-fun="off"] .hero h1 {
@@ -270,7 +269,8 @@
             box-shadow: 
                 inset -2px -2px 0 rgba(0,0,0,0.5),
                 inset 2px 2px 0 rgba(255,255,255,0.2);
-            padding: 2rem 1.5rem;
+            padding: 1.5rem;
+            min-width: 0;
         }
 
         body[data-fun="off"] .feature-card {
@@ -325,9 +325,11 @@
         }
 
         body[data-fun="on"] .feature-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            white-space: normal;
+            word-break: break-word;
         }
 
         body[data-fun="off"] .feature-card h3 {
