@@ -191,11 +191,31 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(15, 23, 42, 0.95);
+    background: var(--surface-color);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
     padding: 1rem 0;
+}
+
+/* Dark theme nav */
+body[data-theme="dark"] nav {
+    background: rgba(15, 23, 42, 0.95);
+}
+
+/* Light theme nav */
+body[data-theme="light"] nav {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Fun mode adjustments */
+body[data-fun="on"][data-theme="dark"] nav {
+    background: rgba(45, 24, 16, 0.95);
+}
+
+body[data-fun="on"][data-theme="light"] nav {
+    background: rgba(245, 230, 211, 0.95);
 }
 
 body[data-fun="off"] nav {
@@ -301,6 +321,19 @@ body[data-fun="off"] .control-btn {
     border-radius: 8px;
     font-weight: 500;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light mode control buttons */
+body[data-theme="light"] .control-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+}
+
+body[data-theme="light"][data-fun="off"] .control-btn {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: var(--primary-color);
 }
 
 .control-btn:hover {
