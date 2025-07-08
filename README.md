@@ -120,11 +120,6 @@ Your site will be available at: `https://[your-username].github.io/krisztian-kov
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 📞 Contact
-
-- **LinkedIn**: [linkedin.com/in/krisztian-kovacs](https://linkedin.com/in/krisztian-kovacs)
-- **Email**: [your-email@example.com]
-
 ---
 
 Built with 💻 by Krisztián Kovács
