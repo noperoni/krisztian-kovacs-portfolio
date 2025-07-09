@@ -234,83 +234,12 @@ body[data-fun="off"] nav {
     align-items: center;
 }
 
-.logo {
-    font-weight: 700;
-    font-size: 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: var(--font-title);
-}
-
-/* Pixelated Anvil Logo for Fun Mode */
-body[data-fun="on"] .logo {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    font-size: 0;
-    background: none;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: unset;
-}
-
-body[data-fun="on"] .logo::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    background-image: 
-        /* Horn (left point) - 4px wide */
-        linear-gradient(to right, #999 0%, #999 10%, transparent 10%),
-        /* Face top edge - flat working surface */
-        linear-gradient(to right, #888 0%, #888 85%, transparent 85%),
-        /* Main body - thicker middle section */
-        linear-gradient(to right, #666 15%, #666 75%, transparent 75%),
-        /* Waist - narrower section */
-        linear-gradient(to right, transparent 20%, #555 20%, #555 70%, transparent 70%),
-        /* Base top */
-        linear-gradient(to right, transparent 15%, #444 15%, #444 75%, transparent 75%),
-        /* Base bottom - wider */
-        linear-gradient(to right, transparent 10%, #333 10%, #333 80%, transparent 80%);
-    background-size: 
-        100% 10%,  /* Horn height */
-        100% 10%,  /* Face height */
-        100% 20%,  /* Body height */
-        100% 15%,  /* Waist height */
-        100% 20%,  /* Base top height */
-        100% 25%;  /* Base bottom height */
-    background-position: 
-        0 15%,  /* Horn position */
-        0 25%,  /* Face position */
-        0 35%,  /* Body position */
-        0 50%,  /* Waist position */
-        0 65%,  /* Base top position */
-        0 75%; /* Base bottom position */
-    background-repeat: no-repeat;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-    filter: contrast(1.2);
-}
-
-body[data-fun="on"][data-theme="dark"] .logo::before {
-    filter: brightness(1.5) contrast(1.2);
-}
-
-body[data-fun="on"][data-theme="light"] .logo::before {
-    filter: brightness(0.8) contrast(1.4);
-}
-
-body[data-fun="on"] .logo:hover::before {
-    transform: scale(1.1);
-    filter: brightness(1.2) contrast(1.2) drop-shadow(0 0 5px var(--primary-color));
-}
 
 .nav-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     gap: 2rem;
 }
 
