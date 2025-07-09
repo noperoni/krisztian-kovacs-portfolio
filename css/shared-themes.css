@@ -44,17 +44,17 @@
 
 /* Pro Theme - Ultra Modern Light */
 [data-fun="off"][data-theme="light"] {
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    --tertiary-color: #ec4899;
+    --primary-color: #0ea5e9;
+    --secondary-color: #38bdf8;
+    --tertiary-color: #7dd3fc;
     --bg-color: #fafbfc;
     --surface-color: rgba(255, 255, 255, 0.8);
     --text-color: #1a202c;
     --text-secondary: #64748b;
     --border-color: rgba(226, 232, 240, 0.8);
     --accent-color: #3b82f6;
-    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-1: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    --gradient-2: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
     --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -66,17 +66,17 @@
 
 /* Pro Theme - Ultra Modern Dark */
 [data-fun="off"][data-theme="dark"] {
-    --primary-color: #818cf8;
-    --secondary-color: #a78bfa;
-    --tertiary-color: #f472b6;
+    --primary-color: #38bdf8;
+    --secondary-color: #7dd3fc;
+    --tertiary-color: #93c5fd;
     --bg-color: #0f172a;
     --surface-color: rgba(30, 41, 59, 0.8);
     --text-color: #f1f5f9;
     --text-secondary: #94a3b8;
     --border-color: rgba(51, 65, 85, 0.8);
     --accent-color: #60a5fa;
-    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-1: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+    --gradient-2: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
     --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
