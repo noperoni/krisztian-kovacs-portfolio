@@ -235,19 +235,61 @@ body[data-fun="off"] nav {
 }
 
 .logo {
-    display: flex;
-    align-items: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: var(--font-title);
 }
 
-.logo img {
+/* Pixelated Anvil Logo for Fun Mode */
+body[data-fun="on"] .logo {
+    position: relative;
+    width: 40px;
     height: 40px;
-    width: auto;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    transition: transform 0.3s ease;
+    font-size: 0;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
 }
 
-.logo img:hover {
+body[data-fun="on"] .logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background-image: 
+        /* Top of anvil - horn */
+        linear-gradient(to right, transparent 30%, #666 30%, #666 70%, transparent 70%),
+        /* Anvil face - wider */
+        linear-gradient(to right, transparent 10%, #888 10%, #888 90%, transparent 90%),
+        /* Anvil body */
+        linear-gradient(to right, transparent 20%, #555 20%, #555 80%, transparent 80%),
+        /* Anvil base */
+        linear-gradient(to right, #333 0%, #333 100%);
+    background-size: 100% 25%, 100% 25%, 100% 25%, 100% 25%;
+    background-position: 0 0%, 0 25%, 0 50%, 0 75%;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    filter: contrast(1.2);
+}
+
+body[data-fun="on"][data-theme="dark"] .logo::before {
+    filter: brightness(1.5) contrast(1.2);
+}
+
+body[data-fun="on"][data-theme="light"] .logo::before {
+    filter: brightness(0.8) contrast(1.4);
+}
+
+body[data-fun="on"] .logo:hover::before {
     transform: scale(1.1);
+    filter: brightness(1.2) contrast(1.2) drop-shadow(0 0 5px var(--primary-color));
 }
 
 .nav-content {
