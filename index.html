@@ -93,18 +93,15 @@
         }
 
         body[data-fun="off"] .hero h1 {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientMove 3s ease infinite;
-            background-size: 200% 200%;
             font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 800;
             margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-shadow: none;
         }
 
         body[data-fun="off"][data-theme="light"] .hero h1 {
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            text-shadow: none;
             background: rgba(255, 255, 255, 0.95);
             padding: 1.5rem 2rem;
             border-radius: 1rem;
@@ -113,22 +110,20 @@
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             display: inline-block;
+            color: #0ea5e9;
         }
         
         body[data-fun="off"][data-theme="dark"] .hero h1 {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(30, 41, 59, 0.8);
             padding: 1.5rem 2rem;
             border-radius: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             display: inline-block;
+            color: #ffffff;
         }
 
-        @keyframes gradientMove {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
 
         @keyframes pulse-glow {
             0%, 100% { opacity: 1; }
@@ -286,7 +281,7 @@
         body[data-fun="off"] .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
         }
 
         .btn-primary:hover {
@@ -294,7 +289,7 @@
         }
 
         body[data-fun="off"] .btn-primary:hover {
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
         }
 
         .btn-secondary {
