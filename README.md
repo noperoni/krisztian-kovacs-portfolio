@@ -100,9 +100,9 @@ Your site will be available at: `https://[your-username].github.io/krisztian-kov
 ## 🎨 Color Schemes
 
 ### Professional Theme
-- Primary: `#6366f1` (Indigo)
-- Secondary: `#8b5cf6` (Purple)
-- Accent: `#ec4899` (Pink)
+- Primary: `#0ea5e9` (Sky Blue)
+- Secondary: `#38bdf8` (Light Blue)
+- Accent: `#3b82f6` (Blue)
 
 ### Gaming Themes
 - Dark Mode: Orange/Red/Yellow (Doom-inspired)

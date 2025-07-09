@@ -31,7 +31,7 @@ function updateControlButtons(theme, fun, lang) {
         funToggle.textContent = fun === 'on' ? 'FUN' : 'PRO';
         
         if (fun === 'off') {
-            funToggle.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            funToggle.style.background = 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)';
             funToggle.style.color = 'white';
             funToggle.style.border = '1px solid rgba(255, 255, 255, 0.2)';
         } else {
@@ -86,7 +86,7 @@ function toggleFun() {
         funToggle.textContent = newFun === 'on' ? 'FUN' : 'PRO';
         
         if (newFun === 'off') {
-            funToggle.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            funToggle.style.background = 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)';
             funToggle.style.color = 'white';
             funToggle.style.border = '1px solid rgba(255, 255, 255, 0.2)';
         } else {
