@@ -7,6 +7,22 @@ async fn main() {
     use leptos::prelude::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use portfolio::app::*;
+    use portfolio::db;
+
+    // Load environment variables from .env file
+    dotenvy::dotenv().ok();
+
+    // Initialize database pool
+    let pool = db::create_pool()
+        .await
+        .expect("Failed to create database pool");
+
+    // Run migrations
+    db::run_migrations(&pool)
+        .await
+        .expect("Failed to run database migrations");
+
+    log!("Database connected and migrations applied");
 
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
