@@ -5,6 +5,9 @@ use leptos_router::{
     StaticSegment,
 };
 
+use crate::components::LanguageToggle;
+use crate::i18n::{provide_i18n_context, use_i18n};
+
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
@@ -27,6 +30,8 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
+    // Provide i18n context for translations
+    provide_i18n_context();
 
     view! {
         // injects a stylesheet into the document <head>
@@ -34,10 +39,11 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/portfolio.css"/>
 
         // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="Krisztián Kovács - Portfolio"/>
 
         // content for this welcome page
         <Router>
+            <Nav/>
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage/>
@@ -47,15 +53,89 @@ pub fn App() -> impl IntoView {
     }
 }
 
+/// Navigation bar component
+#[component]
+fn Nav() -> impl IntoView {
+    let i18n = use_i18n();
+
+    view! {
+        <nav>
+            <div class="nav-container">
+                <div class="nav-content">
+                    <ul class="nav-links">
+                        <li><a href="/" class="active">{move || i18n.t().nav_home}</a></li>
+                        <li><a href="/about">{move || i18n.t().nav_about}</a></li>
+                        <li><a href="/cv">{move || i18n.t().nav_cv}</a></li>
+                        <li><a href="/projects">{move || i18n.t().nav_projects}</a></li>
+                        <li><a href="/blog">{move || i18n.t().nav_blog}</a></li>
+                    </ul>
+                    <div class="control-panel">
+                        <LanguageToggle/>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    }
+}
+
 /// Renders the home page of your application.
 #[component]
 fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
+    let i18n = use_i18n();
 
     view! {
-        <h1>"Welcome to Leptos!"</h1>
-        <button on:click=on_click>"Click Me: " {count}</button>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>{move || i18n.t().hero_title}</h1>
+                <p class="subtitle">{move || i18n.t().hero_subtitle}</p>
+                <p class="hero-description">{move || i18n.t().hero_description}</p>
+                <div class="cta-buttons">
+                    <a href="/projects" class="btn btn-primary">
+                        {move || i18n.t().hero_cta_projects}
+                        <span>" →"</span>
+                    </a>
+                    <a href="/cv" class="btn btn-secondary">
+                        {move || i18n.t().hero_cta_cv}
+                        <span>" ↓"</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="features-grid">
+                <FeatureCard
+                    icon="🚀"
+                    title=Signal::derive(move || i18n.t().feature_cloud_title.to_string())
+                    description=Signal::derive(move || i18n.t().feature_cloud_desc.to_string())
+                />
+                <FeatureCard
+                    icon="🔒"
+                    title=Signal::derive(move || i18n.t().feature_security_title.to_string())
+                    description=Signal::derive(move || i18n.t().feature_security_desc.to_string())
+                />
+                <FeatureCard
+                    icon="🤖"
+                    title=Signal::derive(move || i18n.t().feature_ai_title.to_string())
+                    description=Signal::derive(move || i18n.t().feature_ai_desc.to_string())
+                />
+            </div>
+        </section>
+    }
+}
+
+/// Feature card component
+#[component]
+fn FeatureCard(
+    icon: &'static str,
+    title: Signal<String>,
+    description: Signal<String>,
+) -> impl IntoView {
+    view! {
+        <div class="feature-card">
+            <div class="feature-icon">{icon}</div>
+            <h3>{title}</h3>
+            <p>{description}</p>
+        </div>
     }
 }
