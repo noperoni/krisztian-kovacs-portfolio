@@ -5,8 +5,9 @@ use leptos_router::{
     StaticSegment,
 };
 
-use crate::components::LanguageToggle;
+use crate::components::{ColorModeToggle, LanguageToggle, ThemeToggle};
 use crate::i18n::{provide_i18n_context, use_i18n};
+use crate::themes::{provide_color_mode_context, provide_theme_context};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
@@ -32,6 +33,9 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
     // Provide i18n context for translations
     provide_i18n_context();
+    // Provide theme and color mode contexts
+    provide_theme_context();
+    provide_color_mode_context();
 
     view! {
         // injects a stylesheet into the document <head>
@@ -70,6 +74,8 @@ fn Nav() -> impl IntoView {
                         <li><a href="/blog">{move || i18n.t().nav_blog}</a></li>
                     </ul>
                     <div class="control-panel">
+                        <ThemeToggle/>
+                        <ColorModeToggle/>
                         <LanguageToggle/>
                     </div>
                 </div>
