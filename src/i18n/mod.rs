@@ -58,6 +58,11 @@ impl I18nContext {
     pub fn t(&self) -> Translations {
         Translations::for_language(self.language.get())
     }
+
+    /// Check if current language is French
+    pub fn is_french(&self) -> bool {
+        self.language.get() == Language::Fr
+    }
 }
 
 /// Provide i18n context to the application

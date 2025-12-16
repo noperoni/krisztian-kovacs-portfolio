@@ -128,6 +128,16 @@ pub struct Translations {
     pub cv_lang_professional: &'static str,
     pub cv_lang_limited: &'static str,
 
+    // Projects Page
+    pub proj_page_title: &'static str,
+    pub proj_page_subtitle: &'static str,
+    pub proj_filter_all: &'static str,
+    pub proj_filter_cloud: &'static str,
+    pub proj_filter_security: &'static str,
+    pub proj_filter_automation: &'static str,
+    pub proj_featured_badge: &'static str,
+    pub proj_tech_label: &'static str,
+
     // Common
     pub loading: &'static str,
     pub error: &'static str,
@@ -270,6 +280,16 @@ impl Translations {
             cv_lang_professional: "Full professional",
             cv_lang_limited: "Limited working",
 
+            // Projects Page
+            proj_page_title: "Projects Portfolio",
+            proj_page_subtitle: "A showcase of my technical projects and achievements",
+            proj_filter_all: "All Projects",
+            proj_filter_cloud: "Cloud & Infrastructure",
+            proj_filter_security: "Security & Compliance",
+            proj_filter_automation: "Automation & DevOps",
+            proj_featured_badge: "Featured",
+            proj_tech_label: "Tech:",
+
             // Common
             loading: "Loading...",
             error: "An error occurred",
@@ -403,6 +423,16 @@ impl Translations {
             cv_lang_native: "Natif ou bilingue",
             cv_lang_professional: "Compétence professionnelle complète",
             cv_lang_limited: "Compétence professionnelle limitée",
+
+            // Projects Page
+            proj_page_title: "Portfolio de Projets",
+            proj_page_subtitle: "Une vitrine de mes projets techniques et réalisations",
+            proj_filter_all: "Tous les Projets",
+            proj_filter_cloud: "Cloud & Infrastructure",
+            proj_filter_security: "Sécurité & Conformité",
+            proj_filter_automation: "Automatisation & DevOps",
+            proj_featured_badge: "En Vedette",
+            proj_tech_label: "Tech :",
 
             // Common
             loading: "Chargement...",

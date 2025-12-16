@@ -7,7 +7,7 @@ use leptos_router::{
 
 use crate::components::{ColorModeToggle, LanguageToggle, ThemeToggle};
 use crate::i18n::{provide_i18n_context, use_i18n};
-use crate::pages::{AboutPage, CvPage};
+use crate::pages::{AboutPage, CvPage, ProjectsPage};
 use crate::themes::{provide_color_mode_context, provide_theme_context};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -54,6 +54,7 @@ pub fn App() -> impl IntoView {
                     <Route path=StaticSegment("") view=HomePage/>
                     <Route path=StaticSegment("about") view=AboutPage/>
                     <Route path=StaticSegment("cv") view=CvPage/>
+                    <Route path=StaticSegment("projects") view=ProjectsPage/>
                 </Routes>
             </main>
         </Router>
