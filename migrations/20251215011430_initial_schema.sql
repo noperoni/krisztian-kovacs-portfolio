@@ -1,10 +1,10 @@
 -- Portfolio v2 Initial Schema
 -- Tables: contact_submissions, page_views, analytics_events
--- Using PostgreSQL 18's native uuidv7() for time-ordered UUIDs (better indexing)
+-- Using gen_random_uuid() for UUIDs (can upgrade to uuidv7 later with extension)
 
 -- Contact form submissions
 CREATE TABLE contact_submissions (
-    id UUID PRIMARY KEY DEFAULT uuidv7(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     subject VARCHAR(500),
@@ -27,7 +27,7 @@ CREATE TABLE contact_submissions (
 
 -- Page views (privacy-first analytics - no cookies, no PII)
 CREATE TABLE page_views (
-    id UUID PRIMARY KEY DEFAULT uuidv7(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
     -- Page info
     path VARCHAR(500) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE page_views (
 
 -- Analytics events (button clicks, interactions, etc.)
 CREATE TABLE analytics_events (
-    id UUID PRIMARY KEY DEFAULT uuidv7(),
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
     -- Event info
     event_name VARCHAR(255) NOT NULL,  -- e.g., 'contact_form_submit', 'project_click', 'theme_toggle'
