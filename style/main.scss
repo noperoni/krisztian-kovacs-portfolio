@@ -1579,3 +1579,738 @@ footer {
     left: calc(-1 * var(--space-lg) - 5px);
   }
 }
+
+// ============================================================================
+// CV PAGE
+// ============================================================================
+.cv-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: calc(var(--nav-height) + var(--space-2xl)) var(--space-lg) var(--space-3xl);
+}
+
+// CV Hero
+.cv-hero {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  padding: var(--space-2xl);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  animation: fadeInUp 0.8s ease;
+  position: relative;
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-md);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cv-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+}
+
+.cv-contact {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+
+  .contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-accent);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    transition: all var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary);
+      transform: scale(1.05);
+    }
+
+    .contact-icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+// CV Section
+.cv-section {
+  margin-bottom: var(--space-2xl);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  position: relative;
+  animation: fadeInUp 0.8s ease both;
+
+  &:nth-child(2) { animation-delay: 0.1s; }
+  &:nth-child(3) { animation-delay: 0.2s; }
+  &:nth-child(4) { animation-delay: 0.3s; }
+  &:nth-child(5) { animation-delay: 0.4s; }
+  &:nth-child(6) { animation-delay: 0.5s; }
+  &:nth-child(7) { animation-delay: 0.6s; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: var(--space-lg);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .summary-text {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+}
+
+// Technical Expertise Grid
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.expertise-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+  }
+
+  h4 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+}
+
+.expertise-list {
+  li {
+    position: relative;
+    padding-left: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+  }
+}
+
+// CV Timeline (Experience)
+.cv-timeline {
+  position: relative;
+  padding-left: var(--space-2xl);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: var(--space-sm);
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+    border-radius: 2px;
+  }
+}
+
+.experience-item {
+  position: relative;
+  margin-bottom: var(--space-xl);
+  padding-left: var(--space-lg);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--space-2xl) + 2px);
+    top: var(--space-xs);
+    width: 14px;
+    height: 14px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--color-surface);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .job-title {
+    font-weight: bold;
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: var(--space-xs);
+    font-family: var(--font-display);
+  }
+
+  .company {
+    color: var(--color-secondary);
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+  }
+
+  .date-location {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+  }
+}
+
+.responsibilities {
+  li {
+    position: relative;
+    padding-left: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+
+    &::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+    }
+  }
+}
+
+// Projects Grid
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.project-card {
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+  }
+
+  h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+
+  .project-date {
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+    margin-bottom: var(--space-sm);
+    font-weight: 600;
+    font-family: var(--font-mono);
+  }
+
+  .project-description {
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    font-size: 0.95rem;
+  }
+
+  .project-tech {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-style: italic;
+    font-family: var(--font-mono);
+  }
+}
+
+// Education Grid
+.education-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+
+  h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+}
+
+.education-item {
+  margin-bottom: var(--space-lg);
+
+  .degree {
+    font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+  }
+
+  .school {
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .level {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+  }
+}
+
+.certifications-list {
+  li {
+    position: relative;
+    padding-left: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-muted);
+
+    &::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--color-secondary);
+      font-weight: bold;
+    }
+  }
+}
+
+// Languages
+.languages-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+.language-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  .language-name {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .language-level {
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+  }
+}
+
+// ============================================================================
+// CV PAGE - TERMINAL THEME
+// ============================================================================
+[data-theme="terminal"] {
+  .cv-hero {
+    box-shadow: var(--shadow-glow);
+
+    h1::before {
+      content: '$ cat ';
+      background: none;
+      -webkit-text-fill-color: var(--color-secondary);
+      font-size: 0.7em;
+    }
+  }
+
+  .cv-section .section-title::before {
+    content: '>';
+    color: var(--color-secondary);
+    margin-right: var(--space-sm);
+  }
+
+  .cv-timeline::before {
+    background: var(--color-secondary);
+    opacity: 0.5;
+  }
+
+  .expertise-card h4::before {
+    content: './';
+    color: var(--color-secondary);
+  }
+}
+
+// ============================================================================
+// CV PAGE - FORGE THEME
+// ============================================================================
+[data-theme="forge"] {
+  .cv-hero {
+    border-width: 3px;
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .cv-section {
+    border-width: 2px;
+
+    .section-title {
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--color-primary);
+      margin-top: var(--space-lg);
+      transition: width var(--transition-fast);
+    }
+
+    &:hover::after {
+      width: 100px;
+    }
+  }
+
+  .expertise-card,
+  .project-card {
+    border-width: 2px;
+  }
+
+  .project-card h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+}
+
+// ============================================================================
+// CV PAGE - BITART THEME (RPG/Doom Style)
+// ============================================================================
+[data-theme="bitart"] {
+  .cv-hero {
+    border-width: 5px;
+    box-shadow:
+      inset -4px -4px 0 rgba(0, 0, 0, 0.4),
+      inset 4px 4px 0 rgba(255, 255, 255, 0.05),
+      8px 8px 0 rgba(0, 0, 0, 0.3);
+    animation: torchFlicker 3s ease-in-out infinite;
+
+    // Doom-style corner decorations
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: var(--color-accent);
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+    }
+
+    &::before {
+      top: -5px;
+      left: -5px;
+    }
+
+    &::after {
+      bottom: -5px;
+      right: -5px;
+      transform: rotate(180deg);
+    }
+
+    h1 {
+      font-size: clamp(1rem, 4vw, 1.5rem);
+      text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    .cv-subtitle {
+      font-family: var(--font-body);
+      font-size: 1.2rem;
+
+      &::before, &::after {
+        content: ' ◆ ';
+        color: var(--color-secondary);
+      }
+    }
+
+    .contact-item:hover {
+      text-shadow: 0 0 5px currentColor;
+    }
+  }
+
+  .cv-section {
+    border-width: 4px;
+    box-shadow:
+      inset -3px -3px 0 rgba(0, 0, 0, 0.4),
+      inset 3px 3px 0 rgba(255, 255, 255, 0.05),
+      4px 4px 0 rgba(0, 0, 0, 0.3);
+
+    // Doom-style gradient bar
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent,
+        var(--color-accent) 10%,
+        var(--color-secondary) 50%,
+        var(--color-accent) 90%,
+        transparent
+      );
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+
+      &::before {
+        content: '◆';
+        color: var(--color-accent);
+        margin-right: var(--space-sm);
+        animation: blink 1s steps(2) infinite;
+      }
+    }
+  }
+
+  .cv-timeline::before {
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--color-primary),
+      var(--color-primary) 5px,
+      transparent 5px,
+      transparent 10px
+    );
+  }
+
+  .experience-item::before {
+    border-radius: 0;
+    background: var(--color-secondary);
+    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--color-secondary), 0 0 20px var(--color-secondary);
+  }
+
+  .expertise-card,
+  .project-card {
+    border-width: 3px;
+    box-shadow:
+      inset -2px -2px 0 rgba(0, 0, 0, 0.4),
+      inset 2px 2px 0 rgba(255, 255, 255, 0.1),
+      3px 3px 0 rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      transform: scale(1.02);
+      border-color: var(--color-secondary);
+    }
+
+    h3, h4 {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .expertise-list li,
+  .responsibilities li {
+    font-family: var(--font-body);
+    font-size: 1rem;
+
+    &::before {
+      content: '◆';
+    }
+  }
+
+  .language-item {
+    border-width: 2px;
+    position: relative;
+    padding-left: var(--space-xl);
+
+    &::before {
+      content: '★';
+      position: absolute;
+      left: var(--space-sm);
+      color: var(--color-primary);
+    }
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+// ============================================================================
+// CV PAGE - RESPONSIVE
+// ============================================================================
+@media (max-width: 768px) {
+  .cv-page {
+    padding-top: calc(var(--nav-height) + var(--space-xl));
+  }
+
+  .cv-hero {
+    padding: var(--space-xl);
+
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+
+  .cv-contact {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .expertise-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-timeline {
+    padding-left: var(--space-xl);
+  }
+
+  .experience-item::before {
+    left: calc(-1 * var(--space-xl) + 2px);
+  }
+
+  .languages-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================================================
+// CV PAGE - PRINT STYLES
+// ============================================================================
+@media print {
+  // Hide navigation and non-essential elements
+  nav,
+  .control-panel {
+    display: none !important;
+  }
+
+  // Reset colors for printing
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+
+  .cv-page {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cv-hero,
+  .cv-section {
+    background: white !important;
+    border: 1px solid #333 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    page-break-inside: avoid;
+    animation: none !important;
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+
+  .cv-hero h1 {
+    background: none !important;
+    -webkit-text-fill-color: black !important;
+    color: black !important;
+  }
+
+  .cv-subtitle,
+  .contact-item,
+  .section-title,
+  .job-title,
+  .company,
+  .project-card h3,
+  .expertise-card h4 {
+    color: black !important;
+  }
+
+  .summary-text,
+  .date-location,
+  .responsibilities li,
+  .expertise-list li,
+  .project-description,
+  .project-tech,
+  .language-level {
+    color: #333 !important;
+  }
+
+  .cv-timeline::before {
+    background: #333 !important;
+  }
+
+  .experience-item::before {
+    background: #333 !important;
+    box-shadow: none !important;
+  }
+
+  // Ensure links are visible
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  // Page breaks
+  .cv-section {
+    page-break-before: auto;
+  }
+
+  .experience-item,
+  .project-card {
+    page-break-inside: avoid;
+  }
+}

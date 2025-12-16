@@ -62,6 +62,72 @@ pub struct Translations {
     pub contact_message: &'static str,
     pub contact_send: &'static str,
 
+    // CV Page - Hero & Summary
+    pub cv_subtitle: &'static str,
+    pub cv_summary_title: &'static str,
+    pub cv_summary_text: &'static str,
+
+    // CV Page - Technical Expertise
+    pub cv_expertise_title: &'static str,
+    pub cv_expertise_infra_title: &'static str,
+    pub cv_expertise_support_title: &'static str,
+    pub cv_expertise_tools_title: &'static str,
+    pub cv_skill_support_levels: &'static str,
+    pub cv_skill_audit: &'static str,
+    pub cv_skill_project_mgmt: &'static str,
+
+    // CV Page - Experience
+    pub cv_experience_title: &'static str,
+    pub cv_exp_nomadia_title: &'static str,
+    pub cv_exp_nomadia_date: &'static str,
+    pub cv_exp_nomadia_r1: &'static str,
+    pub cv_exp_nomadia_r2: &'static str,
+    pub cv_exp_nomadia_r3: &'static str,
+    pub cv_exp_nomadia_r4: &'static str,
+    pub cv_exp_dynamips_title: &'static str,
+    pub cv_exp_dynamips_date: &'static str,
+    pub cv_exp_dynamips_r1: &'static str,
+    pub cv_exp_dynamips_r2: &'static str,
+    pub cv_exp_dynamips_r3: &'static str,
+    pub cv_exp_dynamips_r4: &'static str,
+    pub cv_exp_charier_title: &'static str,
+    pub cv_exp_charier_date: &'static str,
+    pub cv_exp_charier_r1: &'static str,
+    pub cv_exp_charier_r2: &'static str,
+    pub cv_exp_charier_r3: &'static str,
+    pub cv_exp_charier_r4: &'static str,
+
+    // CV Page - Projects
+    pub cv_projects_title: &'static str,
+    pub cv_proj_k8s_title: &'static str,
+    pub cv_proj_k8s_desc: &'static str,
+    pub cv_proj_modernization_title: &'static str,
+    pub cv_proj_modernization_desc: &'static str,
+    pub cv_proj_endpoint_title: &'static str,
+    pub cv_proj_endpoint_desc: &'static str,
+    pub cv_proj_multicloud_title: &'static str,
+    pub cv_proj_multicloud_desc: &'static str,
+
+    // CV Page - Education
+    pub cv_education_title: &'static str,
+    pub cv_education_heading: &'static str,
+    pub cv_edu_master_title: &'static str,
+    pub cv_edu_master_level: &'static str,
+    pub cv_edu_bachelor_title: &'static str,
+    pub cv_edu_bachelor_level: &'static str,
+    pub cv_certifications_heading: &'static str,
+
+    // CV Page - Languages
+    pub cv_languages_title: &'static str,
+    pub cv_lang_english: &'static str,
+    pub cv_lang_french: &'static str,
+    pub cv_lang_hungarian: &'static str,
+    pub cv_lang_romanian: &'static str,
+    pub cv_lang_german: &'static str,
+    pub cv_lang_native: &'static str,
+    pub cv_lang_professional: &'static str,
+    pub cv_lang_limited: &'static str,
+
     // Common
     pub loading: &'static str,
     pub error: &'static str,
@@ -138,6 +204,72 @@ impl Translations {
             contact_message: "Message",
             contact_send: "Send Message",
 
+            // CV Page - Hero & Summary
+            cv_subtitle: "IT Infrastructure Engineer | Inter-Departmental IT Project Manager",
+            cv_summary_title: "Professional Summary",
+            cv_summary_text: "IT Engineer with expertise in enterprise system optimization, cloud security, and multi-service project management. Currently IT Expert at Nomadia, specializing in IT audit, regulatory compliance, and inter-departmental IT project management. Proven track record in Level 3 IT Support, complex incident management, and strategic IT implementation.",
+
+            // CV Page - Technical Expertise
+            cv_expertise_title: "Technical Expertise",
+            cv_expertise_infra_title: "Infrastructure & Virtualization",
+            cv_expertise_support_title: "IT Support & Management",
+            cv_expertise_tools_title: "Technologies & Tools",
+            cv_skill_support_levels: "Level 1-3 Support",
+            cv_skill_audit: "IT Audit & Compliance",
+            cv_skill_project_mgmt: "Project Management",
+
+            // CV Page - Experience
+            cv_experience_title: "Professional Experience",
+            cv_exp_nomadia_title: "IT Expert (Work-Study Program)",
+            cv_exp_nomadia_date: "Oct 2023 - Present",
+            cv_exp_nomadia_r1: "Strategic IT project management and implementation across multiple departments",
+            cv_exp_nomadia_r2: "IT infrastructure audit and regulatory compliance (GDPR, ISO 27001)",
+            cv_exp_nomadia_r3: "Level 3 IT Support and complex incident resolution",
+            cv_exp_nomadia_r4: "Active participation in internal R&D on ML & AI integration",
+            cv_exp_dynamips_title: "IT Administrator (Work-Study Program)",
+            cv_exp_dynamips_date: "Sep 2022 - Sep 2023",
+            cv_exp_dynamips_r1: "M365, Network, AD, RDS, and Azure incident resolution",
+            cv_exp_dynamips_r2: "VEEAM administration and optimization",
+            cv_exp_dynamips_r3: "RDS migration project participation",
+            cv_exp_dynamips_r4: "Legacy infrastructure modernization",
+            cv_exp_charier_title: "IT Technician (Work-Study Program)",
+            cv_exp_charier_date: "Sep 2020 - Sep 2022",
+            cv_exp_charier_r1: "Workstation preparation and configuration",
+            cv_exp_charier_r2: "End-user IT support",
+            cv_exp_charier_r3: "Intune project management for mobility solutions",
+            cv_exp_charier_r4: "IT park maintenance",
+
+            // CV Page - Projects
+            cv_projects_title: "Key Projects",
+            cv_proj_k8s_title: "Cloud-Native Kubernetes Infrastructure",
+            cv_proj_k8s_desc: "Delivered production-ready Kubernetes infrastructure on GCP with 99.95% uptime and 28% under budget.",
+            cv_proj_modernization_title: "IT Modernization & International Integration",
+            cv_proj_modernization_desc: "Led IT transformation implementing ITIL and ISO 27001, reducing order processing by 25%.",
+            cv_proj_endpoint_title: "Enterprise Endpoint Management",
+            cv_proj_endpoint_desc: "Architected Intune solution with 98% BitLocker coverage, reducing deployment time from days to hours.",
+            cv_proj_multicloud_title: "Multi-Cloud Infrastructure Transformation",
+            cv_proj_multicloud_desc: "Migrated OVH to Azure achieving 62% latency reduction and 2-4h provisioning time.",
+
+            // CV Page - Education
+            cv_education_title: "Education & Certifications",
+            cv_education_heading: "Education",
+            cv_edu_master_title: "Expert in IT and Information Systems",
+            cv_edu_master_level: "Master's Level (RNCP Level 7)",
+            cv_edu_bachelor_title: "Secure Infrastructure Administrator",
+            cv_edu_bachelor_level: "Bachelor's Level (RNCP Level 6)",
+            cv_certifications_heading: "Certifications",
+
+            // CV Page - Languages
+            cv_languages_title: "Languages",
+            cv_lang_english: "English",
+            cv_lang_french: "French",
+            cv_lang_hungarian: "Hungarian",
+            cv_lang_romanian: "Romanian",
+            cv_lang_german: "German",
+            cv_lang_native: "Native or bilingual",
+            cv_lang_professional: "Full professional",
+            cv_lang_limited: "Limited working",
+
             // Common
             loading: "Loading...",
             error: "An error occurred",
@@ -205,6 +337,72 @@ impl Translations {
             contact_email: "Email",
             contact_message: "Message",
             contact_send: "Envoyer",
+
+            // CV Page - Hero & Summary
+            cv_subtitle: "Ingénieur Infrastructure IT | Chef de Projet IT Inter-Départemental",
+            cv_summary_title: "Résumé Professionnel",
+            cv_summary_text: "Ingénieur IT spécialisé dans l'optimisation des systèmes d'entreprise, la sécurité cloud et la gestion de projets multi-services. Actuellement Expert IT chez Nomadia, spécialisé dans l'audit IT, la conformité réglementaire et la gestion de projets IT inter-départementaux. Expertise confirmée en support IT Niveau 3, gestion d'incidents complexes et implémentation stratégique IT.",
+
+            // CV Page - Technical Expertise
+            cv_expertise_title: "Expertise Technique",
+            cv_expertise_infra_title: "Infrastructure & Virtualisation",
+            cv_expertise_support_title: "Support & Gestion IT",
+            cv_expertise_tools_title: "Technologies & Outils",
+            cv_skill_support_levels: "Support Niveaux 1-3",
+            cv_skill_audit: "Audit IT & Conformité",
+            cv_skill_project_mgmt: "Gestion de Projet",
+
+            // CV Page - Experience
+            cv_experience_title: "Expérience Professionnelle",
+            cv_exp_nomadia_title: "Expert IT (Alternance)",
+            cv_exp_nomadia_date: "Oct 2023 - Présent",
+            cv_exp_nomadia_r1: "Gestion et implémentation de projets IT stratégiques multi-départements",
+            cv_exp_nomadia_r2: "Audit d'infrastructure IT et conformité réglementaire (RGPD, ISO 27001)",
+            cv_exp_nomadia_r3: "Support IT Niveau 3 et résolution d'incidents complexes",
+            cv_exp_nomadia_r4: "Participation active à la R&D interne sur l'intégration ML & IA",
+            cv_exp_dynamips_title: "Administrateur IT (Alternance)",
+            cv_exp_dynamips_date: "Sep 2022 - Sep 2023",
+            cv_exp_dynamips_r1: "Résolution d'incidents M365, Réseau, AD, RDS et Azure",
+            cv_exp_dynamips_r2: "Administration et optimisation VEEAM",
+            cv_exp_dynamips_r3: "Participation au projet de migration RDS",
+            cv_exp_dynamips_r4: "Modernisation d'infrastructure legacy",
+            cv_exp_charier_title: "Technicien IT (Alternance)",
+            cv_exp_charier_date: "Sep 2020 - Sep 2022",
+            cv_exp_charier_r1: "Préparation et configuration de postes de travail",
+            cv_exp_charier_r2: "Support IT utilisateur final",
+            cv_exp_charier_r3: "Gestion de projet Intune pour solutions de mobilité",
+            cv_exp_charier_r4: "Maintenance du parc informatique",
+
+            // CV Page - Projects
+            cv_projects_title: "Projets Clés",
+            cv_proj_k8s_title: "Infrastructure Kubernetes Cloud-Native",
+            cv_proj_k8s_desc: "Livraison d'infrastructure Kubernetes production sur GCP avec 99,95% de disponibilité et 28% sous budget.",
+            cv_proj_modernization_title: "Modernisation IT & Intégration Internationale",
+            cv_proj_modernization_desc: "Direction de transformation IT avec ITIL et ISO 27001, réduction de 25% du temps de traitement.",
+            cv_proj_endpoint_title: "Gestion des Endpoints d'Entreprise",
+            cv_proj_endpoint_desc: "Architecture Intune avec 98% de chiffrement BitLocker, réduction du déploiement de jours à heures.",
+            cv_proj_multicloud_title: "Transformation Infrastructure Multi-Cloud",
+            cv_proj_multicloud_desc: "Migration OVH vers Azure avec réduction latence de 62% et provisionnement en 2-4h.",
+
+            // CV Page - Education
+            cv_education_title: "Formation & Certifications",
+            cv_education_heading: "Formation",
+            cv_edu_master_title: "Expert en Informatique et SI",
+            cv_edu_master_level: "Niveau Master (RNCP Niveau 7)",
+            cv_edu_bachelor_title: "Administrateur d'Infrastructures Sécurisées",
+            cv_edu_bachelor_level: "Niveau Licence (RNCP Niveau 6)",
+            cv_certifications_heading: "Certifications",
+
+            // CV Page - Languages
+            cv_languages_title: "Langues",
+            cv_lang_english: "Anglais",
+            cv_lang_french: "Français",
+            cv_lang_hungarian: "Hongrois",
+            cv_lang_romanian: "Roumain",
+            cv_lang_german: "Allemand",
+            cv_lang_native: "Natif ou bilingue",
+            cv_lang_professional: "Compétence professionnelle complète",
+            cv_lang_limited: "Compétence professionnelle limitée",
 
             // Common
             loading: "Chargement...",
