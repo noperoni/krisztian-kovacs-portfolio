@@ -3439,3 +3439,333 @@ footer {
     transform: translateY(0);
   }
 }
+
+// ============================================================================
+// CONTACT FORM MODAL
+// ============================================================================
+
+// Floating Action Button
+.contact-fab {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--color-border);
+  color: var(--color-bg);
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-fast);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg), 0 0 20px var(--color-primary);
+  }
+
+  .fab-icon {
+    line-height: 1;
+    font-family: var(--font-mono);
+  }
+}
+
+// Modal Backdrop
+.contact-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Modal Container
+.contact-modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin: 0;
+  }
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--space-sm);
+  line-height: 1;
+  transition: color var(--transition-fast);
+  font-family: var(--font-mono);
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+// Contact Form
+.contact-form {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+
+  label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  input, textarea {
+    background: var(--color-surface-elevated, var(--color-bg));
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color var(--transition-fast);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+// Honeypot (hidden)
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+// Form Messages
+.form-message {
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+
+  &.success {
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+  }
+
+  &.error {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+  }
+}
+
+.submit-btn {
+  margin-top: var(--space-md);
+  width: 100%;
+  justify-content: center;
+}
+
+// Theme-specific modal styles
+[data-theme="terminal"] {
+  .contact-modal {
+    box-shadow: var(--shadow-lg), 0 0 30px rgba(0, 255, 0, 0.1);
+
+    &::before {
+      content: '> contact_form.sh';
+      display: block;
+      padding: var(--space-sm) var(--space-lg);
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--color-secondary);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-bg);
+    }
+  }
+
+  .modal-header {
+    border-bottom: none;
+    padding-top: var(--space-sm);
+
+    h2::before {
+      content: '# ';
+      color: var(--color-secondary);
+    }
+  }
+
+  .form-group label::before {
+    content: '$ ';
+    color: var(--color-secondary);
+  }
+
+  .contact-fab {
+    .fab-icon::before {
+      content: '>';
+      margin-right: 2px;
+      font-size: 0.8em;
+    }
+  }
+}
+
+[data-theme="forge"] {
+  .contact-fab {
+    border-width: 3px;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+  }
+
+  .contact-modal {
+    border-width: 2px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  .form-group label {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+}
+
+[data-theme="bitart"] {
+  .contact-fab {
+    border-radius: 0;
+    border-width: 4px;
+    box-shadow:
+      inset -4px -4px 0 rgba(0, 0, 0, 0.5),
+      inset 4px 4px 0 rgba(255, 255, 255, 0.1),
+      0 6px 0 #000;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .contact-modal {
+    border-width: 4px;
+    border-radius: 0;
+    border-color: var(--color-border);
+    box-shadow:
+      inset -4px -4px 0 rgba(0, 0, 0, 0.3),
+      inset 4px 4px 0 rgba(255, 255, 255, 0.1),
+      8px 8px 0 #000;
+  }
+
+  .modal-header h2 {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    label {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+    }
+
+    input, textarea {
+      font-family: var(--font-body);
+      border-width: 3px;
+      border-radius: 0;
+    }
+  }
+
+  .submit-btn {
+    border-radius: 0;
+  }
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .contact-fab {
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+
+  .contact-modal-backdrop {
+    padding: var(--space-sm);
+    align-items: flex-end;
+  }
+
+  .contact-modal {
+    max-height: 85vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  [data-theme="bitart"] .contact-modal {
+    border-radius: 0;
+  }
+}

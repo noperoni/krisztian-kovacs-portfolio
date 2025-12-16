@@ -25,6 +25,10 @@ dotenvy = { version = "0.15", optional = true }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
+# Email (SSR only)
+lettre = { version = "0.11", features = ["tokio1-native-tls", "builder", "smtp-transport"], optional = true }
+sha2 = { version = "0.10", optional = true }
+
 [build-dependencies]
 pulldown-cmark = "0.10"
 syntect = { version = "5.2", default-features = false, features = ["default-fancy"] }
@@ -48,6 +52,8 @@ ssr = [
     "dep:chrono",
     "dep:uuid",
     "dep:dotenvy",
+    "dep:lettre",
+    "dep:sha2",
     "leptos/ssr",
     "leptos_meta/ssr",
     "leptos_router/ssr",

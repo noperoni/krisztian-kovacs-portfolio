@@ -2,8 +2,11 @@ pub mod app;
 pub mod blog;
 pub mod components;
 pub mod db;
+#[cfg(feature = "ssr")]
+pub mod email;
 pub mod i18n;
 pub mod pages;
+pub mod server_fns;
 pub mod themes;
 
 #[cfg(feature = "hydrate")]

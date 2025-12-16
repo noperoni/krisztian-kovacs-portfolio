@@ -8,6 +8,7 @@ async fn main() {
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use portfolio::app::*;
     use portfolio::db;
+    use std::net::SocketAddr;
 
     // Load environment variables from .env file
     dotenvy::dotenv().ok();
@@ -30,21 +31,34 @@ async fn main() {
     // Generate the list of routes in your Leptos App
     let routes = generate_route_list(App);
 
+    // Clone pool for the context closure
+    let pool_for_context = pool.clone();
+
     let app = Router::new()
-        .leptos_routes(&leptos_options, routes, {
-            let leptos_options = leptos_options.clone();
-            move || shell(leptos_options.clone())
-        })
+        .leptos_routes_with_context(
+            &leptos_options,
+            routes,
+            move || {
+                // Provide database pool as context for server functions
+                provide_context(pool_for_context.clone());
+            },
+            {
+                let leptos_options = leptos_options.clone();
+                move || shell(leptos_options.clone())
+            },
+        )
         .fallback(leptos_axum::file_and_error_handler(shell))
         .with_state(leptos_options);
 
     // run our app with hyper
-    // `axum::Server` is a re-export of `hyper::Server`
     log!("listening on http://{}", &addr);
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    axum::serve(listener, app.into_make_service())
-        .await
-        .unwrap();
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .await
+    .unwrap();
 }
 
 #[cfg(not(feature = "ssr"))]

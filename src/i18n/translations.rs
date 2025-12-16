@@ -61,6 +61,15 @@ pub struct Translations {
     pub contact_email: &'static str,
     pub contact_message: &'static str,
     pub contact_send: &'static str,
+    pub contact_subject: &'static str,
+    pub contact_sending: &'static str,
+    pub contact_success: &'static str,
+    pub contact_error_name: &'static str,
+    pub contact_error_email: &'static str,
+    pub contact_error_message: &'static str,
+    pub contact_error_subject: &'static str,
+    pub contact_error_rate_limit: &'static str,
+    pub contact_error_generic: &'static str,
 
     // CV Page - Hero & Summary
     pub cv_subtitle: &'static str,
@@ -224,6 +233,15 @@ impl Translations {
             contact_email: "Email",
             contact_message: "Message",
             contact_send: "Send Message",
+            contact_subject: "Subject",
+            contact_sending: "Sending...",
+            contact_success: "Thank you! Your message has been sent successfully.",
+            contact_error_name: "Please enter a valid name (max 255 characters).",
+            contact_error_email: "Please enter a valid email address.",
+            contact_error_message: "Please enter a message (max 5000 characters).",
+            contact_error_subject: "Subject is too long (max 500 characters).",
+            contact_error_rate_limit: "Too many messages. Please try again later.",
+            contact_error_generic: "An error occurred. Please try again.",
 
             // CV Page - Hero & Summary
             cv_subtitle: "IT Infrastructure Engineer | Inter-Departmental IT Project Manager",
@@ -379,6 +397,15 @@ impl Translations {
             contact_email: "Email",
             contact_message: "Message",
             contact_send: "Envoyer",
+            contact_subject: "Sujet",
+            contact_sending: "Envoi en cours...",
+            contact_success: "Merci ! Votre message a ete envoye avec succes.",
+            contact_error_name: "Veuillez entrer un nom valide (max 255 caracteres).",
+            contact_error_email: "Veuillez entrer une adresse email valide.",
+            contact_error_message: "Veuillez entrer un message (max 5000 caracteres).",
+            contact_error_subject: "Le sujet est trop long (max 500 caracteres).",
+            contact_error_rate_limit: "Trop de messages. Veuillez reessayer plus tard.",
+            contact_error_generic: "Une erreur s'est produite. Veuillez reessayer.",
 
             // CV Page - Hero & Summary
             cv_subtitle: "Ingénieur Infrastructure IT | Chef de Projet IT Inter-Départemental",

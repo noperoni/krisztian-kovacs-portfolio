@@ -5,7 +5,7 @@ use leptos_router::{
     ParamSegment, StaticSegment,
 };
 
-use crate::components::{ColorModeToggle, LanguageToggle, ThemeToggle};
+use crate::components::{ColorModeToggle, ContactFAB, LanguageToggle, ThemeToggle};
 use crate::i18n::{provide_i18n_context, use_i18n};
 use crate::pages::{AboutPage, BlogPage, BlogPostPage, BlogTagPage, CvPage, ProjectsPage};
 use crate::themes::{provide_color_mode_context, provide_theme_context};
@@ -61,6 +61,9 @@ pub fn App() -> impl IntoView {
                 </Routes>
             </main>
         </Router>
+
+        // Floating contact button (visible on all pages)
+        <ContactFAB/>
     }
 }
 
