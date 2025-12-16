@@ -5,6 +5,8 @@
 #[cfg(feature = "ssr")]
 mod contact;
 #[cfg(feature = "ssr")]
+pub mod github;
+#[cfg(feature = "ssr")]
 mod models;
 #[cfg(feature = "ssr")]
 mod pool;

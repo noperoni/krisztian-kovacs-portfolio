@@ -4,6 +4,8 @@ pub mod components;
 pub mod db;
 #[cfg(feature = "ssr")]
 pub mod email;
+#[cfg(feature = "ssr")]
+pub mod github;
 pub mod i18n;
 pub mod pages;
 pub mod server_fns;

@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 
 use crate::i18n::{use_i18n, I18nContext};
+use crate::server_fns::{get_github_repos, GithubRepoDisplay};
 
 // ============================================================================
 // DATA MODEL
@@ -323,7 +324,8 @@ pub fn ProjectsPage() -> impl IntoView {
         <div class="projects-page">
             <PageHeader i18n=i18n.clone() />
             <FilterTabs i18n=i18n.clone() selected=selected_category />
-            <ProjectsGrid i18n=i18n projects=filtered_projects />
+            <ProjectsGrid i18n=i18n.clone() projects=filtered_projects />
+            <GithubSection i18n=i18n />
         </div>
     }
 }
@@ -435,6 +437,140 @@ fn ProjectCard(project: &'static Project, i18n: I18nContext, style: String) -> i
                         {project.tech_stack}
                     </p>
                 </div>
+            </div>
+        </article>
+    }
+}
+
+// ============================================================================
+// GITHUB SECTION
+// ============================================================================
+
+/// GitHub section showing public repositories
+#[component]
+fn GithubSection(i18n: I18nContext) -> impl IntoView {
+    // Create resource for async data fetching
+    let repos_resource = Resource::new(|| (), |_| get_github_repos());
+
+    view! {
+        <section class="github-section">
+            <header class="section-header">
+                <h2>{move || i18n.t().github_section_title}</h2>
+                <p class="section-subtitle">{move || i18n.t().github_section_subtitle}</p>
+            </header>
+
+            <Suspense fallback=move || view! {
+                <div class="github-loading">
+                    <span class="loading-spinner"></span>
+                    <span>{move || i18n.t().github_loading}</span>
+                </div>
+            }>
+                {move || {
+                    repos_resource.get().map(|result| {
+                        match result {
+                            Ok(data) => {
+                                if data.repos.is_empty() {
+                                    view! {
+                                        <div class="github-empty">
+                                            {move || i18n.t().github_no_repos}
+                                        </div>
+                                    }.into_any()
+                                } else {
+                                    let repos = data.repos.clone();
+                                    view! {
+                                        <div class="github-grid">
+                                            <For
+                                                each=move || repos.clone()
+                                                key=|repo| repo.html_url.clone()
+                                                children=move |repo| {
+                                                    view! { <GithubRepoCard repo=repo i18n=i18n.clone() /> }
+                                                }
+                                            />
+                                        </div>
+                                    }.into_any()
+                                }
+                            }
+                            Err(_) => view! {
+                                <div class="github-error">
+                                    {move || i18n.t().github_error}
+                                </div>
+                            }.into_any(),
+                        }
+                    })
+                }}
+            </Suspense>
+        </section>
+    }
+}
+
+/// Individual GitHub repository card
+#[component]
+fn GithubRepoCard(repo: GithubRepoDisplay, i18n: I18nContext) -> impl IntoView {
+    let language_class = repo
+        .language
+        .as_ref()
+        .map(|l| format!("lang-{}", l.to_lowercase().replace(' ', "-")))
+        .unwrap_or_default();
+
+    let html_url = repo.html_url.clone();
+    let html_url_footer = repo.html_url.clone();
+
+    view! {
+        <article class="github-card">
+            <div class="github-card-header">
+                <h3 class="repo-name">
+                    <a href=html_url target="_blank" rel="noopener noreferrer">
+                        {repo.name.clone()}
+                    </a>
+                </h3>
+                {repo.language.as_ref().map(|lang| view! {
+                    <span class=format!("repo-language {}", language_class)>
+                        {lang.clone()}
+                    </span>
+                })}
+            </div>
+
+            {repo.description.as_ref().map(|desc| view! {
+                <p class="repo-description">{desc.clone()}</p>
+            })}
+
+            <div class="repo-meta">
+                <span class="repo-stat">
+                    <span class="stat-icon">"★"</span>
+                    <span class="stat-value">{repo.stars}</span>
+                    <span class="stat-label">{move || i18n.t().github_stars}</span>
+                </span>
+                <span class="repo-stat">
+                    <span class="stat-icon">"⑂"</span>
+                    <span class="stat-value">{repo.forks}</span>
+                    <span class="stat-label">{move || i18n.t().github_forks}</span>
+                </span>
+            </div>
+
+            {(!repo.topics.is_empty()).then(|| {
+                let topics = repo.topics.clone();
+                view! {
+                    <div class="repo-topics">
+                        {topics.into_iter().take(5).map(|topic| view! {
+                            <span class="topic-tag">{topic}</span>
+                        }).collect_view()}
+                    </div>
+                }
+            })}
+
+            <div class="repo-footer">
+                {repo.updated_at.as_ref().map(|date| {
+                    let date = date.clone();
+                    view! {
+                        <span class="repo-updated">
+                            {move || i18n.t().github_updated}": "{date.clone()}
+                        </span>
+                    }
+                })}
+                <a href=html_url_footer target="_blank" rel="noopener noreferrer" class="github-link">
+                    {move || i18n.t().github_view_on_github}
+                    <span>" →"</span>
+                </a>
             </div>
         </article>
     }

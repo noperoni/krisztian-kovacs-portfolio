@@ -147,6 +147,17 @@ pub struct Translations {
     pub proj_featured_badge: &'static str,
     pub proj_tech_label: &'static str,
 
+    // GitHub Section
+    pub github_section_title: &'static str,
+    pub github_section_subtitle: &'static str,
+    pub github_stars: &'static str,
+    pub github_forks: &'static str,
+    pub github_updated: &'static str,
+    pub github_view_on_github: &'static str,
+    pub github_loading: &'static str,
+    pub github_error: &'static str,
+    pub github_no_repos: &'static str,
+
     // Blog Page
     pub blog_page_title: &'static str,
     pub blog_page_subtitle: &'static str,
@@ -319,6 +330,17 @@ impl Translations {
             proj_featured_badge: "Featured",
             proj_tech_label: "Tech:",
 
+            // GitHub Section
+            github_section_title: "Open Source",
+            github_section_subtitle: "My public repositories on GitHub",
+            github_stars: "stars",
+            github_forks: "forks",
+            github_updated: "Updated",
+            github_view_on_github: "View on GitHub",
+            github_loading: "Loading repositories...",
+            github_error: "Failed to load repositories",
+            github_no_repos: "No repositories found",
+
             // Blog Page
             blog_page_title: "Blog",
             blog_page_subtitle: "Thoughts on cloud, infrastructure, and technology",
@@ -482,6 +504,17 @@ impl Translations {
             proj_filter_automation: "Automatisation & DevOps",
             proj_featured_badge: "En Vedette",
             proj_tech_label: "Tech :",
+
+            // GitHub Section
+            github_section_title: "Open Source",
+            github_section_subtitle: "Mes depots publics sur GitHub",
+            github_stars: "etoiles",
+            github_forks: "forks",
+            github_updated: "Mis a jour",
+            github_view_on_github: "Voir sur GitHub",
+            github_loading: "Chargement des depots...",
+            github_error: "Echec du chargement des depots",
+            github_no_repos: "Aucun depot trouve",
 
             // Blog Page
             blog_page_title: "Blog",
