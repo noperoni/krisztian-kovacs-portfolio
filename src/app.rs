@@ -7,6 +7,7 @@ use leptos_router::{
 
 use crate::components::{ColorModeToggle, LanguageToggle, ThemeToggle};
 use crate::i18n::{provide_i18n_context, use_i18n};
+use crate::pages::AboutPage;
 use crate::themes::{provide_color_mode_context, provide_theme_context};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -51,6 +52,7 @@ pub fn App() -> impl IntoView {
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("about") view=AboutPage/>
                 </Routes>
             </main>
         </Router>

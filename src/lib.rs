@@ -2,6 +2,7 @@ pub mod app;
 pub mod components;
 pub mod db;
 pub mod i18n;
+pub mod pages;
 pub mod themes;
 
 #[cfg(feature = "hydrate")]
