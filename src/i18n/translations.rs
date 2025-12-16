@@ -146,6 +146,8 @@ pub struct Translations {
     pub blog_back_to_list: &'static str,
     pub blog_not_found: &'static str,
     pub blog_not_found_desc: &'static str,
+    pub blog_prev: &'static str,
+    pub blog_next: &'static str,
 
     // Common
     pub loading: &'static str,
@@ -307,6 +309,8 @@ impl Translations {
             blog_back_to_list: "Back to Blog",
             blog_not_found: "Post Not Found",
             blog_not_found_desc: "The blog post you're looking for doesn't exist.",
+            blog_prev: "Previous",
+            blog_next: "Next",
 
             // Common
             loading: "Loading...",
@@ -460,6 +464,8 @@ impl Translations {
             blog_back_to_list: "Retour au Blog",
             blog_not_found: "Article Non Trouve",
             blog_not_found_desc: "L'article que vous recherchez n'existe pas.",
+            blog_prev: "Précédent",
+            blog_next: "Suivant",
 
             // Common
             loading: "Chargement...",

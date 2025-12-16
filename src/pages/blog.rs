@@ -1,27 +1,69 @@
 use leptos::prelude::*;
+use leptos_router::hooks::use_query_map;
 
 use crate::blog::BlogPost;
 use crate::i18n::{use_i18n, I18nContext};
 
 // ============================================================================
+// CONSTANTS
+// ============================================================================
+
+const POSTS_PER_PAGE: usize = 6;
+
+// ============================================================================
 // BLOG LIST PAGE
 // ============================================================================
 
-/// Blog listing page with tag filtering
+/// Blog listing page with tag filtering and pagination
 #[component]
 pub fn BlogPage() -> impl IntoView {
     let i18n = use_i18n();
 
-    // Tag filter state
-    let selected_tag = RwSignal::new(Option::<String>::None);
+    // Read ?tag=X from URL query string
+    let query = use_query_map();
+    let initial_tag = query.read().get("tag");
+
+    // Tag filter state (initialized from URL if present)
+    let selected_tag = RwSignal::new(initial_tag);
+
+    // Sync selected_tag with URL changes (for back/forward navigation)
+    Effect::new(move |_| {
+        let url_tag = query.read().get("tag");
+        if url_tag != selected_tag.get() {
+            selected_tag.set(url_tag);
+        }
+    });
+
+    // Pagination state
+    let current_page = RwSignal::new(1usize);
+
+    // Reset to page 1 when tag changes
+    Effect::new(move |_| {
+        let _ = selected_tag.get();
+        current_page.set(1);
+    });
 
     // Filtered posts based on selected tag
     let filtered_posts = Signal::derive(move || {
         let all = BlogPost::all_posts();
         match selected_tag.get() {
-            Some(tag) => all.iter().filter(|p| p.tags.contains(&tag.as_str())).collect(),
-            None => all.iter().collect(),
+            Some(tag) => all.iter().filter(|p| p.tags.contains(&tag.as_str())).collect::<Vec<_>>(),
+            None => all.iter().collect::<Vec<_>>(),
         }
+    });
+
+    // Total pages calculation
+    let total_pages = Signal::derive(move || {
+        let count = filtered_posts.get().len();
+        (count + POSTS_PER_PAGE - 1) / POSTS_PER_PAGE.max(1)
+    });
+
+    // Paginated posts for current page
+    let paginated_posts = Signal::derive(move || {
+        let all = filtered_posts.get();
+        let page = current_page.get();
+        let start = (page - 1) * POSTS_PER_PAGE;
+        all.into_iter().skip(start).take(POSTS_PER_PAGE).collect::<Vec<_>>()
     });
 
     // Get all unique tags
@@ -32,7 +74,12 @@ pub fn BlogPage() -> impl IntoView {
             <BlogHeader i18n=i18n.clone() />
             <div class="blog-container">
                 <TagFilter tags=all_tags selected=selected_tag i18n=i18n.clone() />
-                <BlogGrid posts=filtered_posts i18n=i18n />
+                <BlogGrid posts=paginated_posts i18n=i18n.clone() />
+                <Pagination
+                    current=current_page
+                    total=total_pages
+                    i18n=i18n
+                />
             </div>
         </div>
     }
@@ -150,6 +197,157 @@ fn BlogCard(post: &'static BlogPost, i18n: I18nContext, index: usize) -> impl In
 }
 
 // ============================================================================
+// PAGINATION
+// ============================================================================
+
+#[component]
+fn Pagination(
+    current: RwSignal<usize>,
+    total: Signal<usize>,
+    i18n: I18nContext,
+) -> impl IntoView {
+    view! {
+        <Show when=move || { total.get() > 1 }>
+            <nav class="pagination" aria-label="Blog pagination">
+                <button
+                    class="pagination-btn"
+                    disabled=move || current.get() <= 1
+                    on:click=move |_| current.update(|p| *p = (*p).saturating_sub(1).max(1))
+                >
+                    "← " {move || i18n.t().blog_prev}
+                </button>
+                <span class="pagination-info">
+                    {move || current.get()} " / " {move || total.get()}
+                </span>
+                <button
+                    class="pagination-btn"
+                    disabled=move || current.get() >= total.get()
+                    on:click=move |_| current.update(|p| *p = (*p + 1).min(total.get()))
+                >
+                    {move || i18n.t().blog_next} " →"
+                </button>
+            </nav>
+        </Show>
+    }
+}
+
+// ============================================================================
+// BLOG TAG PAGE (Route: /blog/tags/:tag)
+// ============================================================================
+
+/// Blog page filtered by tag from URL path
+#[component]
+pub fn BlogTagPage() -> impl IntoView {
+    let i18n = use_i18n();
+    let params = leptos_router::hooks::use_params_map();
+
+    // Get tag from URL path param
+    let tag_from_path = Signal::derive(move || params.read().get("tag"));
+
+    // Tag filter state (initialized from path param)
+    let selected_tag = RwSignal::new(tag_from_path.get());
+
+    // Sync with path param changes
+    Effect::new(move |_| {
+        let path_tag = tag_from_path.get();
+        if path_tag != selected_tag.get() {
+            selected_tag.set(path_tag);
+        }
+    });
+
+    // Pagination state
+    let current_page = RwSignal::new(1usize);
+
+    // Reset to page 1 when tag changes
+    Effect::new(move |_| {
+        let _ = selected_tag.get();
+        current_page.set(1);
+    });
+
+    // Filtered posts based on selected tag
+    let filtered_posts = Signal::derive(move || {
+        let all = BlogPost::all_posts();
+        match selected_tag.get() {
+            Some(tag) => all.iter().filter(|p| p.tags.contains(&tag.as_str())).collect::<Vec<_>>(),
+            None => all.iter().collect::<Vec<_>>(),
+        }
+    });
+
+    // Total pages calculation
+    let total_pages = Signal::derive(move || {
+        let count = filtered_posts.get().len();
+        (count + POSTS_PER_PAGE - 1) / POSTS_PER_PAGE.max(1)
+    });
+
+    // Paginated posts for current page
+    let paginated_posts = Signal::derive(move || {
+        let all = filtered_posts.get();
+        let page = current_page.get();
+        let start = (page - 1) * POSTS_PER_PAGE;
+        all.into_iter().skip(start).take(POSTS_PER_PAGE).collect::<Vec<_>>()
+    });
+
+    // Get all unique tags
+    let all_tags = BlogPost::all_tags();
+
+    view! {
+        <div class="blog-page">
+            <BlogHeader i18n=i18n.clone() />
+            <div class="blog-container">
+                <TagFilterLinks tags=all_tags current_tag=selected_tag i18n=i18n.clone() />
+                <BlogGrid posts=paginated_posts i18n=i18n.clone() />
+                <Pagination
+                    current=current_page
+                    total=total_pages
+                    i18n=i18n
+                />
+            </div>
+        </div>
+    }
+}
+
+// ============================================================================
+// TAG FILTER WITH LINKS (for /blog/tags/:tag routes)
+// ============================================================================
+
+#[component]
+fn TagFilterLinks(
+    tags: Vec<&'static str>,
+    current_tag: RwSignal<Option<String>>,
+    i18n: I18nContext,
+) -> impl IntoView {
+    view! {
+        <div class="filter-tabs">
+            <a
+                href="/blog"
+                class=move || if current_tag.get().is_none() { "filter-tab active" } else { "filter-tab" }
+            >
+                {move || i18n.t().blog_filter_all}
+            </a>
+            {tags.into_iter().map(|tag| {
+                let tag_for_check = tag.to_string();
+                let tag_display = tag.to_string();
+                let href = format!("/blog/tags/{}", tag);
+                view! {
+                    <a
+                        href=href
+                        class=move || {
+                            if current_tag.get().as_deref() == Some(&tag_for_check) {
+                                "filter-tab active"
+                            } else {
+                                "filter-tab"
+                            }
+                        }
+                    >
+                        {tag_display}
+                    </a>
+                }
+            }).collect_view()}
+        </div>
+    }
+}
+
+// ============================================================================
 // BLOG POST DETAIL PAGE
 // ============================================================================
 
@@ -185,7 +383,7 @@ pub fn BlogPostPage() -> impl IntoView {
                                     {post.tags.iter().map(|tag| {
                                         let tag_str = *tag;
                                         view! {
-                                            <a href=format!("/blog?tag={}", tag_str) class="tag">{tag_str}</a>
+                                            <a href=format!("/blog/tags/{}", tag_str) class="tag">{tag_str}</a>
                                         }
                                     }).collect_view()}
                                 </div>
