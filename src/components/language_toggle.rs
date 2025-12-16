@@ -14,11 +14,12 @@ pub fn LanguageToggle() -> impl IntoView {
 
     view! {
         <button
-            class="control-btn"
+            class="toggle-btn lang-toggle"
             id="langToggle"
             on:click=toggle_language
+            title="Toggle language"
         >
-            {label}
+            <span class="toggle-label">{label}</span>
         </button>
     }
 }

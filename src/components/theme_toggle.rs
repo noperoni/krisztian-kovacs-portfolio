@@ -15,7 +15,7 @@ pub fn ThemeToggle() -> impl IntoView {
 
     view! {
         <button
-            class="control-btn theme-toggle"
+            class="toggle-btn theme-toggle"
             id="themeToggle"
             on:click=cycle_theme
             title="Cycle theme"

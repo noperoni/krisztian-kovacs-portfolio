@@ -14,7 +14,7 @@ pub fn ColorModeToggle() -> impl IntoView {
 
     view! {
         <button
-            class="control-btn color-mode-toggle"
+            class="toggle-btn color-mode-toggle"
             id="colorModeToggle"
             on:click=toggle_mode
             title="Toggle light/dark mode"
