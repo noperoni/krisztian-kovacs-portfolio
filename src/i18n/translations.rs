@@ -138,6 +138,15 @@ pub struct Translations {
     pub proj_featured_badge: &'static str,
     pub proj_tech_label: &'static str,
 
+    // Blog Page
+    pub blog_page_title: &'static str,
+    pub blog_page_subtitle: &'static str,
+    pub blog_filter_all: &'static str,
+    pub blog_read_more: &'static str,
+    pub blog_back_to_list: &'static str,
+    pub blog_not_found: &'static str,
+    pub blog_not_found_desc: &'static str,
+
     // Common
     pub loading: &'static str,
     pub error: &'static str,
@@ -290,6 +299,15 @@ impl Translations {
             proj_featured_badge: "Featured",
             proj_tech_label: "Tech:",
 
+            // Blog Page
+            blog_page_title: "Blog",
+            blog_page_subtitle: "Thoughts on cloud, infrastructure, and technology",
+            blog_filter_all: "All Posts",
+            blog_read_more: "Read More",
+            blog_back_to_list: "Back to Blog",
+            blog_not_found: "Post Not Found",
+            blog_not_found_desc: "The blog post you're looking for doesn't exist.",
+
             // Common
             loading: "Loading...",
             error: "An error occurred",
@@ -433,6 +451,15 @@ impl Translations {
             proj_filter_automation: "Automatisation & DevOps",
             proj_featured_badge: "En Vedette",
             proj_tech_label: "Tech :",
+
+            // Blog Page
+            blog_page_title: "Blog",
+            blog_page_subtitle: "Reflexions sur le cloud, l'infrastructure et la technologie",
+            blog_filter_all: "Tous les Articles",
+            blog_read_more: "Lire la Suite",
+            blog_back_to_list: "Retour au Blog",
+            blog_not_found: "Article Non Trouve",
+            blog_not_found_desc: "L'article que vous recherchez n'existe pas.",
 
             // Common
             loading: "Chargement...",

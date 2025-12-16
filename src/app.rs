@@ -2,12 +2,12 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
-    StaticSegment,
+    ParamSegment, StaticSegment,
 };
 
 use crate::components::{ColorModeToggle, LanguageToggle, ThemeToggle};
 use crate::i18n::{provide_i18n_context, use_i18n};
-use crate::pages::{AboutPage, CvPage, ProjectsPage};
+use crate::pages::{AboutPage, BlogPage, BlogPostPage, CvPage, ProjectsPage};
 use crate::themes::{provide_color_mode_context, provide_theme_context};
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
@@ -55,6 +55,8 @@ pub fn App() -> impl IntoView {
                     <Route path=StaticSegment("about") view=AboutPage/>
                     <Route path=StaticSegment("cv") view=CvPage/>
                     <Route path=StaticSegment("projects") view=ProjectsPage/>
+                    <Route path=StaticSegment("blog") view=BlogPage/>
+                    <Route path=(StaticSegment("blog"), ParamSegment("slug")) view=BlogPostPage/>
                 </Routes>
             </main>
         </Router>
