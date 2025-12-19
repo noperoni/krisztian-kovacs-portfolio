@@ -87,6 +87,14 @@ pub struct Translations {
 
     // CV Page - Experience
     pub cv_experience_title: &'static str,
+    // Nomadia - Current PM role (Oct 2025 - Present)
+    pub cv_exp_nomadia_pm_title: &'static str,
+    pub cv_exp_nomadia_pm_date: &'static str,
+    pub cv_exp_nomadia_pm_r1: &'static str,
+    pub cv_exp_nomadia_pm_r2: &'static str,
+    pub cv_exp_nomadia_pm_r3: &'static str,
+    pub cv_exp_nomadia_pm_r4: &'static str,
+    // Nomadia - Previous IT Expert role (Oct 2023 - Sep 2025)
     pub cv_exp_nomadia_title: &'static str,
     pub cv_exp_nomadia_date: &'static str,
     pub cv_exp_nomadia_r1: &'static str,
@@ -195,7 +203,7 @@ impl Translations {
 
             // Hero section
             hero_title: "Krisztián Kovács",
-            hero_subtitle: "IT Infrastructure Engineer & Project Manager",
+            hero_subtitle: "Project Manager: Infrastructure & Solutions",
             hero_description: "Crafting robust cloud solutions and leading cross-functional teams to deliver enterprise-grade infrastructure. Specializing in cloud security, Kubernetes orchestration, and regulatory compliance.",
             hero_cta_projects: "View Projects",
             hero_cta_cv: "Download CV",
@@ -213,11 +221,11 @@ impl Translations {
             about_page_subtitle: "IT Engineer, Problem Solver, Innovation Enthusiast",
 
             // About page - Profile
-            about_profile_title: "IT Infrastructure Engineer & Project Manager based in France",
+            about_profile_title: "Project Manager: Infrastructure & Solutions at Nomadia",
 
             // About page - Introduction
             about_intro_title: "Hello, I'm Krisztián",
-            about_intro_p1: "I'm an IT Infrastructure Engineer with a passion for building robust, scalable systems that drive business value. Currently working as an IT Expert at Nomadia in Nantes, France, I specialize in cloud architecture, regulatory compliance, and cross-departmental project management.",
+            about_intro_p1: "I'm a Project Manager specializing in Infrastructure & Solutions, with a passion for building robust, scalable systems that drive business value. Currently leading IT infrastructure projects at Nomadia in Nantes, France, I focus on cloud architecture, DevOps collaboration, security compliance, and AI/ML integration.",
             about_intro_p2: "With expertise spanning from Level 3 support to strategic IT implementations, I thrive on solving complex technical challenges and transforming infrastructure to meet modern demands. My approach combines technical excellence with a keen understanding of business needs, ensuring solutions that are both innovative and practical.",
             about_intro_p3: "Beyond the technical realm, I'm multilingual (speaking English, French, Hungarian, Romanian, and some German), which has proven invaluable in managing international projects and collaborating with diverse teams across Europe.",
 
@@ -227,11 +235,11 @@ impl Translations {
 
             // About page - Journey Timeline
             about_journey_title: "My Journey",
-            about_timeline_nomadia: "Leading strategic IT projects, conducting infrastructure audits, and driving innovation through ML/AI integration.",
+            about_timeline_nomadia: "Promoted to Project Manager leading infrastructure evolution projects, security compliance, DevOps collaboration, and enterprise AI/ML integration initiatives.",
             about_timeline_dynamips: "Managed cloud infrastructure, modernized legacy systems, and ensured GDPR compliance across platforms.",
             about_timeline_charier: "Started my professional journey implementing Intune solutions and supporting enterprise mobility initiatives.",
-            about_timeline_education_title: "Continuous Learning",
-            about_timeline_education: "Pursuing Master's degree at EPSI while gaining hands-on experience through work-study programs.",
+            about_timeline_education_title: "Education Complete",
+            about_timeline_education: "Graduated from EPSI with Expert en Informatique et Systèmes d'Information (EISI) diploma - Master's level (RNCP Level 7).",
 
             // About page - Contact CTA
             about_cta_title: "Let's Connect",
@@ -255,9 +263,9 @@ impl Translations {
             contact_error_generic: "An error occurred. Please try again.",
 
             // CV Page - Hero & Summary
-            cv_subtitle: "IT Infrastructure Engineer | Inter-Departmental IT Project Manager",
+            cv_subtitle: "Project Manager: Infrastructure & Solutions",
             cv_summary_title: "Professional Summary",
-            cv_summary_text: "IT Engineer with expertise in enterprise system optimization, cloud security, and multi-service project management. Currently IT Expert at Nomadia, specializing in IT audit, regulatory compliance, and inter-departmental IT project management. Proven track record in Level 3 IT Support, complex incident management, and strategic IT implementation.",
+            cv_summary_text: "Project Manager specializing in infrastructure architecture design, strategic IT project management, and enterprise solutions. Currently at Nomadia, leading infrastructure evolution projects across cloud, automation, and security domains. Expert in DevOps collaboration, regulatory compliance (GDPR, ISO), and AI/ML integration initiatives. Master's graduate (RNCP Level 7) with proven track record in cross-team coordination and business continuity planning.",
 
             // CV Page - Technical Expertise
             cv_expertise_title: "Technical Expertise",
@@ -270,8 +278,16 @@ impl Translations {
 
             // CV Page - Experience
             cv_experience_title: "Professional Experience",
+            // Nomadia - Current PM role
+            cv_exp_nomadia_pm_title: "Project Manager: Infrastructure & Solutions",
+            cv_exp_nomadia_pm_date: "Oct 2025 - Present",
+            cv_exp_nomadia_pm_r1: "Infrastructure architecture design: systems, networks, storage, virtualization, cloud",
+            cv_exp_nomadia_pm_r2: "Strategic IT project management for infrastructure evolution (cloud, automation, security)",
+            cv_exp_nomadia_pm_r3: "Security & compliance: policies implementation, audits, GDPR/ISO compliance",
+            cv_exp_nomadia_pm_r4: "AI & ML integration: active participation in enterprise R&D initiatives",
+            // Nomadia - Previous IT Expert role
             cv_exp_nomadia_title: "IT Expert (Work-Study Program)",
-            cv_exp_nomadia_date: "Oct 2023 - Present",
+            cv_exp_nomadia_date: "Oct 2023 - Sep 2025",
             cv_exp_nomadia_r1: "Strategic IT project management and implementation across multiple departments",
             cv_exp_nomadia_r2: "IT infrastructure audit and regulatory compliance (GDPR, ISO 27001)",
             cv_exp_nomadia_r3: "Level 3 IT Support and complex incident resolution",
@@ -370,7 +386,7 @@ impl Translations {
 
             // Hero section
             hero_title: "Krisztián Kovács",
-            hero_subtitle: "Ingénieur Infrastructure IT & Chef de Projet",
+            hero_subtitle: "Chef de Projet : Infrastructure & Solutions",
             hero_description: "Conception de solutions cloud robustes et direction d'équipes interfonctionnelles pour livrer des infrastructures d'entreprise. Spécialisé en sécurité cloud, orchestration Kubernetes et conformité réglementaire.",
             hero_cta_projects: "Voir Projets",
             hero_cta_cv: "Télécharger CV",
@@ -388,11 +404,11 @@ impl Translations {
             about_page_subtitle: "Ingénieur IT, Résolveur de Problèmes, Passionné d'Innovation",
 
             // About page - Profile
-            about_profile_title: "Ingénieur Infrastructure IT & Chef de Projet basé en France",
+            about_profile_title: "Chef de Projet : Infrastructure & Solutions chez Nomadia",
 
             // About page - Introduction
             about_intro_title: "Bonjour, je suis Krisztián",
-            about_intro_p1: "Je suis un Ingénieur Infrastructure IT passionné par la construction de systèmes robustes et évolutifs qui génèrent de la valeur commerciale. Actuellement Expert IT chez Nomadia à Nantes, France, je me spécialise dans l'architecture cloud, la conformité réglementaire et la gestion de projets inter-départementaux.",
+            about_intro_p1: "Je suis Chef de Projet spécialisé en Infrastructure & Solutions, passionné par la construction de systèmes robustes et évolutifs qui génèrent de la valeur commerciale. Actuellement chez Nomadia à Nantes, je dirige des projets d'infrastructure IT en me concentrant sur l'architecture cloud, la collaboration DevOps, la conformité sécurité et l'intégration IA/ML.",
             about_intro_p2: "Avec une expertise allant du support de niveau 3 aux implémentations IT stratégiques, je m'épanouis dans la résolution de défis techniques complexes et la transformation d'infrastructures pour répondre aux exigences modernes. Mon approche combine l'excellence technique avec une compréhension approfondie des besoins commerciaux, garantissant des solutions à la fois innovantes et pratiques.",
             about_intro_p3: "Au-delà du domaine technique, je suis multilingue (parlant anglais, français, hongrois, roumain et un peu d'allemand), ce qui s'est avéré inestimable pour gérer des projets internationaux et collaborer avec des équipes diverses à travers l'Europe.",
 
@@ -402,11 +418,11 @@ impl Translations {
 
             // About page - Journey Timeline
             about_journey_title: "Mon Parcours",
-            about_timeline_nomadia: "Direction de projets IT stratégiques, réalisation d'audits d'infrastructure et stimulation de l'innovation par l'intégration ML/IA.",
+            about_timeline_nomadia: "Promu Chef de Projet dirigeant les projets d'évolution d'infrastructure, conformité sécurité, collaboration DevOps et initiatives d'intégration IA/ML.",
             about_timeline_dynamips: "Gestion de l'infrastructure cloud, modernisation des systèmes legacy et assurance de la conformité RGPD sur toutes les plateformes.",
             about_timeline_charier: "Début de mon parcours professionnel en implémentant des solutions Intune et en soutenant les initiatives de mobilité d'entreprise.",
-            about_timeline_education_title: "Apprentissage Continu",
-            about_timeline_education: "Poursuite d'un Master à l'EPSI tout en acquérant une expérience pratique grâce aux programmes d'alternance.",
+            about_timeline_education_title: "Formation Complétée",
+            about_timeline_education: "Diplômé de l'EPSI avec le titre d'Expert en Informatique et Systèmes d'Information (EISI) - Niveau Master (RNCP Niveau 7).",
 
             // About page - Contact CTA
             about_cta_title: "Connectons-nous",
@@ -430,9 +446,9 @@ impl Translations {
             contact_error_generic: "Une erreur s'est produite. Veuillez reessayer.",
 
             // CV Page - Hero & Summary
-            cv_subtitle: "Ingénieur Infrastructure IT | Chef de Projet IT Inter-Départemental",
+            cv_subtitle: "Chef de Projet : Infrastructure & Solutions",
             cv_summary_title: "Résumé Professionnel",
-            cv_summary_text: "Ingénieur IT spécialisé dans l'optimisation des systèmes d'entreprise, la sécurité cloud et la gestion de projets multi-services. Actuellement Expert IT chez Nomadia, spécialisé dans l'audit IT, la conformité réglementaire et la gestion de projets IT inter-départementaux. Expertise confirmée en support IT Niveau 3, gestion d'incidents complexes et implémentation stratégique IT.",
+            cv_summary_text: "Chef de Projet spécialisé dans la conception d'architecture d'infrastructure, la gestion stratégique de projets IT et les solutions d'entreprise. Actuellement chez Nomadia, je dirige des projets d'évolution d'infrastructure dans les domaines cloud, automatisation et sécurité. Expert en collaboration DevOps, conformité réglementaire (RGPD, ISO) et initiatives d'intégration IA/ML. Diplômé niveau Master (RNCP Niveau 7) avec une expertise confirmée en coordination inter-équipes et planification de continuité d'activité.",
 
             // CV Page - Technical Expertise
             cv_expertise_title: "Expertise Technique",
@@ -445,8 +461,16 @@ impl Translations {
 
             // CV Page - Experience
             cv_experience_title: "Expérience Professionnelle",
+            // Nomadia - Current PM role
+            cv_exp_nomadia_pm_title: "Chef de Projet : Infrastructure & Solutions",
+            cv_exp_nomadia_pm_date: "Oct 2025 - Présent",
+            cv_exp_nomadia_pm_r1: "Conception d'architecture d'infrastructure : systèmes, réseaux, stockage, virtualisation, cloud",
+            cv_exp_nomadia_pm_r2: "Gestion stratégique de projets IT pour l'évolution d'infrastructure (cloud, automatisation, sécurité)",
+            cv_exp_nomadia_pm_r3: "Sécurité & conformité : mise en œuvre des politiques, audits, conformité RGPD/ISO",
+            cv_exp_nomadia_pm_r4: "Intégration IA & ML : participation active aux initiatives R&D d'entreprise",
+            // Nomadia - Previous IT Expert role
             cv_exp_nomadia_title: "Expert IT (Alternance)",
-            cv_exp_nomadia_date: "Oct 2023 - Présent",
+            cv_exp_nomadia_date: "Oct 2023 - Sep 2025",
             cv_exp_nomadia_r1: "Gestion et implémentation de projets IT stratégiques multi-départements",
             cv_exp_nomadia_r2: "Audit d'infrastructure IT et conformité réglementaire (RGPD, ISO 27001)",
             cv_exp_nomadia_r3: "Support IT Niveau 3 et résolution d'incidents complexes",

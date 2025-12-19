@@ -137,6 +137,20 @@ fn ProfessionalExperience(i18n: crate::i18n::I18nContext) -> impl IntoView {
         <section class="cv-section">
             <h2 class="section-title">{move || i18n.t().cv_experience_title}</h2>
             <div class="cv-timeline">
+                // Current role - Project Manager
+                <ExperienceItem
+                    title=Signal::derive(move || i18n.t().cv_exp_nomadia_pm_title.to_string())
+                    company="Nomadia"
+                    date=Signal::derive(move || i18n.t().cv_exp_nomadia_pm_date.to_string())
+                    location="Nantes, France"
+                    responsibilities=vec![
+                        Signal::derive(move || i18n.t().cv_exp_nomadia_pm_r1.to_string()),
+                        Signal::derive(move || i18n.t().cv_exp_nomadia_pm_r2.to_string()),
+                        Signal::derive(move || i18n.t().cv_exp_nomadia_pm_r3.to_string()),
+                        Signal::derive(move || i18n.t().cv_exp_nomadia_pm_r4.to_string()),
+                    ]
+                />
+                // Previous role - IT Expert (Work-Study)
                 <ExperienceItem
                     title=Signal::derive(move || i18n.t().cv_exp_nomadia_title.to_string())
                     company="Nomadia"

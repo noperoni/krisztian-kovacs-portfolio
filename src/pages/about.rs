@@ -131,7 +131,7 @@ fn JourneyTimeline(i18n: crate::i18n::I18nContext) -> impl IntoView {
             <div class="timeline">
                 <TimelineItem
                     date="2023 - Present"
-                    title="IT Expert at Nomadia"
+                    title="Project Manager at Nomadia"
                     description=Signal::derive(move || i18n.t().about_timeline_nomadia.to_string())
                 />
                 <TimelineItem
@@ -149,6 +149,7 @@ fn JourneyTimeline(i18n: crate::i18n::I18nContext) -> impl IntoView {
                     title=Signal::derive(move || i18n.t().about_timeline_education_title.to_string())
                     description=Signal::derive(move || i18n.t().about_timeline_education.to_string())
                 />
+                // Note: Education completed Sep 2025 - EPSI EISI diploma (Master's, RNCP Level 7)
             </div>
         </section>
     }
