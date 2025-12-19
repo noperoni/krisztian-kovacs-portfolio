@@ -9,12 +9,12 @@ pub fn CvPage() -> impl IntoView {
 
     view! {
         <div class="cv-page">
-            <CvHero i18n=i18n.clone() />
-            <ProfessionalSummary i18n=i18n.clone() />
-            <TechnicalExpertise i18n=i18n.clone() />
-            <ProfessionalExperience i18n=i18n.clone() />
-            <KeyProjects i18n=i18n.clone() />
-            <EducationCertifications i18n=i18n.clone() />
+            <CvHero i18n=i18n />
+            <ProfessionalSummary i18n=i18n />
+            <TechnicalExpertise i18n=i18n />
+            <ProfessionalExperience i18n=i18n />
+            <KeyProjects i18n=i18n />
+            <EducationCertifications i18n=i18n />
             <Languages i18n=i18n />
         </div>
     }

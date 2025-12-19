@@ -9,11 +9,11 @@ pub fn AboutPage() -> impl IntoView {
 
     view! {
         <div class="about-page">
-            <PageHeader i18n=i18n.clone() />
-            <ProfileSection i18n=i18n.clone() />
-            <AboutSection i18n=i18n.clone() />
-            <SkillsGrid i18n=i18n.clone() />
-            <JourneyTimeline i18n=i18n.clone() />
+            <PageHeader i18n=i18n />
+            <ProfileSection i18n=i18n />
+            <AboutSection i18n=i18n />
+            <SkillsGrid i18n=i18n />
+            <JourneyTimeline i18n=i18n />
             <ContactCTA i18n=i18n />
         </div>
     }

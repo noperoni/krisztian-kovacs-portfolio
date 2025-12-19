@@ -71,10 +71,10 @@ pub fn BlogPage() -> impl IntoView {
 
     view! {
         <div class="blog-page">
-            <BlogHeader i18n=i18n.clone() />
+            <BlogHeader i18n=i18n />
             <div class="blog-container">
-                <TagFilter tags=all_tags selected=selected_tag i18n=i18n.clone() />
-                <BlogGrid posts=paginated_posts i18n=i18n.clone() />
+                <TagFilter tags=all_tags selected=selected_tag i18n=i18n />
+                <BlogGrid posts=paginated_posts i18n=i18n />
                 <Pagination
                     current=current_page
                     total=total_pages
@@ -153,7 +153,7 @@ fn BlogGrid(posts: Signal<Vec<&'static BlogPost>>, i18n: I18nContext) -> impl In
                 key=|(_, post)| post.slug
                 children=move |(index, post)| {
                     view! {
-                        <BlogCard post=post i18n=i18n.clone() index=index />
+                        <BlogCard post=post i18n=i18n index=index />
                     }
                 }
             />
@@ -292,10 +292,10 @@ pub fn BlogTagPage() -> impl IntoView {
 
     view! {
         <div class="blog-page">
-            <BlogHeader i18n=i18n.clone() />
+            <BlogHeader i18n=i18n />
             <div class="blog-container">
-                <TagFilterLinks tags=all_tags current_tag=selected_tag i18n=i18n.clone() />
-                <BlogGrid posts=paginated_posts i18n=i18n.clone() />
+                <TagFilterLinks tags=all_tags current_tag=selected_tag i18n=i18n />
+                <BlogGrid posts=paginated_posts i18n=i18n />
                 <Pagination
                     current=current_page
                     total=total_pages

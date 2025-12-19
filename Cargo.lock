@@ -2060,6 +2060,7 @@ dependencies = [
  "syntect",
  "thiserror 2.0.17",
  "tokio",
+ "tower-http",
  "uuid",
  "walkdir",
  "wasm-bindgen",

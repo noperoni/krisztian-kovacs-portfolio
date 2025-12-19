@@ -24,13 +24,6 @@ impl ProjectCategory {
         ]
     }
 
-    pub fn id(&self) -> &'static str {
-        match self {
-            ProjectCategory::Cloud => "cloud",
-            ProjectCategory::Security => "security",
-            ProjectCategory::Automation => "automation",
-        }
-    }
 }
 
 /// A single project stat (value + label key for i18n)
@@ -312,7 +305,7 @@ pub fn ProjectsPage() -> impl IntoView {
             .filter(|p| {
                 selected_category
                     .get()
-                    .map_or(true, |cat| p.category == cat)
+                    .is_none_or(|cat| p.category == cat)
             })
             .collect();
         // Sort: featured first
@@ -322,9 +315,9 @@ pub fn ProjectsPage() -> impl IntoView {
 
     view! {
         <div class="projects-page">
-            <PageHeader i18n=i18n.clone() />
-            <FilterTabs i18n=i18n.clone() selected=selected_category />
-            <ProjectsGrid i18n=i18n.clone() projects=filtered_projects />
+            <PageHeader i18n=i18n />
+            <FilterTabs i18n=i18n selected=selected_category />
+            <ProjectsGrid i18n=i18n projects=filtered_projects />
             <GithubSection i18n=i18n />
         </div>
     }
@@ -383,7 +376,7 @@ fn ProjectsGrid(i18n: I18nContext, projects: Signal<Vec<&'static Project>>) -> i
                 children=move |(index, project)| {
                     let delay = format!("animation-delay: {}s", index as f32 * 0.1);
                     view! {
-                        <ProjectCard project=project i18n=i18n.clone() style=delay />
+                        <ProjectCard project=project i18n=i18n style=delay />
                     }
                 }
             />
@@ -483,7 +476,7 @@ fn GithubSection(i18n: I18nContext) -> impl IntoView {
                                                 each=move || repos.clone()
                                                 key=|repo| repo.html_url.clone()
                                                 children=move |repo| {
-                                                    view! { <GithubRepoCard repo=repo i18n=i18n.clone() /> }
+                                                    view! { <GithubRepoCard repo=repo i18n=i18n /> }
                                                 }
                                             />
                                         </div>

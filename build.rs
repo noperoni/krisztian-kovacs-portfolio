@@ -50,7 +50,7 @@ fn main() {
     for entry in WalkDir::new(blog_dir)
         .into_iter()
         .filter_map(|e| e.ok())
-        .filter(|e| e.path().extension().map_or(false, |ext| ext == "md"))
+        .filter(|e| e.path().extension().is_some_and(|ext| ext == "md"))
     {
         println!("cargo:rerun-if-changed={}", entry.path().display());
 
