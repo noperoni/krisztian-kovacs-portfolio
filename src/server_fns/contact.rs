@@ -95,8 +95,14 @@ pub async fn submit_contact(input: ContactFormInput) -> Result<ContactResult, Se
     }
 
     // Validate email
+    // Security: reject newlines to prevent email header injection attacks
     let email = input.email.trim();
-    if email.is_empty() || !email.contains('@') || email.len() > 255 {
+    if email.is_empty()
+        || !email.contains('@')
+        || email.len() > 255
+        || email.contains('\n')
+        || email.contains('\r')
+    {
         return Ok(ContactResult {
             success: false,
             message_key: "contact_error_email".to_string(),
