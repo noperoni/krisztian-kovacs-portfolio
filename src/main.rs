@@ -25,6 +25,13 @@ async fn main() {
         .await
         .expect("Failed to run database migrations");
 
+    // Cleanup stale rate limit records (older than 24 hours)
+    match db::cleanup_rate_limits(&pool).await {
+        Ok(deleted) if deleted > 0 => log!("Cleaned up {} stale rate limit records", deleted),
+        Ok(_) => {}
+        Err(e) => log!("Warning: Failed to cleanup rate limits: {:?}", e),
+    }
+
     log!("Database connected and migrations applied");
 
     let conf = get_configuration(None).unwrap();
