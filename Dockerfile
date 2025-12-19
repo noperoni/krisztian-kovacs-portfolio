@@ -46,16 +46,23 @@ FROM alpine:3.21 AS runtime
 # Install minimal runtime dependencies (ca-certificates for TLS)
 RUN apk add --no-cache ca-certificates
 
+# Create non-root user for security
+RUN addgroup -g 1000 portfolio && \
+    adduser -u 1000 -G portfolio -s /bin/sh -D portfolio
+
 WORKDIR /app
 
 # Copy the server binary
-COPY --from=builder /app/target/release/portfolio /app/portfolio
+COPY --from=builder --chown=portfolio:portfolio /app/target/release/portfolio /app/portfolio
 
 # Copy the site assets (JS, WASM, CSS)
-COPY --from=builder /app/target/site /app/site
+COPY --from=builder --chown=portfolio:portfolio /app/target/site /app/site
 
 # Copy Cargo.toml (needed by leptos at runtime for config)
-COPY --from=builder /app/Cargo.toml /app/Cargo.toml
+COPY --from=builder --chown=portfolio:portfolio /app/Cargo.toml /app/Cargo.toml
+
+# Switch to non-root user
+USER portfolio
 
 # Set environment variables
 ENV RUST_LOG="info"

@@ -2,6 +2,7 @@
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
+    use axum::http::{header, HeaderName, HeaderValue};
     use axum::Router;
     use leptos::logging::log;
     use leptos::prelude::*;
@@ -9,6 +10,7 @@ async fn main() {
     use portfolio::app::*;
     use portfolio::db;
     use std::net::SocketAddr;
+    use tower_http::set_header::SetResponseHeaderLayer;
 
     // Load environment variables from .env file
     dotenvy::dotenv().ok();
@@ -48,7 +50,38 @@ async fn main() {
             },
         )
         .fallback(leptos_axum::file_and_error_handler(shell))
-        .with_state(leptos_options);
+        .with_state(leptos_options)
+        // Security headers middleware
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::X_FRAME_OPTIONS,
+            HeaderValue::from_static("DENY"),
+        ))
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::X_CONTENT_TYPE_OPTIONS,
+            HeaderValue::from_static("nosniff"),
+        ))
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::STRICT_TRANSPORT_SECURITY,
+            HeaderValue::from_static("max-age=31536000; includeSubDomains"),
+        ))
+        .layer(SetResponseHeaderLayer::if_not_present(
+            HeaderName::from_static("referrer-policy"),
+            HeaderValue::from_static("strict-origin-when-cross-origin"),
+        ))
+        .layer(SetResponseHeaderLayer::if_not_present(
+            HeaderName::from_static("content-security-policy"),
+            HeaderValue::from_static(
+                "default-src 'self'; \
+                 script-src 'self' 'wasm-unsafe-eval'; \
+                 style-src 'self' 'unsafe-inline'; \
+                 font-src 'self' data:; \
+                 img-src 'self' data: https:; \
+                 connect-src 'self'; \
+                 frame-ancestors 'none'; \
+                 base-uri 'self'; \
+                 form-action 'self'"
+            ),
+        ));
 
     // run our app with hyper
     log!("listening on http://{}", &addr);

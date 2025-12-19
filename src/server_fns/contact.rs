@@ -44,9 +44,11 @@ pub async fn submit_contact(input: ContactFormInput) -> Result<ContactResult, Se
         .unwrap_or_else(|| "unknown".to_string());
 
     // Hash the IP for privacy (never store raw IPs)
+    let salt = std::env::var("CONTACT_SALT")
+        .unwrap_or_else(|_| "portfolio-contact-salt-2025".to_string());
     let mut hasher = Sha256::new();
     hasher.update(ip.as_bytes());
-    hasher.update(b"portfolio-contact-salt-2025");
+    hasher.update(salt.as_bytes());
     let ip_hash = format!("{:x}", hasher.finalize());
 
     // Get user agent for logging
