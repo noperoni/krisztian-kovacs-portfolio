@@ -51,7 +51,7 @@ fn ProfileSection(i18n: crate::i18n::I18nContext) -> impl IntoView {
                         <span class="link-icon">"💼"</span>
                         <span>"LinkedIn"</span>
                     </a>
-                    <a href="mailto:krisztian.kovacs.pro@pm.me" class="profile-link">
+                    <a href="mailto:kovacs@pilgrim.ovh" class="profile-link">
                         <span class="link-icon">"✉️"</span>
                         <span>"Email"</span>
                     </a>
@@ -198,7 +198,7 @@ fn ContactCTA(i18n: crate::i18n::I18nContext) -> impl IntoView {
         <section class="contact-cta">
             <h2>{move || i18n.t().about_cta_title}</h2>
             <p>{move || i18n.t().about_cta_description}</p>
-            <a href="mailto:krisztian.kovacs.pro@pm.me" class="btn btn-primary">
+            <a href="mailto:kovacs@pilgrim.ovh" class="btn btn-primary">
                 {move || i18n.t().about_cta_button}
                 <span>" →"</span>
             </a>

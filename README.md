@@ -125,7 +125,7 @@ See [LICENSE](LICENSE) file for details.
 ## 📞 Contact
 
 - **LinkedIn**: [linkedin.com/in/krisztián-géza-kovács-2b72251a2](https://www.linkedin.com/in/kriszti%C3%A1n-g%C3%A9za-kov%C3%A1cs-2b72251a2/)
-- **Email**: krisztian.kovacs.pro@pm.me
+- **Email**: kovacs@pilgrim.ovh
 
 ---
 
