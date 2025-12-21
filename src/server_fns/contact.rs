@@ -137,7 +137,7 @@ pub async fn submit_contact(input: ContactFormInput) -> Result<ContactResult, Se
             });
         }
         Err(e) => {
-            leptos::logging::error!("Rate limit check failed: {:?}", e);
+            tracing::error!(?e, "Rate limit check failed");
             return Err(ServerFnError::new("Database error"));
         }
     }
@@ -158,7 +158,7 @@ pub async fn submit_contact(input: ContactFormInput) -> Result<ContactResult, Se
     };
 
     if let Err(e) = insert_contact(&pool, submission).await {
-        leptos::logging::error!("Failed to insert contact: {:?}", e);
+        tracing::error!(?e, "Failed to insert contact");
         return Err(ServerFnError::new("Failed to save message"));
     }
 
@@ -177,11 +177,11 @@ pub async fn submit_contact(input: ContactFormInput) -> Result<ContactResult, Se
         )
         .await
         {
-            leptos::logging::error!("Failed to send email notification: {:?}", e);
+            tracing::error!(?e, "Failed to send email notification");
             // Don't fail - message is saved in DB, email is a bonus
         }
     } else {
-        leptos::logging::warn!("Email not configured - skipping notification");
+        tracing::warn!("Email not configured - skipping notification");
     }
 
     Ok(ContactResult {

@@ -1,13 +1,12 @@
 //! GitHub API client for fetching repository data
 //!
-//! Uses reqwest for HTTP requests with proper User-Agent and rate limit handling.
+//! Uses a shared reqwest client from context for connection pooling.
 
 use chrono::{DateTime, Utc};
 
 use crate::db::github::GithubApiRepo;
 
 const GITHUB_API_URL: &str = "https://api.github.com";
-const USER_AGENT: &str = "krisztian-kovacs-portfolio/1.0";
 
 pub struct GithubClient {
     client: reqwest::Client,
@@ -33,13 +32,10 @@ pub enum GithubError {
 }
 
 impl GithubClient {
-    pub fn new(username: &str) -> Self {
-        let client = reqwest::Client::builder()
-            .user_agent(USER_AGENT)
-            .timeout(std::time::Duration::from_secs(30))
-            .build()
-            .expect("Failed to build HTTP client");
-
+    /// Create a new GitHub client using a shared HTTP client
+    ///
+    /// The HTTP client should be provided via Leptos context for connection reuse.
+    pub fn new(client: reqwest::Client, username: &str) -> Self {
         Self {
             client,
             username: username.to_string(),

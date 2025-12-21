@@ -58,7 +58,7 @@ pub async fn get_github_repos() -> Result<GithubReposResult, ServerFnError> {
     if cache_fresh {
         // Cache is fresh - return immediately
         let repos = get_cached_repos(&pool).await.map_err(|e| {
-            leptos::logging::error!("Failed to get cached repos: {:?}", e);
+            tracing::error!(?e, "Failed to get cached repos");
             ServerFnError::new("Database error")
         })?;
 
@@ -76,7 +76,7 @@ pub async fn get_github_repos() -> Result<GithubReposResult, ServerFnError> {
     if has_data {
         // Cache is stale but has data - return stale data and trigger background refresh
         let repos = get_cached_repos(&pool).await.map_err(|e| {
-            leptos::logging::error!("Failed to get cached repos: {:?}", e);
+            tracing::error!(?e, "Failed to get cached repos");
             ServerFnError::new("Database error")
         })?;
 
@@ -86,7 +86,7 @@ pub async fn get_github_repos() -> Result<GithubReposResult, ServerFnError> {
         let pool_clone = pool.clone();
         tokio::spawn(async move {
             if let Err(e) = refresh_github_cache(&pool_clone).await {
-                leptos::logging::error!("Background GitHub refresh failed: {:?}", e);
+                tracing::error!(?e, "Background GitHub refresh failed");
             }
         });
 
@@ -103,7 +103,7 @@ pub async fn get_github_repos() -> Result<GithubReposResult, ServerFnError> {
     match refresh_github_cache(&pool).await {
         Ok(_) => {
             let repos = get_cached_repos(&pool).await.map_err(|e| {
-                leptos::logging::error!("Failed to get repos after refresh: {:?}", e);
+                tracing::error!(?e, "Failed to get repos after refresh");
                 ServerFnError::new("Database error")
             })?;
 
@@ -114,7 +114,7 @@ pub async fn get_github_repos() -> Result<GithubReposResult, ServerFnError> {
             })
         }
         Err(e) => {
-            leptos::logging::error!("GitHub fetch failed with no cache: {:?}", e);
+            tracing::error!(?e, "GitHub fetch failed with no cache");
             Err(ServerFnError::new("Failed to fetch GitHub repos"))
         }
     }
@@ -127,8 +127,11 @@ async fn refresh_github_cache(
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     use crate::db::github::{update_cache_metadata, upsert_repos, GITHUB_USERNAME};
     use crate::github::GithubClient;
+    use leptos::prelude::*;
 
-    let client = GithubClient::new(GITHUB_USERNAME);
+    // Get shared HTTP client from context (provided by main.rs)
+    let http_client = expect_context::<reqwest::Client>();
+    let client = GithubClient::new(http_client, GITHUB_USERNAME);
 
     match client.fetch_repos().await {
         Ok(result) => {
@@ -145,7 +148,7 @@ async fn refresh_github_cache(
             )
             .await?;
 
-            leptos::logging::log!("GitHub cache refreshed successfully");
+            tracing::info!("GitHub cache refreshed successfully");
             Ok(())
         }
         Err(e) => {

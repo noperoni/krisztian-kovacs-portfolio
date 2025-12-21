@@ -8,19 +8,14 @@ use sqlx::FromRow;
 use uuid::Uuid;
 
 /// Contact form submission status
-#[derive(Debug, Clone, Serialize, Deserialize, sqlx::Type)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize, sqlx::Type)]
 #[sqlx(type_name = "varchar", rename_all = "lowercase")]
 pub enum ContactStatus {
+    #[default]
     Pending,
     Read,
     Replied,
     Spam,
-}
-
-impl Default for ContactStatus {
-    fn default() -> Self {
-        Self::Pending
-    }
 }
 
 /// Contact form submission from visitors
