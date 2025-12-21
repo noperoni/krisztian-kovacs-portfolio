@@ -4,8 +4,8 @@ use serde::{Deserialize, Serialize};
 /// Color mode (light/dark)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
 pub enum ColorMode {
-    #[default]
     Dark,
+    #[default]
     Light,
 }
 

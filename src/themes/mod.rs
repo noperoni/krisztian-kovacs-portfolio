@@ -8,8 +8,8 @@ use serde::{Deserialize, Serialize};
 /// Available themes
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default, Serialize, Deserialize)]
 pub enum Theme {
-    #[default]
     Terminal,  // Terminal Artisan - Warm CRT vibes, JetBrains Mono
+    #[default]
     Forge,     // Forge & Steel - Industrial, bold Bebas Neue typography
     Bitart,    // Bitart RPG - Press Start 2P font, RPG HUD style
 }
