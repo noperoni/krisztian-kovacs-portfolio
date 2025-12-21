@@ -202,7 +202,7 @@ impl Translations {
             nav_blog: "Blog",
 
             // Hero section
-            hero_title: "Krisztián Kovács",
+            hero_title: "Kovács Krisztián Géza",
             hero_subtitle: "Project Manager: Infrastructure & Solutions",
             hero_description: "Crafting robust cloud solutions and leading cross-functional teams to deliver enterprise-grade infrastructure. Specializing in cloud security, Kubernetes orchestration, and regulatory compliance.",
             hero_cta_projects: "View Projects",
@@ -385,7 +385,7 @@ impl Translations {
             nav_blog: "Blog",
 
             // Hero section
-            hero_title: "Krisztián Kovács",
+            hero_title: "Kovács Krisztián Géza",
             hero_subtitle: "Chef de Projet : Infrastructure & Solutions",
             hero_description: "Conception de solutions cloud robustes et direction d'équipes interfonctionnelles pour livrer des infrastructures d'entreprise. Spécialisé en sécurité cloud, orchestration Kubernetes et conformité réglementaire.",
             hero_cta_projects: "Voir Projets",

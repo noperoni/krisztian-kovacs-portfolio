@@ -87,7 +87,7 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/portfolio.css"/>
 
         // sets the document title
-        <Title text="Krisztián Kovács - Portfolio"/>
+        <Title text="Kovács Krisztián Géza - Portfolio"/>
 
         // content for this welcome page
         <Router>

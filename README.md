@@ -1,4 +1,4 @@
-# Krisztián Kovács - Portfolio Website
+# Kovács Krisztián Géza - Portfolio Website
 
 Welcome to my personal portfolio website showcasing my work as an IT Infrastructure Engineer and Project Manager.
 
@@ -118,7 +118,7 @@ Your site will be available at: `https://[your-username].github.io/krisztian-kov
 
 ## 📄 License
 
-Copyright (c) 2025 Krisztián Kovács. All Rights Reserved.
+Copyright (c) 2025 Kovács Krisztián Géza. All Rights Reserved.
 
 See [LICENSE](LICENSE) file for details.
 
@@ -129,4 +129,4 @@ See [LICENSE](LICENSE) file for details.
 
 ---
 
-Built with 💻 by Krisztián Kovács
+Built with 💻 by Kovács Krisztián Géza
