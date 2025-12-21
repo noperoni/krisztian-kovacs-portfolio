@@ -10,6 +10,46 @@ use crate::i18n::{provide_i18n_context, use_i18n};
 use crate::pages::{AboutPage, BlogPage, BlogPostPage, BlogTagPage, CvPage, ProjectsPage};
 use crate::themes::{provide_color_mode_context, provide_theme_context};
 
+/// Sets the Content-Security-Policy header with the current nonce.
+/// This component runs on the server and has no visual output.
+#[component]
+fn CspHeader() -> impl IntoView {
+    #[cfg(feature = "ssr")]
+    {
+        use http::{header::HeaderName, HeaderValue};
+        use leptos::nonce::use_nonce;
+        use leptos_axum::ResponseOptions;
+
+        if let Some(nonce) = use_nonce() {
+            let nonce_str: &str = &nonce;
+            let csp = format!(
+                "default-src 'self'; \
+                 script-src 'self' 'wasm-unsafe-eval' 'nonce-{}'; \
+                 style-src 'self' 'unsafe-inline'; \
+                 font-src 'self' data:; \
+                 img-src 'self' data: https:; \
+                 connect-src 'self'; \
+                 frame-ancestors 'none'; \
+                 base-uri 'self'; \
+                 form-action 'self'",
+                nonce_str
+            );
+
+            if let Some(response_options) = use_context::<ResponseOptions>() {
+                response_options.insert_header(
+                    HeaderName::from_static("content-security-policy"),
+                    HeaderValue::from_str(&csp).unwrap_or_else(|_| {
+                        HeaderValue::from_static("default-src 'self'")
+                    }),
+                );
+            }
+        }
+    }
+
+    // This component has no visual output
+    ()
+}
+
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
         <!DOCTYPE html>
@@ -39,6 +79,9 @@ pub fn App() -> impl IntoView {
     provide_color_mode_context();
 
     view! {
+        // Set CSP header with nonce (server-side only, no visual output)
+        <CspHeader/>
+
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/portfolio.css"/>
