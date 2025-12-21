@@ -36,10 +36,10 @@ fn ProfileSection(i18n: crate::i18n::I18nContext) -> impl IntoView {
     view! {
         <section class="profile-section">
             <div class="profile-image">
-                <img src="/images/krisztian-headshot.jpg" alt="Krisztian Kovacs" />
+                <img src="/images/krisztian-headshot.jpg" alt="Kovács Krisztián Géza" />
             </div>
             <div class="profile-info">
-                <h2>"Krisztian Kovacs"</h2>
+                <h2>"Kovács Krisztián Géza"</h2>
                 <p class="profile-title">{move || i18n.t().about_profile_title}</p>
                 <div class="profile-links">
                     <a

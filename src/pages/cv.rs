@@ -25,7 +25,7 @@ pub fn CvPage() -> impl IntoView {
 fn CvHero(i18n: crate::i18n::I18nContext) -> impl IntoView {
     view! {
         <header class="cv-hero">
-            <h1>"Krisztián Kovács"</h1>
+            <h1>"Kovács Krisztián Géza"</h1>
             <p class="cv-subtitle">{move || i18n.t().cv_subtitle}</p>
             <div class="cv-contact">
                 <a href="mailto:krisztian.kovacs.pro@pm.me" class="contact-item">

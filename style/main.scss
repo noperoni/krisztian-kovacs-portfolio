@@ -2864,7 +2864,7 @@ footer {
 
     .page-subtitle {
       font-size: 1.2rem;
-      color: var(--color-text-secondary);
+      color: var(--color-text-muted);
       max-width: 600px;
       margin: 0 auto;
     }
@@ -2917,7 +2917,7 @@ footer {
   .blog-date {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
   }
 
   .blog-tags {
@@ -2947,7 +2947,7 @@ footer {
   }
 
   .blog-summary {
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: var(--space-md);
@@ -3006,7 +3006,7 @@ footer {
 }
 
 .pagination-info {
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   font-size: 0.9rem;
   font-family: var(--font-mono);
 }
@@ -3033,7 +3033,7 @@ footer {
 
   .back-link {
     display: inline-block;
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     text-decoration: none;
     margin-bottom: var(--space-lg);
     font-size: 0.9rem;
@@ -3063,7 +3063,7 @@ footer {
   .post-date {
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
   }
 
   .post-tags {
@@ -3076,7 +3076,7 @@ footer {
       padding: var(--space-xs) var(--space-sm);
       background: var(--color-surface);
       border: 1px solid var(--color-border);
-      color: var(--color-text-secondary);
+      color: var(--color-text-muted);
       border-radius: var(--radius-sm);
       text-decoration: none;
       transition: all 0.2s ease;
@@ -3156,7 +3156,7 @@ footer {
     border-left: 4px solid var(--color-primary);
     background: var(--color-surface);
     font-style: italic;
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
   }
 
   hr {
@@ -3197,7 +3197,7 @@ footer {
     padding: var(--space-xs) var(--space-sm);
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     background: var(--color-surface);
     border-radius: 0 var(--radius-md) 0 var(--radius-sm);
     text-transform: uppercase;
@@ -3359,7 +3359,7 @@ footer {
   }
 
   p {
-    color: var(--color-text-secondary);
+    color: var(--color-text-muted);
     margin-bottom: var(--space-xl);
     font-size: 1.1rem;
   }
