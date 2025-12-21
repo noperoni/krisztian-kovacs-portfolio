@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
-    components::{Route, Router, Routes},
+    components::{Redirect, Route, Router, Routes},
     ParamSegment, StaticSegment,
 };
 
@@ -94,7 +94,7 @@ pub fn App() -> impl IntoView {
             <Nav/>
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
-                    <Route path=StaticSegment("") view=HomePage/>
+                    <Route path=StaticSegment("") view=|| view! { <Redirect path="/about" /> }/>
                     <Route path=StaticSegment("about") view=AboutPage/>
                     <Route path=StaticSegment("cv") view=CvPage/>
                     <Route path=StaticSegment("projects") view=ProjectsPage/>
@@ -120,7 +120,6 @@ fn Nav() -> impl IntoView {
             <div class="nav-container">
                 <div class="nav-content">
                     <ul class="nav-links">
-                        <li><a href="/" class="active">{move || i18n.t().nav_home}</a></li>
                         <li><a href="/about">{move || i18n.t().nav_about}</a></li>
                         <li><a href="/cv">{move || i18n.t().nav_cv}</a></li>
                         <li><a href="/projects">{move || i18n.t().nav_projects}</a></li>
@@ -137,116 +136,3 @@ fn Nav() -> impl IntoView {
     }
 }
 
-/// Renders the home page - Bold & Impactful design
-#[component]
-fn HomePage() -> impl IntoView {
-    let i18n = use_i18n();
-
-    view! {
-        <section class="hero">
-            <div class="hero-container">
-                <div class="hero-visual">
-                    <div class="hero-image-wrapper">
-                        <img src="/images/krisztian-headshot.jpg" alt="Kovács Krisztián Géza" class="hero-image" />
-                        <div class="hero-image-glow"></div>
-                    </div>
-                </div>
-                <div class="hero-content">
-                    <div class="hero-badge">"Project Manager & Cloud Architect"</div>
-                    <h1 class="hero-title">{move || i18n.t().hero_title}</h1>
-                    <p class="hero-subtitle">{move || i18n.t().hero_subtitle}</p>
-                    <p class="hero-description">{move || i18n.t().hero_description}</p>
-                    <div class="cta-buttons">
-                        <a href="/projects" class="btn btn-primary btn-lg">
-                            <span class="btn-icon">"🚀"</span>
-                            {move || i18n.t().hero_cta_projects}
-                        </a>
-                        <a href="/cv" class="btn btn-secondary btn-lg">
-                            <span class="btn-icon">"📄"</span>
-                            {move || i18n.t().hero_cta_cv}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="home-stats">
-            <div class="stats-container">
-                <div class="stat-card">
-                    <span class="stat-number">"5+"</span>
-                    <span class="stat-text">"Years Experience"</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">"50+"</span>
-                    <span class="stat-text">"Projects Delivered"</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">"99.9%"</span>
-                    <span class="stat-text">"Uptime SLA"</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">"3"</span>
-                    <span class="stat-text">"Cloud Platforms"</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="features">
-            <h2 class="features-title">"What I Do"</h2>
-            <div class="features-grid">
-                <FeatureCard
-                    icon="☁️"
-                    title=Signal::derive(move || i18n.t().feature_cloud_title.to_string())
-                    description=Signal::derive(move || i18n.t().feature_cloud_desc.to_string())
-                    highlight="Azure • AWS • GCP"
-                />
-                <FeatureCard
-                    icon="🔒"
-                    title=Signal::derive(move || i18n.t().feature_security_title.to_string())
-                    description=Signal::derive(move || i18n.t().feature_security_desc.to_string())
-                    highlight="GDPR • ISO 27001"
-                />
-                <FeatureCard
-                    icon="🤖"
-                    title=Signal::derive(move || i18n.t().feature_ai_title.to_string())
-                    description=Signal::derive(move || i18n.t().feature_ai_desc.to_string())
-                    highlight="MLOps • Automation"
-                />
-            </div>
-        </section>
-
-        <section class="home-cta">
-            <div class="home-cta-content">
-                <h2>"Ready to Build Something Great?"</h2>
-                <p>"Let's discuss your next project and how I can help you achieve your goals."</p>
-                <div class="home-cta-buttons">
-                    <a href="mailto:kovacs@pilgrim.ovh" class="btn btn-primary btn-lg">
-                        <span class="btn-icon">"✉️"</span>
-                        "Get In Touch"
-                    </a>
-                    <a href="/about" class="btn btn-outline btn-lg">
-                        "Learn More About Me"
-                    </a>
-                </div>
-            </div>
-        </section>
-    }
-}
-
-/// Feature card component - Enhanced
-#[component]
-fn FeatureCard(
-    icon: &'static str,
-    title: Signal<String>,
-    description: Signal<String>,
-    highlight: &'static str,
-) -> impl IntoView {
-    view! {
-        <div class="feature-card">
-            <div class="feature-icon">{icon}</div>
-            <h3>{title}</h3>
-            <p class="feature-description">{description}</p>
-            <span class="feature-highlight">{highlight}</span>
-        </div>
-    }
-}
