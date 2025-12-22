@@ -37,6 +37,7 @@ build/
 demos/
 end2end/
 k8s/
+scripts/
 
 # Temporary files
 *.tmp
