@@ -3030,6 +3030,83 @@ footer {
 }
 
 // ============================================================================
+// TABLE OF CONTENTS (HOMEL-70)
+// ============================================================================
+
+.blog-toc {
+  margin: var(--space-xl) 0;
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--color-primary);
+
+  .toc-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-md) 0;
+    color: var(--color-text);
+  }
+
+  .toc-content {
+    font-size: 0.95rem;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      ul {
+        padding-left: var(--space-lg);
+        margin-top: var(--space-xs);
+      }
+    }
+
+    li {
+      margin-bottom: var(--space-xs);
+    }
+
+    a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+// Reading time badge
+.reading-time {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0 var(--space-md);
+}
+
+// ============================================================================
+// MERMAID DIAGRAMS (HOMEL-70)
+// ============================================================================
+
+pre.mermaid {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-xl) 0;
+  overflow-x: auto;
+  text-align: center;
+
+  // Mermaid will replace this with SVG
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// ============================================================================
 // SYNTAX HIGHLIGHTING - CODE BLOCKS
 // ============================================================================
 

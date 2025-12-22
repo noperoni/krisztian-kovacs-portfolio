@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_meta::Script;
 use leptos_router::hooks::use_query_map;
 
 use crate::blog::BlogPost;
@@ -351,7 +352,7 @@ fn TagFilterLinks(
 // BLOG POST DETAIL PAGE
 // ============================================================================
 
-/// Individual blog post page
+/// Individual blog post page with ToC, JSON-LD SEO, and Mermaid support
 #[component]
 pub fn BlogPostPage() -> impl IntoView {
     let i18n = use_i18n();
@@ -368,40 +369,75 @@ pub fn BlogPostPage() -> impl IntoView {
     view! {
         <div class="blog-post-page">
             {move || match post.get() {
-                Some(post) => view! {
-                    <article class="blog-post">
-                        <header class="post-header">
-                            <a href="/blog" class="back-link">
-                                "← " {move || i18n.t().blog_back_to_list}
-                            </a>
-                            <h1 class="post-title">
-                                {move || if i18n.is_french() { post.title_fr } else { post.title_en }}
-                            </h1>
-                            <div class="post-meta">
-                                <time class="post-date">{post.date}</time>
-                                <div class="post-tags">
-                                    {post.tags.iter().map(|tag| {
-                                        let tag_str = *tag;
-                                        view! {
-                                            <a href=format!("/blog/tags/{}", tag_str) class="tag">{tag_str}</a>
-                                        }
-                                    }).collect_view()}
+                Some(post) => {
+                    // Generate JSON-LD schema for SEO
+                    let json_ld = generate_json_ld(post, i18n.is_french());
+
+                    view! {
+                        // JSON-LD structured data for rich search results
+                        <Script type_="application/ld+json">{json_ld}</Script>
+
+                        // Conditional Mermaid loader (only if post has diagrams)
+                        {post.has_mermaid.then(|| view! {
+                            <Script type_="module">
+                                r#"import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+                                mermaid.initialize({ startOnLoad: true, theme: 'default' });"#
+                            </Script>
+                        })}
+
+                        <article class="blog-post">
+                            <header class="post-header">
+                                <a href="/blog" class="back-link">
+                                    "← " {move || i18n.t().blog_back_to_list}
+                                </a>
+                                <h1 class="post-title">
+                                    {move || if i18n.is_french() { post.title_fr } else { post.title_en }}
+                                </h1>
+                                <div class="post-meta">
+                                    <time class="post-date">{post.date}</time>
+                                    <span class="reading-time">
+                                        "📖 "
+                                        {move || if i18n.is_french() { post.reading_time_fr } else { post.reading_time_en }}
+                                        " min"
+                                    </span>
+                                    <div class="post-tags">
+                                        {post.tags.iter().map(|tag| {
+                                            let tag_str = *tag;
+                                            view! {
+                                                <a href=format!("/blog/tags/{}", tag_str) class="tag">{tag_str}</a>
+                                            }
+                                        }).collect_view()}
+                                    </div>
                                 </div>
-                            </div>
-                        </header>
-                        <div
-                            class="post-content prose"
-                            inner_html=move || {
-                                if i18n.is_french() { post.content_fr } else { post.content_en }
-                            }
-                        />
-                        <footer class="post-footer">
-                            <a href="/blog" class="btn btn-secondary">
-                                "← " {move || i18n.t().blog_back_to_list}
-                            </a>
-                        </footer>
-                    </article>
-                }.into_any(),
+                            </header>
+
+                            // Table of Contents (if post has headings)
+                            {move || {
+                                let toc = if i18n.is_french() { post.toc_html_fr } else { post.toc_html_en };
+                                (!toc.is_empty()).then(|| view! {
+                                    <nav class="blog-toc" aria-label="Table of contents">
+                                        <h2 class="toc-title">
+                                            {move || if i18n.is_french() { "Table des matières" } else { "Table of Contents" }}
+                                        </h2>
+                                        <div class="toc-content" inner_html=toc />
+                                    </nav>
+                                })
+                            }}
+
+                            <div
+                                class="post-content prose"
+                                inner_html=move || {
+                                    if i18n.is_french() { post.content_fr } else { post.content_en }
+                                }
+                            />
+                            <footer class="post-footer">
+                                <a href="/blog" class="btn btn-secondary">
+                                    "← " {move || i18n.t().blog_back_to_list}
+                                </a>
+                            </footer>
+                        </article>
+                    }.into_any()
+                },
                 None => view! {
                     <div class="not-found">
                         <h1>{move || i18n.t().blog_not_found}</h1>
@@ -414,4 +450,35 @@ pub fn BlogPostPage() -> impl IntoView {
             }}
         </div>
     }
+}
+
+/// Generate JSON-LD BlogPosting schema for SEO rich results
+fn generate_json_ld(post: &'static BlogPost, is_french: bool) -> String {
+    let title = if is_french { post.title_fr } else { post.title_en };
+    let summary = if is_french { post.summary_fr } else { post.summary_en };
+    let tags = post.tags.iter().map(|t| format!("\"{}\"", t)).collect::<Vec<_>>().join(", ");
+
+    format!(
+        r#"{{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{}",
+  "description": "{}",
+  "author": {{
+    "@type": "Person",
+    "name": "Kovács Krisztián Géza"
+  }},
+  "datePublished": "{}",
+  "keywords": [{}],
+  "mainEntityOfPage": {{
+    "@type": "WebPage",
+    "@id": "https://kovacs.pilgrim.ovh/blog/{}"
+  }}
+}}"#,
+        title.replace('"', "\\\""),
+        summary.replace('"', "\\\""),
+        post.date,
+        tags,
+        post.slug
+    )
 }

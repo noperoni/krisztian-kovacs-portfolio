@@ -34,6 +34,7 @@ build/
 .claude/
 
 # Internal directories (not for public repo)
+content/
 demos/
 end2end/
 k8s/

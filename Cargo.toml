@@ -45,6 +45,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"], optional = tr
 
 [build-dependencies]
 pulldown-cmark = "0.10"
+pulldown-cmark-toc = "0.4"
 syntect = { version = "5.2", default-features = false, features = ["default-fancy"] }
 gray_matter = "0.2"
 serde = { version = "1", features = ["derive"] }

@@ -2079,6 +2079,7 @@ dependencies = [
  "leptos_router",
  "lettre",
  "pulldown-cmark",
+ "pulldown-cmark-toc",
  "reqwest",
  "serde",
  "serde_json",
@@ -2215,6 +2216,17 @@ name = "pulldown-cmark-escape"
 version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bd348ff538bc9caeda7ee8cad2d1d48236a1f443c1fa3913c6a02fe0043b1dd3"
+
+[[package]]
+name = "pulldown-cmark-toc"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8a69b4d88896cba93d8f12ed192e76b0954215d7db9e0c459cfafe041929e3ee"
+dependencies = [
+ "once_cell",
+ "pulldown-cmark",
+ "regex",
+]
 
 [[package]]
 name = "quick-xml"

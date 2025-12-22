@@ -10,6 +10,14 @@ pub struct BlogPost {
     pub summary_fr: &'static str,
     pub content_en: &'static str,
     pub content_fr: &'static str,
+    // New fields for blog system upgrade (HOMEL-70)
+    pub reading_time_en: u32,
+    pub reading_time_fr: u32,
+    pub category: &'static str,
+    pub featured: bool,
+    pub toc_html_en: &'static str,
+    pub toc_html_fr: &'static str,
+    pub has_mermaid: bool,
 }
 
 impl BlogPost {
