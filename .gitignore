@@ -30,9 +30,13 @@ build/
 .env.local
 .env.*.local
 
-# K8s secrets (contain real credentials after setup)
-k8s/smtp-secret.yaml
-k8s/postgres.yaml
+# Claude Code project files (internal)
+.claude/
+
+# Internal directories (not for public repo)
+demos/
+end2end/
+k8s/
 
 # Temporary files
 *.tmp

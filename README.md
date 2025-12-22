@@ -1,132 +1,92 @@
-# Kovács Krisztián Géza - Portfolio Website
+# Kovács Krisztián Géza - Portfolio
 
-Welcome to my personal portfolio website showcasing my work as an IT Infrastructure Engineer and Project Manager.
+Personal portfolio website built with Rust, Leptos, and Axum.
 
-🌐 **Live Site**: [https://noperoni.github.io/krisztian-kovacs-portfolio](https://noperoni.github.io/krisztian-kovacs-portfolio)
+**Live Site**: [https://kovacs.pilgrim.ovh](https://kovacs.pilgrim.ovh)
 
-## 🎯 Overview
+## Tech Stack
 
-This portfolio website features:
-- **Home** - Landing page with hero section and key expertise areas
-- **About** - Personal introduction, skills, and professional journey
-- **CV** - Interactive resume with theme switching (Professional/Fun modes)
-- **Projects** - Showcase of technical projects with filtering capabilities
-- **Blog** - Technical blog (coming soon)
+- **Frontend**: [Leptos](https://leptos.dev/) (Rust → WebAssembly)
+- **Backend**: [Axum](https://github.com/tokio-rs/axum) (Rust async web framework)
+- **Database**: PostgreSQL 16
+- **Styling**: SCSS with CSS custom properties
+- **Blog**: Markdown with build-time compilation (pulldown-cmark + syntect)
 
-## 🚀 Features
+## Features
 
-### Interactive CV
-- **3 Visual Themes**:
-  - Professional modern theme with glassmorphism effects
-  - Retro gaming theme (Doom/StarCraft for dark mode)
-  - Classic gaming theme (Warcraft/Commander Keen for light mode)
-- **Language Toggle**: English/French language switching
-- **Dark/Light Mode**: Full theme support across all pages
-- **Responsive Design**: Mobile-first approach with hamburger menu
+### Three Visual Themes
+- **Forge** - Industrial, bold Bebas Neue typography
+- **Terminal** - Warm CRT vibes, JetBrains Mono, cozy hacker aesthetic
+- **Bitart** - Press Start 2P font, RPG-inspired pixel art style
 
-### Project Showcase
-- Filterable project categories
-- Detailed project metrics and outcomes
-- Technology stack highlighting
-- Featured project section
+### Internationalization
+- Full English and French translations
+- Language persisted in localStorage
 
-### Modern Design
-- Smooth animations and transitions
-- Gradient backgrounds and hover effects
-- Consistent navigation across all pages
-- Optimized for performance
+### Color Modes
+- Light and dark mode for each theme
+- Respects system preference, user-overridable
 
-## 🛠️ Technologies Used
+### Blog System
+- Markdown files compiled at build time
+- Syntax highlighting with theme-matched colors
+- Tag filtering and pagination
+- Bilingual posts (EN/FR in single file)
 
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Styling**: Custom CSS with CSS Variables
-- **Fonts**: Inter, Poppins, VT323, Press Start 2P
-- **Icons**: Unicode emojis for universal support
-- **Hosting**: GitHub Pages
+### Contact Form
+- Server-side validation
+- PostgreSQL storage
+- Email notifications via SMTP
+- Honeypot spam protection
+- Rate limiting
 
-## 📁 Project Structure
+### GitHub Integration
+- Live repository stats from GitHub API
+- Stale-while-revalidate caching
 
+## Pages
+
+- **About** - Professional introduction and skills
+- **CV** - Interactive resume with print styles
+- **Projects** - Filterable project showcase
+- **Blog** - Technical articles
+
+## Development
+
+### Prerequisites
+- Rust (stable)
+- cargo-leptos
+- PostgreSQL 16+
+
+### Setup
+```bash
+# Install cargo-leptos
+cargo install cargo-leptos
+
+# Copy environment template
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Run migrations
+sqlx database create
+sqlx migrate run
+
+# Start development server
+cargo leptos watch
 ```
-krisztian-kovacs-portfolio/
-├── index.html          # Home page
-├── about.html          # About me page
-├── cv.html            # Interactive CV/Resume
-├── projects.html      # Project portfolio
-├── blog.html          # Blog placeholder
-├── README.md          # This file
-├── css/               # Stylesheets (if separated)
-├── js/                # JavaScript files (if separated)
-└── images/            # Image assets
+
+### Build for Production
+```bash
+cargo leptos build --release
 ```
 
-## 🚀 Setup & Deployment
-
-### Local Development
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/[your-username]/krisztian-kovacs-portfolio.git
-   cd krisztian-kovacs-portfolio
-   ```
-
-2. Open `index.html` in your browser or use a local server:
-   ```bash
-   python -m http.server 8000
-   # or
-   npx serve
-   ```
-
-### GitHub Pages Deployment
-1. Push your code to GitHub
-2. Go to Settings → Pages
-3. Select "Deploy from a branch"
-4. Choose `main` branch and `/ (root)` folder
-5. Save and wait for deployment
-
-Your site will be available at: `https://[your-username].github.io/krisztian-kovacs-portfolio/`
-
-## 📝 Customization
-
-### Updating Content
-- Edit the HTML files directly to update content
-- CV themes can be modified in the `cv.html` CSS variables
-- Add new projects in `projects.html` following the existing structure
-
-### Adding New Pages
-1. Create new HTML file
-2. Copy navigation structure from existing pages
-3. Update navigation links in all pages
-4. Maintain consistent styling
-
-## 🎨 Color Schemes
-
-### Professional Theme
-- Primary: `#0ea5e9` (Sky Blue)
-- Secondary: `#38bdf8` (Light Blue)
-- Accent: `#3b82f6` (Blue)
-
-### Gaming Themes
-- Dark Mode: Orange/Red/Yellow (Doom-inspired)
-- Light Mode: Blue/Green/Gold (Warcraft-inspired)
-
-## 📱 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
-
-## 📄 License
+## License
 
 Copyright (c) 2025 Kovács Krisztián Géza. All Rights Reserved.
 
 See [LICENSE](LICENSE) file for details.
 
-## 📞 Contact
+## Contact
 
-- **LinkedIn**: [linkedin.com/in/krisztián-géza-kovács-2b72251a2](https://www.linkedin.com/in/kriszti%C3%A1n-g%C3%A9za-kov%C3%A1cs-2b72251a2/)
+- **LinkedIn**: [Krisztián Géza Kovács](https://www.linkedin.com/in/kriszti%C3%A1n-g%C3%A9za-kov%C3%A1cs-2b72251a2/)
 - **Email**: kovacs@pilgrim.ovh
-
----
-
-Built with 💻 by Kovács Krisztián Géza
