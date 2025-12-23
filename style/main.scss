@@ -2873,16 +2873,50 @@ footer {
   padding: calc(var(--nav-height) + var(--space-2xl)) var(--space-xl) var(--space-2xl);
   max-width: 800px;
   margin: 0 auto;
+
+  // Wide screens: expand to fit sidebar + content
+  @media (min-width: 1200px) {
+    max-width: 1100px;
+  }
 }
 
-.blog-post {
-  animation: fadeInUp 0.6s ease;
+// Layout container for ToC sidebar + content
+.blog-post-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
 
-  .post-header {
-    margin-bottom: var(--space-2xl);
-    padding-bottom: var(--space-xl);
-    border-bottom: 1px solid var(--color-border);
+  // Wide screens: sidebar on left, content on right
+  @media (min-width: 1200px) {
+    flex-direction: row;
+    align-items: flex-start;
   }
+}
+
+// ToC wrapper for sticky positioning
+.blog-toc-wrapper {
+  // Narrow screens: inline, no sticky
+  width: 100%;
+  order: -1; // ToC above content on mobile
+
+  // Wide screens: sticky sidebar
+  @media (min-width: 1200px) {
+    width: 260px;
+    flex-shrink: 0;
+    order: 0;
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-lg));
+    max-height: calc(100vh - var(--nav-height) - var(--space-2xl));
+    overflow-y: auto;
+  }
+}
+
+// Post header (now outside .blog-post for layout purposes)
+.post-header {
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+  animation: fadeInUp 0.6s ease;
 
   .back-link {
     display: inline-block;
@@ -2941,6 +2975,14 @@ footer {
       }
     }
   }
+}
+
+.blog-post {
+  animation: fadeInUp 0.6s ease;
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+  flex: 1; // Take remaining space in flex layout
+  min-width: 0; // Prevent flex item overflow
 
   .post-footer {
     margin-top: var(--space-2xl);
@@ -3034,7 +3076,6 @@ footer {
 // ============================================================================
 
 .blog-toc {
-  margin: var(--space-xl) 0;
   padding: var(--space-lg);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -3043,14 +3084,15 @@ footer {
 
   .toc-title {
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     margin: 0 0 var(--space-md) 0;
     color: var(--color-text);
   }
 
   .toc-content {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
 
     ul {
       list-style: none;
@@ -3058,7 +3100,7 @@ footer {
       padding: 0;
 
       ul {
-        padding-left: var(--space-lg);
+        padding-left: var(--space-md);
         margin-top: var(--space-xs);
       }
     }
@@ -3071,6 +3113,8 @@ footer {
       color: var(--color-text-muted);
       text-decoration: none;
       transition: color var(--transition-fast);
+      display: block;
+      padding: 2px 0;
 
       &:hover {
         color: var(--color-primary);
@@ -3331,7 +3375,7 @@ pre.mermaid {
     padding: calc(var(--nav-height) + var(--space-xl)) var(--space-md) var(--space-2xl);
   }
 
-  .blog-post {
+  .post-header {
     .post-title {
       font-size: 1.75rem;
     }
