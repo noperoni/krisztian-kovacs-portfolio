@@ -64,3 +64,7 @@ target/
 
 # Security audit reports - NEVER commit
 security-audit/
+
+# Database - schema and backups (not needed in public repo)
+*.sql
+migrations/
