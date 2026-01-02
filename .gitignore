@@ -67,4 +67,5 @@ security-audit/
 
 # Database - schema and backups (not needed in public repo)
 *.sql
-migrations/
+# Keep migrations folder (for sqlx compile) but ignore actual .sql files via *.sql above
+!migrations/.gitkeep

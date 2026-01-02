@@ -33,6 +33,7 @@ COPY src/ src/
 COPY content/ content/
 COPY style/ style/
 COPY public/ public/
+COPY migrations/ migrations/
 
 # Build the application
 RUN cargo leptos build --release -vv
